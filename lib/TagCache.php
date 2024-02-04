@@ -195,7 +195,7 @@ class TagCache extends BaseCache
      * {@inheritdoc}
      * @svc
      */
-    protected function isHit(string $key = null): bool
+    protected function isHit(?string $key = null): bool
     {
         return $this->cache->isHit($key ? $this->getKey($key) : null);
     }

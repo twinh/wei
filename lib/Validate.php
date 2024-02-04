@@ -421,7 +421,7 @@ class Validate extends Base
      * @param array $rules
      * @return $this
      */
-    public function setRules(array $rules = null)
+    public function setRules(?array $rules = null)
     {
         $this->rules = (array) $rules;
         return $this;
@@ -646,7 +646,7 @@ class Validate extends Base
      * @param array $messages
      * @return $this
      */
-    public function setMessages(array $messages = null)
+    public function setMessages(?array $messages = null)
     {
         $this->messages = (array) $messages;
         return $this;

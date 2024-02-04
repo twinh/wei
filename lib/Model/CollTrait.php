@@ -63,7 +63,7 @@ trait CollTrait
      * @param string|null $sortColumn
      * @return $this
      */
-    public function saveColl(array $attributes, array $extra = [], string $sortColumn = null): self
+    public function saveColl(array $attributes, array $extra = [], ?string $sortColumn = null): self
     {
         // 1. Uses primary key as data index
         $newAttributes = [];

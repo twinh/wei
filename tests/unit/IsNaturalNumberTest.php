@@ -25,7 +25,7 @@ final class IsNaturalNumberTest extends BaseValidatorTestCase
         $this->assertFalse($this->isNaturalNumber($input));
     }
 
-    public function providerForNaturalNumber()
+    public static function providerForNaturalNumber()
     {
         return [
             ['0'],
@@ -38,7 +38,7 @@ final class IsNaturalNumberTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotNaturalNumber()
+    public static function providerForNotNaturalNumber()
     {
         return [
             ['0.1'],

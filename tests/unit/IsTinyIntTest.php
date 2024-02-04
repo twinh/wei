@@ -25,7 +25,7 @@ final class IsTinyIntTest extends BaseValidatorTestCase
         $this->assertFalse($this->isTinyInt($input));
     }
 
-    public function providerForTinyInt()
+    public static function providerForTinyInt()
     {
         return [
             [0],
@@ -36,7 +36,7 @@ final class IsTinyIntTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotTinyInt()
+    public static function providerForNotTinyInt()
     {
         return [
             ['1.0'],

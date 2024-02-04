@@ -8,7 +8,7 @@ namespace WeiTest;
  */
 final class StrTest extends TestCase
 {
-    public function providerForSnake()
+    public static function providerForSnake()
     {
         return [
             ['a', 'a'],
@@ -29,7 +29,7 @@ final class StrTest extends TestCase
         $this->assertEquals($output, $this->str->snake($input));
     }
 
-    public function providerForDash()
+    public static function providerForDash()
     {
         return [
             ['a', 'a'],
@@ -50,7 +50,7 @@ final class StrTest extends TestCase
         $this->assertEquals($output, $this->str->dash($input));
     }
 
-    public function providerForCamel(): array
+    public static function providerForCamel(): array
     {
         return [
             ['a', 'a'],
@@ -76,7 +76,7 @@ final class StrTest extends TestCase
      * @link http://zh.wiktionary.org/zh/%E9%99%84%E5%BD%95:%E8%8B%B1%E8%AF%AD%E4%B8%8D%E8%A7%84%E5%88%99%E5%A4%8D%E6%95%B0
      * @link https://github.com/doctrine/inflector/blob/master/tests/Doctrine/Tests/Common/Inflector/InflectorTest.php
      */
-    public function providerForSingularize()
+    public static function providerForSingularize()
     {
         return [
             ['test', 'test'],
@@ -162,7 +162,7 @@ final class StrTest extends TestCase
         $this->assertEquals($output, $this->str->singularize($input));
     }
 
-    public function providerForPluralize()
+    public static function providerForPluralize()
     {
         return [
             ['test', 'tests'],
@@ -257,7 +257,7 @@ final class StrTest extends TestCase
         $this->assertSame($output, $this->str->cut($input, $length));
     }
 
-    public function providerForCut(): array
+    public static function providerForCut(): array
     {
         return [
             ['test', 3, 'tes'],

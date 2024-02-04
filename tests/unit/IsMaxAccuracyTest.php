@@ -27,7 +27,7 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
         $this->assertFalse($this->isMaxAccuracy($input, $max));
     }
 
-    public function providerForMaxAccuracy()
+    public static function providerForMaxAccuracy()
     {
         return [
             ['1.0', 1],
@@ -41,7 +41,7 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotMaxAccuracy()
+    public static function providerForNotMaxAccuracy()
     {
         return [
             ['1.234', 2],

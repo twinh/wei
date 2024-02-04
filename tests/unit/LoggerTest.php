@@ -193,7 +193,7 @@ final class LoggerTest extends TestCase
         $this->assertStringContainsString('test log message', $content);
     }
 
-    public function providerForContexts()
+    public static function providerForContexts()
     {
         return [
             ['debug'],

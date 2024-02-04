@@ -57,9 +57,9 @@ abstract class BaseDriver extends Base
      * @param callable|null $phpKeyConverter
      * @return array
      */
-    abstract public function getColumns(string $table, callable $phpKeyConverter = null): array;
+    abstract public function getColumns(string $table, ?callable $phpKeyConverter = null): array;
 
-    protected function wrap($column, string $defaultTable = null)
+    protected function wrap($column, ?string $defaultTable = null)
     {
         if (false === strpos($column, '.')) {
             if (!$defaultTable) {

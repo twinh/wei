@@ -27,7 +27,7 @@ final class IsCreditCardTest extends BaseValidatorTestCase
         $this->assertFalse($this->isCreditCard($input, $type));
     }
 
-    public function providerForCreditCard()
+    public static function providerForCreditCard()
     {
         // Test data from
         // http://www.easy400.net/js2/regexp/ccnums.html
@@ -73,7 +73,7 @@ final class IsCreditCardTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotCreditCard()
+    public static function providerForNotCreditCard()
     {
         return [
             [[]],            // not string

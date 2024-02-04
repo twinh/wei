@@ -25,7 +25,7 @@ final class IsEmailTest extends BaseValidatorTestCase
         $this->assertFalse($this->isEmail($input));
     }
 
-    public function providerForEmail()
+    public static function providerForEmail()
     {
         return [
             ['abc@def.com'],
@@ -37,7 +37,7 @@ final class IsEmailTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotEmail()
+    public static function providerForNotEmail()
     {
         return [
             ['not email.com'],

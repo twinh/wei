@@ -33,7 +33,7 @@ final class IsContainsTest extends BaseValidatorTestCase
         $this->assertFalse($this->isContains($input, $search, $regex));
     }
 
-    public function providerForContains()
+    public static function providerForContains()
     {
         return [
             [123, 1],
@@ -43,7 +43,7 @@ final class IsContainsTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotContains()
+    public static function providerForNotContains()
     {
         return [
             ['123', '4'],

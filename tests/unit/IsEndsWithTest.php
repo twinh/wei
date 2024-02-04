@@ -29,7 +29,7 @@ final class IsEndsWithTest extends BaseValidatorTestCase
         $this->assertFalse($this->isEndsWith($input, $findMe, $case));
     }
 
-    public function providerForEndsWith()
+    public static function providerForEndsWith()
     {
         return [
             ['abc', 'c', false],
@@ -42,7 +42,7 @@ final class IsEndsWithTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotEndsWith()
+    public static function providerForNotEndsWith()
     {
         return [
             ['abc', 'b', false],

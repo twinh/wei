@@ -234,7 +234,7 @@ namespace Wei {
          *
          * @param Wei $container
          */
-        public static function setContainer(self $container = null)
+        public static function setContainer(?self $container = null)
         {
             static::$container = $container;
         }

@@ -25,7 +25,7 @@ final class IsMobileCnTest extends BaseValidatorTestCase
         $this->assertFalse($this->isMobileCn($input));
     }
 
-    public function providerForMobileCn()
+    public static function providerForMobileCn()
     {
         return [
             ['13112345678'],
@@ -41,7 +41,7 @@ final class IsMobileCnTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotMobileCn()
+    public static function providerForNotMobileCn()
     {
         return [
             ['10000000000'],

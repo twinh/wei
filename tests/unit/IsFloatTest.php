@@ -25,7 +25,7 @@ final class IsFloatTest extends BaseValidatorTestCase
         $this->assertFalse($this->isFloat($input));
     }
 
-    public function providerForFloatVal()
+    public static function providerForFloatVal()
     {
         return [
             [0],
@@ -42,7 +42,7 @@ final class IsFloatTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotFloatVal()
+    public static function providerForNotFloatVal()
     {
         return [
             ['a'],

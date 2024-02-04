@@ -25,7 +25,7 @@ final class IsIdCardHkTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIdCardHk($input));
     }
 
-    public function providerForIdCardHk()
+    public static function providerForIdCardHk()
     {
         return [
             ['Z437626A'],
@@ -43,7 +43,7 @@ final class IsIdCardHkTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIdCardHk()
+    public static function providerForNotIdCardHk()
     {
         return [
             ['13134191'], // first char should be A-Z

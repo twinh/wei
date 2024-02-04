@@ -25,7 +25,7 @@ final class IsUBigIntTest extends BaseValidatorTestCase
         $this->assertFalse($this->isUBigInt($input));
     }
 
-    public function providerForUBigInt()
+    public static function providerForUBigInt()
     {
         return [
             [1],
@@ -35,7 +35,7 @@ final class IsUBigIntTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUBigInt()
+    public static function providerForNotUBigInt()
     {
         return [
             ['1.0'],

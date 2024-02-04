@@ -17,7 +17,7 @@ final class PinyinTest extends TestCase
         $this->assertEquals($pinyin, $this->pinyin($chinese));
     }
 
-    public function providerForPinyin()
+    public static function providerForPinyin()
     {
         return [
             ['中文', 'zhongwen'],

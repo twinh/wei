@@ -27,7 +27,7 @@ final class IsLessThanTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLessThan($input, $options));
     }
 
-    public function providerForLessThan()
+    public static function providerForLessThan()
     {
         return [
             [7, 8],
@@ -38,7 +38,7 @@ final class IsLessThanTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLessThan()
+    public static function providerForNotLessThan()
     {
         return [
             [7, 7],

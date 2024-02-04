@@ -69,7 +69,7 @@ abstract class CacheTestCase extends TestCase
         ];
     }
 
-    public function providerForGetterAndSetter()
+    public static function providerForGetterAndSetter()
     {
         $types = $this->getFixtures();
         $types[] = [\NAN, 'nan'];

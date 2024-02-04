@@ -27,7 +27,7 @@ final class IsLowercaseTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLowercase($input, $options));
     }
 
-    public function providerForLowercase()
+    public static function providerForLowercase()
     {
         return [
             ['abc'],
@@ -38,7 +38,7 @@ final class IsLowercaseTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLowercase()
+    public static function providerForNotLowercase()
     {
         return [
             ['ABC'],

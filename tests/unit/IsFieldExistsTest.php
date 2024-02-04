@@ -52,7 +52,7 @@ final class IsFieldExistsTest extends BaseValidatorTestCase
         }
     }
 
-    public function providerForFieldExists()
+    public static function providerForFieldExists()
     {
         return [
             [

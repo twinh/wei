@@ -163,7 +163,7 @@ final class ReqTest extends TestCase
      * @link https://github.com/zendframework/zf2/blob/master/tests/ZendTest/Http/PhpEnvironment/RequestTest.php
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function baseUrlAndPathProvider()
+    public static function baseUrlAndPathProvider()
     {
         return [
             [
@@ -432,7 +432,7 @@ final class ReqTest extends TestCase
         $this->assertEquals('/blog', $this->req->getRequestUri());
     }
 
-    public function providerForGetUrl()
+    public static function providerForGetUrl()
     {
         return [
             [
@@ -843,7 +843,7 @@ final class ReqTest extends TestCase
         $this->assertSame($result, $this->req->accept($mime));
     }
 
-    public function acceptProvider()
+    public static function acceptProvider()
     {
         return [
             [
@@ -985,7 +985,7 @@ final class ReqTest extends TestCase
         $this->assertSame($result, $request->isUrlRewrite());
     }
 
-    public function providerForIsUrlRewrite()
+    public static function providerForIsUrlRewrite()
     {
         return [
             [
@@ -1032,7 +1032,7 @@ final class ReqTest extends TestCase
         $this->assertSame($routerPathInfo, $request->getRouterPathInfo());
     }
 
-    public function providerForGetRouterPathInfo()
+    public static function providerForGetRouterPathInfo()
     {
         return [
             [

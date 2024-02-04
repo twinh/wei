@@ -25,7 +25,7 @@ final class IsTinyCharTest extends BaseValidatorTestCase
         $this->assertFalse($this->isTinyChar($input));
     }
 
-    public function providerForLength()
+    public static function providerForLength()
     {
         return [
             ['i♥u4'],
@@ -34,7 +34,7 @@ final class IsTinyCharTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLength()
+    public static function providerForNotLength()
     {
         return [
             [str_repeat('1', 256)],

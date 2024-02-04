@@ -53,7 +53,7 @@ class IsImageUrl extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, int $maxLength = null)
+    public function __invoke($input, ?int $maxLength = null)
     {
         null !== $maxLength && $this->storeOption('maxLength', $maxLength);
 

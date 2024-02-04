@@ -25,7 +25,7 @@ final class IsPresentTest extends BaseValidatorTestCase
         $this->assertFalse($this->isPresent($input));
     }
 
-    public function providerForPresent()
+    public static function providerForPresent()
     {
         return [
             ['0'],
@@ -39,7 +39,7 @@ final class IsPresentTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPresent()
+    public static function providerForNotPresent()
     {
         return [
             [''],

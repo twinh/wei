@@ -29,7 +29,7 @@ final class IsStartsWithTest extends BaseValidatorTestCase
         $this->assertFalse($this->isStartsWith($input, $findMe, $case));
     }
 
-    public function providerForStartsWith()
+    public static function providerForStartsWith()
     {
         return [
             ['abc', 'a', false],
@@ -43,7 +43,7 @@ final class IsStartsWithTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotStartsWith()
+    public static function providerForNotStartsWith()
     {
         return [
             ['abc', 'b', false],

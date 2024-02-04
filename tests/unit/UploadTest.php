@@ -53,7 +53,7 @@ final class UploadTest extends TestCase
         $this->assertTrue($this->upload->hasError($name));
     }
 
-    public function providerForUploadError()
+    public static function providerForUploadError()
     {
         return [
             [

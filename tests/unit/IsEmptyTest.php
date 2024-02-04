@@ -25,7 +25,7 @@ final class IsEmptyTest extends BaseValidatorTestCase
         $this->assertFalse(wei()->isEmpty($input));
     }
 
-    public function providerForEmpty()
+    public static function providerForEmpty()
     {
         return [
             [''],
@@ -33,7 +33,7 @@ final class IsEmptyTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotEmpty()
+    public static function providerForNotEmpty()
     {
         return [
             ['0'],

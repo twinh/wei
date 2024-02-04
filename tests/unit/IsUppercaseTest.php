@@ -27,7 +27,7 @@ final class IsUppercaseTest extends BaseValidatorTestCase
         $this->assertFalse($this->isUppercase($input, $options));
     }
 
-    public function providerForUppercase()
+    public static function providerForUppercase()
     {
         return [
             ['ABC'],
@@ -38,7 +38,7 @@ final class IsUppercaseTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUppercase()
+    public static function providerForNotUppercase()
     {
         return [
             ['abc'],

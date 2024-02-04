@@ -25,7 +25,7 @@ final class IsAlnumTest extends BaseValidatorTestCase
         $this->assertFalse($this->isAlnum($input));
     }
 
-    public function providerForAlnum()
+    public static function providerForAlnum()
     {
         return [
             ['0'],
@@ -37,7 +37,7 @@ final class IsAlnumTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotAlnum()
+    public static function providerForNotAlnum()
     {
         return [
             ['a bcdefg'],
@@ -67,7 +67,7 @@ final class IsAlnumTest extends BaseValidatorTestCase
         $this->assertEquals($message, $validator->getFirstMessage());
     }
 
-    public function providerForLocale()
+    public static function providerForLocale()
     {
         return [
             ['en', 'This value must contain letters (a-z) and digits (0-9)'],

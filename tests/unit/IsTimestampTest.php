@@ -28,7 +28,7 @@ final class IsTimestampTest extends BaseValidatorTestCase
         $this->assertFalse($this->isTimestamp($input, $format));
     }
 
-    public function providerForTimestamp()
+    public static function providerForTimestamp()
     {
         return [
             ['2012-02-29 23:59:59'],
@@ -37,7 +37,7 @@ final class IsTimestampTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotTimestamp()
+    public static function providerForNotTimestamp()
     {
         return [
             ['0'],

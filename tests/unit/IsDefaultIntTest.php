@@ -25,7 +25,7 @@ final class IsDefaultIntTest extends BaseValidatorTestCase
         $this->assertFalse($this->isDefaultInt($input));
     }
 
-    public function providerForDefaultInt()
+    public static function providerForDefaultInt()
     {
         return [
             [0],
@@ -36,7 +36,7 @@ final class IsDefaultIntTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotDefaultInt()
+    public static function providerForNotDefaultInt()
     {
         return [
             ['1.0'],

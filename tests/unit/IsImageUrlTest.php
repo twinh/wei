@@ -26,7 +26,7 @@ final class IsImageUrlTest extends BaseValidatorTestCase
         $this->assertFalse($this->isImageUrl($input));
     }
 
-    public function providerForUrl()
+    public static function providerForUrl()
     {
         return [
             ['https://example.com/dir/1.jpg'],
@@ -43,7 +43,7 @@ final class IsImageUrlTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUrl()
+    public static function providerForNotUrl()
     {
         return [
             ['http://exa_mple.com'],

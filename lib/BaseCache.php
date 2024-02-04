@@ -287,7 +287,7 @@ abstract class BaseCache extends Base
      * @return false|mixed
      * @svc
      */
-    protected function remember(string $key, $expireOrFn, callable $fn = null)
+    protected function remember(string $key, $expireOrFn, ?callable $fn = null)
     {
         $value = $this->get($key);
         if ($this->isHit()) {
@@ -325,7 +325,7 @@ abstract class BaseCache extends Base
      * @return bool
      * @svc
      */
-    protected function isHit(string $key = null): bool
+    protected function isHit(?string $key = null): bool
     {
         if (null !== $key) {
             return $this->hits[$key] ?? false;

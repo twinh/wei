@@ -36,7 +36,7 @@ final class IsInTest extends BaseValidatorTestCase
         $this->isIn('abc', 'bcd');
     }
 
-    public function providerForIn()
+    public static function providerForIn()
     {
         return [
             ['apple', ['apple', 'pear']],
@@ -45,7 +45,7 @@ final class IsInTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIn()
+    public static function providerForNotIn()
     {
         return [
             ['', [null], true],

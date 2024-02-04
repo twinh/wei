@@ -25,7 +25,7 @@ final class IsBoolTest extends BaseValidatorTestCase
         $this->assertFalse($this->isBool($input));
     }
 
-    public function providerForBoolVal()
+    public static function providerForBoolVal()
     {
         return [
             [true],
@@ -38,7 +38,7 @@ final class IsBoolTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotBoolVal()
+    public static function providerForNotBoolVal()
     {
         return [
             ['123'],

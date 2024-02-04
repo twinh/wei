@@ -11,7 +11,7 @@ final class IsArrayTest extends BaseValidatorTestCase
      * @dataProvider providerForArrayVal
      * @param mixed $input
      */
-    public function testArrayVal($input, int $minLength = null, int $maxLength = null)
+    public function testArrayVal($input, ?int $minLength = null, ?int $maxLength = null)
     {
         $this->assertTrue($this->isArray($input, $minLength, $maxLength));
     }
@@ -20,12 +20,12 @@ final class IsArrayTest extends BaseValidatorTestCase
      * @dataProvider providerForNotArrayVal
      * @param mixed $input
      */
-    public function testNotArrayVal($input, int $minLength = null, int $maxLength = null)
+    public function testNotArrayVal($input, ?int $minLength = null, ?int $maxLength = null)
     {
         $this->assertFalse($this->isArray($input, $minLength, $maxLength));
     }
 
-    public function providerForArrayVal()
+    public static function providerForArrayVal()
     {
         return [
             [[]],
@@ -39,7 +39,7 @@ final class IsArrayTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotArrayVal()
+    public static function providerForNotArrayVal()
     {
         return [
             [1],

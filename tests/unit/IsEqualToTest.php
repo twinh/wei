@@ -27,7 +27,7 @@ final class IsEqualToTest extends BaseValidatorTestCase
         $this->assertFalse($this->isEqualTo($input, $equals));
     }
 
-    public function providerForEquals()
+    public static function providerForEquals()
     {
         return [
             ['abc', 'abc'],
@@ -38,7 +38,7 @@ final class IsEqualToTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotEquals()
+    public static function providerForNotEquals()
     {
         return [
             ['abc', 'bbc'],

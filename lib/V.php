@@ -156,7 +156,7 @@ class V extends Base
      * @param string|null $label
      * @return $this
      */
-    public function addValidator($key, string $label = null): self
+    public function addValidator($key, ?string $label = null): self
     {
         return $this->validators[] = new static([
             'wei' => $this->wei,
@@ -174,7 +174,7 @@ class V extends Base
      * @param string|null $label
      * @return $this
      */
-    public function key($key, string $label = null): self
+    public function key($key, ?string $label = null): self
     {
         return $this->addValidator($key, $label);
     }
@@ -197,7 +197,7 @@ class V extends Base
      * @param string|null $message
      * @return $this
      */
-    public function message(string $ruleOrMessage, string $message = null): self
+    public function message(string $ruleOrMessage, ?string $message = null): self
     {
         if (1 === func_num_args()) {
             $rule = $this->getLastKey($this->rules);
@@ -235,7 +235,7 @@ class V extends Base
      *
      * @return $this
      */
-    public function requiredIfNew(BaseModel $model = null): self
+    public function requiredIfNew(?BaseModel $model = null): self
     {
         $model || $model = $this->validator->getModel();
         if (!$model) {
@@ -252,7 +252,7 @@ class V extends Base
      * @param BaseModel|null $model
      * @return $this
      */
-    public function notModelDup(BaseModel $model = null): self
+    public function notModelDup(?BaseModel $model = null): self
     {
         $model || $model = $this->validator->getModel();
         if (!$model) {
@@ -343,7 +343,7 @@ class V extends Base
      * @param callable|null $default
      * @return $this
      */
-    public function when($value, callable $callback, callable $default = null): self
+    public function when($value, callable $callback, ?callable $default = null): self
     {
         if ($value) {
             $callback($this, $value);
@@ -359,7 +359,7 @@ class V extends Base
      * @param callable|null $default
      * @return $this
      */
-    public function unless($value, callable $callback, callable $default = null): self
+    public function unless($value, callable $callback, ?callable $default = null): self
     {
         if (!$value) {
             $callback($this, $value);
@@ -412,7 +412,7 @@ class V extends Base
         return $ret->getData();
     }
 
-    public function setModel(BaseModel $model = null): self
+    public function setModel(?BaseModel $model = null): self
     {
         $this->model = $model;
         return $this;
@@ -433,7 +433,7 @@ class V extends Base
      * @return $this
      * @experimental
      */
-    public function modelColumn(string $name, string $label = null, BaseModel $model = null, $key = null): self
+    public function modelColumn(string $name, ?string $label = null, ?BaseModel $model = null, $key = null): self
     {
         $model || $model = $this->model;
         if (!$model) {

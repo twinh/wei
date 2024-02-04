@@ -17,7 +17,7 @@ class ClsTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function providerForBaseName(): array
+    public static function providerForBaseName(): array
     {
         return [
             ['ClsTest', Cls::baseName(static::class)],

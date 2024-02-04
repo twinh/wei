@@ -30,7 +30,7 @@ final class UrlTest extends TestCase
         $this->assertEquals($result, $this->url->to($url, $params));
     }
 
-    public function providerForTo()
+    public static function providerForTo()
     {
         return [
             [
@@ -121,7 +121,7 @@ final class UrlTest extends TestCase
         $this->assertSame($result, $url->to($to, $argOrParams, $params));
     }
 
-    public function providerForUrlRewrite()
+    public static function providerForUrlRewrite()
     {
         return [
             [

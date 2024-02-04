@@ -25,7 +25,7 @@ final class IsIdCardMoTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIdCardMo($input));
     }
 
-    public function providerForIdCardMo()
+    public static function providerForIdCardMo()
     {
         return [
             ['11111111'],
@@ -34,7 +34,7 @@ final class IsIdCardMoTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIdCardMo()
+    public static function providerForNotIdCardMo()
     {
         return [
             ['00000000'], // first digit should be 1,5,7

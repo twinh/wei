@@ -25,7 +25,7 @@ final class IsPositiveIntegerTest extends BaseValidatorTestCase
         $this->assertFalse($this->isPositiveInteger($input));
     }
 
-    public function providerForPositiveInteger()
+    public static function providerForPositiveInteger()
     {
         return [
             [1],
@@ -36,7 +36,7 @@ final class IsPositiveIntegerTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPositiveInteger()
+    public static function providerForNotPositiveInteger()
     {
         return [
             ['0'],

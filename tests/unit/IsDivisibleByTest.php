@@ -27,7 +27,7 @@ final class IsDivisibleByTest extends BaseValidatorTestCase
         $this->assertFalse($this->isDivisibleBy($input, $divisor));
     }
 
-    public function providerForDivisibleBy()
+    public static function providerForDivisibleBy()
     {
         return [
             ['10', '5'],
@@ -36,7 +36,7 @@ final class IsDivisibleByTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotDivisibleBy()
+    public static function providerForNotDivisibleBy()
     {
         return [
             [10, 3],

@@ -698,7 +698,7 @@ trait RelationTrait
      * @param bool $throw
      * @return BaseModel|null
      */
-    protected function &getRelationValue(string $name, bool &$exists = null, bool $throw = true): ?BaseModel
+    protected function &getRelationValue(string $name, ?bool &$exists = null, bool $throw = true): ?BaseModel
     {
         $exists = true;
         if (array_key_exists($name, $this->relationValues)) {

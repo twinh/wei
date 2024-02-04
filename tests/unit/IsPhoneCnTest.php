@@ -25,7 +25,7 @@ final class IsPhoneCnTest extends BaseValidatorTestCase
         $this->assertFalse($this->isPhoneCn($input));
     }
 
-    public function providerForPhoneCn()
+    public static function providerForPhoneCn()
     {
         return [
             ['020-1234567'],
@@ -36,7 +36,7 @@ final class IsPhoneCnTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPhoneCn()
+    public static function providerForNotPhoneCn()
     {
         return [
             ['012345-1234567890'],

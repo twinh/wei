@@ -25,7 +25,7 @@ final class IsTrueTest extends BaseValidatorTestCase
         $this->assertFalse($this->wei->isTrue($input));
     }
 
-    public function providerForTrue()
+    public static function providerForTrue()
     {
         return [
             [true],
@@ -34,7 +34,7 @@ final class IsTrueTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotTrue()
+    public static function providerForNotTrue()
     {
         return [
             ['123'],

@@ -68,7 +68,7 @@ final class IsAllowEmptyTest extends TestCase
      * @dataProvider providerForAllowEmpty
      * @param mixed $value
      */
-    public function testAllowEmpty(string $type, $value, bool $result, string $message = null)
+    public function testAllowEmpty(string $type, $value, bool $result, ?string $message = null)
     {
         $v = V::new();
         $v->key('key', 'label')->addRule($type, [])->allowEmpty();
@@ -81,7 +81,7 @@ final class IsAllowEmptyTest extends TestCase
         }
     }
 
-    public function providerForAllowEmpty()
+    public static function providerForAllowEmpty()
     {
         return [
             ['string', '', true],

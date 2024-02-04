@@ -63,7 +63,7 @@ final class IsRecordExistsTest extends BaseValidatorTestCase
         $this->assertEmpty($this->isRecordExists->getData());
     }
 
-    public function dataProviderForRecordExists()
+    public static function dataProviderForRecordExists()
     {
         return [
             ['1', 'id'],
@@ -74,7 +74,7 @@ final class IsRecordExistsTest extends BaseValidatorTestCase
         ];
     }
 
-    public function dataProviderForRecordNotExists()
+    public static function dataProviderForRecordNotExists()
     {
         return [
             ['3', 'id'],

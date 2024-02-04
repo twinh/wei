@@ -28,7 +28,7 @@ final class IsBlankTest extends BaseValidatorTestCase
         $this->assertFalse($this->isBlank($input));
     }
 
-    public function providerForBlank()
+    public static function providerForBlank()
     {
         return [
             ['   '],
@@ -36,7 +36,7 @@ final class IsBlankTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotBlank()
+    public static function providerForNotBlank()
     {
         return [
             ['0'],

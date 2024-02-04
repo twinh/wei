@@ -62,7 +62,7 @@ final class IsLengthTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLength($input, $length));
     }
 
-    public function providerForSpecifiedLength()
+    public static function providerForSpecifiedLength()
     {
         return [
             ['length7', 7],
@@ -71,7 +71,7 @@ final class IsLengthTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForSpecifiedLengthNotPass()
+    public static function providerForSpecifiedLengthNotPass()
     {
         return [
             ['length7', 8],
@@ -80,7 +80,7 @@ final class IsLengthTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForLength()
+    public static function providerForLength()
     {
         return [
             ['length7', 7, 10],
@@ -90,7 +90,7 @@ final class IsLengthTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLength()
+    public static function providerForNotLength()
     {
         return [
             ['length7', 0, 0],

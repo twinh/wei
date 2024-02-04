@@ -27,7 +27,7 @@ final class IsTimeTest extends BaseValidatorTestCase
         $this->assertFalse($this->isTime($input, $format));
     }
 
-    public function providerForTime()
+    public static function providerForTime()
     {
         return [
             ['00:00:00'],
@@ -36,7 +36,7 @@ final class IsTimeTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotTime()
+    public static function providerForNotTime()
     {
         return [
             ['24:00:00'],

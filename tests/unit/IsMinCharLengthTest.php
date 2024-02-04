@@ -27,7 +27,7 @@ final class IsMinCharLengthTest extends BaseValidatorTestCase
         $this->assertFalse($this->isMinCharLength($input, $length));
     }
 
-    public function providerForMinCharLength()
+    public static function providerForMinCharLength()
     {
         return [
             ['123', 3],
@@ -36,7 +36,7 @@ final class IsMinCharLengthTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotMinCharLength()
+    public static function providerForNotMinCharLength()
     {
         return [
             ['123', 4],

@@ -148,7 +148,7 @@ final class VModelTest extends TestCase
         }
     }
 
-    public function providerForModelColumn(): array
+    public static function providerForModelColumn(): array
     {
         return [
             [

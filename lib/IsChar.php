@@ -31,7 +31,7 @@ class IsChar extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, int $minLength = null, int $maxLength = null)
+    public function __invoke($input, ?int $minLength = null, ?int $maxLength = null)
     {
         null !== $minLength && $this->storeOption('minLength', $minLength);
         null !== $maxLength && $this->storeOption('maxLength', $maxLength);

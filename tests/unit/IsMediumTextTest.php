@@ -25,7 +25,7 @@ final class IsMediumTextTest extends BaseValidatorTestCase
         $this->assertFalse($this->isMediumText($input));
     }
 
-    public function providerForMediumTextVal()
+    public static function providerForMediumTextVal()
     {
         return [
             [''],
@@ -36,7 +36,7 @@ final class IsMediumTextTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotMediumTextVal()
+    public static function providerForNotMediumTextVal()
     {
         return [
             [str_repeat('1', 16777215 + 1)],

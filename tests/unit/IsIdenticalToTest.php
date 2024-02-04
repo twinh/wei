@@ -27,7 +27,7 @@ final class IsIdenticalToTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIdenticalTo($input, $equals));
     }
 
-    public function providerForIdenticalTo()
+    public static function providerForIdenticalTo()
     {
         $input = $equals = new \stdClass();
         return [
@@ -40,7 +40,7 @@ final class IsIdenticalToTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIdenticalTo()
+    public static function providerForNotIdenticalTo()
     {
         $input = new \stdClass();
         $equals = new \stdClass();
