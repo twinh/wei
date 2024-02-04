@@ -50,7 +50,7 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($cache->replace($key, uniqid()));
     }
 
-    public function getFixtures(): array
+    public static function getFixtures(): array
     {
         $object = new CacheObject('test');
         return [
@@ -71,7 +71,7 @@ abstract class CacheTestCase extends TestCase
 
     public static function providerForGetterAndSetter()
     {
-        $types = $this->getFixtures();
+        $types = self::getFixtures();
         $types[] = [\NAN, 'nan'];
         return $types;
     }
@@ -159,7 +159,7 @@ abstract class CacheTestCase extends TestCase
     public function testGetAndSetMulti()
     {
         $items = [];
-        foreach ($this->getFixtures() as $row) {
+        foreach (self::getFixtures() as $row) {
             $items[$row[1]] = $row[0];
         }
         $cache = $this->object;
@@ -175,7 +175,7 @@ abstract class CacheTestCase extends TestCase
     public function testGetAndSetMultiple()
     {
         $items = [];
-        foreach ($this->getFixtures() as $row) {
+        foreach (self::getFixtures() as $row) {
             $items[$row[1]] = $row[0];
         }
         $cache = $this->object;

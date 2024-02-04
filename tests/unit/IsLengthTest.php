@@ -8,18 +8,6 @@ namespace WeiTest;
  */
 final class IsLengthTest extends BaseValidatorTestCase
 {
-    protected $arrayObject;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->arrayObject = new \ArrayObject([
-            1,
-            2,
-        ]);
-    }
-
     /**
      * @dataProvider providerForLength
      * @param mixed $input
@@ -67,7 +55,7 @@ final class IsLengthTest extends BaseValidatorTestCase
         return [
             ['length7', 7],
             [[1, 2], 2],
-            [$this->arrayObject, 2],
+            [new \ArrayObject([1, 2]), 2],
         ];
     }
 
@@ -76,7 +64,7 @@ final class IsLengthTest extends BaseValidatorTestCase
         return [
             ['length7', 8],
             [[1, 2], 3],
-            [$this->arrayObject, 3],
+            [new \ArrayObject([1, 2]), 3],
         ];
     }
 
@@ -86,7 +74,7 @@ final class IsLengthTest extends BaseValidatorTestCase
             ['length7', 7, 10],
             ['length7', 0, 10],
             [[1, 2], 1, 2],
-            [$this->arrayObject, 1, 10],
+            [new \ArrayObject([1, 2]), 1, 10],
         ];
     }
 
@@ -96,7 +84,7 @@ final class IsLengthTest extends BaseValidatorTestCase
             ['length7', 0, 0],
             ['length7', -2, -1],
             [[1, 2], 10, 0],
-            [$this->arrayObject, 0, 1],
+            [new \ArrayObject([1, 2]), 0, 1],
         ];
     }
 

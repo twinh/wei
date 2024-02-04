@@ -245,7 +245,7 @@ final class WeChatAppTest extends TestCase
         return [
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('0'),
+                self::inputTextMessage('0'),
                 [
                     'content' => '0',
                     'msgType' => 'text',
@@ -255,7 +255,7 @@ final class WeChatAppTest extends TestCase
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('1'),
+                self::inputTextMessage('1'),
                 [
                     'content' => '1',
                     'msgType' => 'text',
@@ -265,7 +265,7 @@ final class WeChatAppTest extends TestCase
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('2'),
+                self::inputTextMessage('2'),
                 [
                     'content' => '2',
                 ],
@@ -273,21 +273,21 @@ final class WeChatAppTest extends TestCase
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('99999'),
+                self::inputTextMessage('99999'),
                 [
                 ],
                 'Your input is 99999',
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('t xx'),
+                self::inputTextMessage('t xx'),
                 [
                 ],
                 'The translation result is: xx',
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('3'),
+                self::inputTextMessage('3'),
                 [
                     'content' => '3',
                 ],
@@ -295,7 +295,7 @@ final class WeChatAppTest extends TestCase
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('I want a iPad'),
+                self::inputTextMessage('I want a iPad'),
                 [
                     'content' => 'I want a iPad',
                 ],
@@ -303,7 +303,7 @@ final class WeChatAppTest extends TestCase
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('Are u Twin?'),
+                self::inputTextMessage('Are u Twin?'),
                 [
                     'content' => 'Are u Twin?',
                 ],
@@ -490,7 +490,7 @@ final class WeChatAppTest extends TestCase
         ];
     }
 
-    public function inputTextMessage($input)
+    public static function inputTextMessage($input)
     {
         return '<xml>
                 <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -512,7 +512,7 @@ final class WeChatAppTest extends TestCase
                 'nonce' => '1365872231',
                 'echostr' => $rand = mt_rand(0, 100000),
             ],
-            'postData' => $this->inputTextMessage('hi'),
+            'postData' => self::inputTextMessage('hi'),
         ]);
 
         // Receive data not in callback Closure
@@ -529,7 +529,7 @@ final class WeChatAppTest extends TestCase
                 'nonce' => '1365872231',
                 'echostr' => $rand = mt_rand(0, 100000),
             ],
-            'postData' => $this->inputTextMessage('hi'),
+            'postData' => self::inputTextMessage('hi'),
         ]);
         $this->assertTrue($app->isVerifyToken());
     }
@@ -543,7 +543,7 @@ final class WeChatAppTest extends TestCase
                 'timestamp' => '1366032735',
                 'nonce' => '1365872231',
             ],
-            'postData' => $this->inputTextMessage('hi'),
+            'postData' => self::inputTextMessage('hi'),
         ]);
         $this->assertFalse($app->isVerifyToken());
     }
@@ -562,7 +562,7 @@ final class WeChatAppTest extends TestCase
                 'timestamp' => '1366032735',
                 'nonce' => '1365872231',
             ],
-            'postData' => $this->inputTextMessage($input),
+            'postData' => self::inputTextMessage($input),
         ]);
 
         $app->is('abc', static function () {
@@ -609,7 +609,7 @@ final class WeChatAppTest extends TestCase
                 'timestamp' => '1366032735',
                 'nonce' => '1365872231',
             ],
-            'postData' => $this->inputTextMessage('test'),
+            'postData' => self::inputTextMessage('test'),
         ]);
 
         // Execute and parse result
@@ -627,7 +627,7 @@ final class WeChatAppTest extends TestCase
                 'timestamp' => '1366032735',
                 'nonce' => '1365872231',
             ],
-            'postData' => $this->inputTextMessage('test'),
+            'postData' => self::inputTextMessage('test'),
         ]);
 
         $app->defaults(static function () {
@@ -962,7 +962,7 @@ MSG
                 'timestamp' => '1366032735',
                 'nonce' => '1365872231',
             ],
-            'postData' => $this->inputTextMessage('hi'),
+            'postData' => self::inputTextMessage('hi'),
         ]);
 
         $attrs = $app->getAttrs();
@@ -986,7 +986,7 @@ MSG
                 'timestamp' => '1366032735',
                 'nonce' => '1365872231',
             ],
-            'postData' => $this->inputTextMessage('hi'),
+            'postData' => self::inputTextMessage('hi'),
         ]);
 
         $this->assertEquals('hi', $app->getKeyword());

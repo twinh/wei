@@ -50,9 +50,6 @@ final class PasswordTest extends TestCase
 
     public static function provideInfo()
     {
-        // Init password service to avoid "PASSWORD_BCRYPT" constant no defined error
-        $this->password;
-
         return [
             ['foo', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
             ['$2y$', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
