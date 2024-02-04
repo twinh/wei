@@ -25,7 +25,7 @@ final class IsQQTest extends BaseValidatorTestCase
         $this->assertFalse($this->isQQ($input));
     }
 
-    public function providerForQQ()
+    public static function providerForQQ()
     {
         return [
             ['1234567'],
@@ -34,7 +34,7 @@ final class IsQQTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotQQ()
+    public static function providerForNotQQ()
     {
         return [
             ['1000'], // Too short

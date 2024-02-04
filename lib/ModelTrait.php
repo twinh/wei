@@ -172,7 +172,7 @@ trait ModelTrait
      * @return mixed
      * @throws \InvalidArgumentException When column not found
      */
-    public function &get($name, bool &$exists = null, bool $throwException = true)
+    public function &get($name, ?bool &$exists = null, bool $throwException = true)
     {
         $exists = true;
 
@@ -318,7 +318,7 @@ trait ModelTrait
      * @param string|null $column
      * @return bool
      */
-    public function isChanged(string $column = null): bool
+    public function isChanged(?string $column = null): bool
     {
         $this->removeUnchanged($column);
 
@@ -334,7 +334,7 @@ trait ModelTrait
      * @param string|null $column
      * @return array|string|null
      */
-    public function getChanges(string $column = null)
+    public function getChanges(?string $column = null)
     {
         $this->removeUnchanged($column);
 
@@ -560,7 +560,7 @@ trait ModelTrait
      * @return array
      * @svc
      */
-    protected function toArray($returnFields = [], callable $prepend = null): array
+    protected function toArray($returnFields = [], ?callable $prepend = null): array
     {
         if ($this->coll) {
             return $this->mapColl(__FUNCTION__, func_get_args());
@@ -1000,7 +1000,7 @@ trait ModelTrait
      * @throws \Exception
      * @svc
      */
-    protected function findFromReq(Req $req = null): self
+    protected function findFromReq(?Req $req = null): self
     {
         $req || $req = $this->wei->req;
         if (!$req->isPost()) {
@@ -1093,7 +1093,7 @@ trait ModelTrait
      *
      * @param string|null $column
      */
-    protected function resetChanges(string $column = null): void
+    protected function resetChanges(?string $column = null): void
     {
         if ($column) {
             unset($this->changes[$column]);
@@ -1128,7 +1128,7 @@ trait ModelTrait
      * @param string|null $column
      * @return bool
      */
-    protected function removeUnchanged(string $column = null): bool
+    protected function removeUnchanged(?string $column = null): bool
     {
         if ($column) {
             if (!isset($this->changes[$column])) {

@@ -27,7 +27,7 @@ final class IsTldTest extends BaseValidatorTestCase
         $this->assertFalse($this->isTld($input, $format));
     }
 
-    public function providerForTld()
+    public static function providerForTld()
     {
         return [
             ['com'],
@@ -38,7 +38,7 @@ final class IsTldTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotTld()
+    public static function providerForNotTld()
     {
         return [
             ['abc'],

@@ -27,7 +27,7 @@ final class IsUrlTest extends BaseValidatorTestCase
         $this->assertFalse($this->isUrl($input, $options));
     }
 
-    public function providerForUrl()
+    public static function providerForUrl()
     {
         return [
             ['http://www.google.com'],
@@ -48,7 +48,7 @@ final class IsUrlTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUrl()
+    public static function providerForNotUrl()
     {
         return [
             ['http://exa_mple.com'],

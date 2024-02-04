@@ -27,7 +27,7 @@ final class IsColorTest extends BaseValidatorTestCase
         $this->assertFalse($this->isColor($input, $options));
     }
 
-    public function providerForColor()
+    public static function providerForColor()
     {
         return [
             ['#FFFFFF'],
@@ -40,7 +40,7 @@ final class IsColorTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotColor()
+    public static function providerForNotColor()
     {
         return [
             ['FFF'],

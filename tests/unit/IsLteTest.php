@@ -27,7 +27,7 @@ final class IsLteTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLte($input, $options));
     }
 
-    public function providerForLte()
+    public static function providerForLte()
     {
         return [
             [7, 7],
@@ -39,7 +39,7 @@ final class IsLteTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLte()
+    public static function providerForNotLte()
     {
         return [
             [7, 6],

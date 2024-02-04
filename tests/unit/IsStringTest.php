@@ -18,7 +18,7 @@ final class IsStringTest extends BaseValidatorTestCase
      * @param int|null $minLength
      * @param int|null $maxLength
      */
-    public function testStringVal($input, int $minLength = null, int $maxLength = null)
+    public function testStringVal($input, ?int $minLength = null, ?int $maxLength = null)
     {
         $this->assertTrue($this->isString($input, $minLength, $maxLength));
     }
@@ -29,12 +29,12 @@ final class IsStringTest extends BaseValidatorTestCase
      * @param int|null $minLength
      * @param int|null $maxLength
      */
-    public function testNotStringVal($input, int $minLength = null, int $maxLength = null)
+    public function testNotStringVal($input, ?int $minLength = null, ?int $maxLength = null)
     {
         $this->assertFalse($this->isString($input, $minLength, $maxLength));
     }
 
-    public function providerForStringVal()
+    public static function providerForStringVal()
     {
         return [
             [''],
@@ -56,7 +56,7 @@ final class IsStringTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotStringVal()
+    public static function providerForNotStringVal()
     {
         return [
             [new \ArrayObject()],

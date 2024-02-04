@@ -32,7 +32,7 @@ abstract class BaseValidatorTestCase extends BaseTestCase
         }
     }
 
-    public function providerForInput()
+    public static function providerForInput()
     {
         // Initial test fixtures
         $data = [

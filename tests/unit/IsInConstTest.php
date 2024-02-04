@@ -31,7 +31,7 @@ final class IsInConstTest extends BaseValidatorTestCase
         $this->assertTrue($this->isInConst($input, $this, $prefix));
     }
 
-    public function providerForConst(): array
+    public static function providerForConst(): array
     {
         return [
             ['a', ''],
@@ -50,7 +50,7 @@ final class IsInConstTest extends BaseValidatorTestCase
         $this->assertFalse($this->isInConst($input, $this, $prefix));
     }
 
-    public function providerForNotConst(): array
+    public static function providerForNotConst(): array
     {
         return [
             ['c', 'TYPE'],

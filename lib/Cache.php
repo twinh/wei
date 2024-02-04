@@ -172,7 +172,7 @@ class Cache extends BaseCache
      * {@inheritdoc}
      * @svc
      */
-    protected function isHit(string $key = null): bool
+    protected function isHit(?string $key = null): bool
     {
         return $this->object->isHit($key);
     }

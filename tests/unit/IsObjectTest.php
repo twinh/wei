@@ -11,7 +11,7 @@ final class IsObjectTest extends BaseValidatorTestCase
      * @dataProvider providerForObjectVal
      * @param mixed $input
      */
-    public function testObjectVal($input, int $length = null)
+    public function testObjectVal($input, ?int $length = null)
     {
         $this->assertTrue($this->isObject($input, $length));
     }
@@ -20,12 +20,12 @@ final class IsObjectTest extends BaseValidatorTestCase
      * @dataProvider providerForNotObjectVal
      * @param mixed $input
      */
-    public function testNotObjectVal($input, int $length = null)
+    public function testNotObjectVal($input, ?int $length = null)
     {
         $this->assertFalse($this->isObject($input, $length));
     }
 
-    public function providerForObjectVal()
+    public static function providerForObjectVal()
     {
         return [
             [(object) []],
@@ -40,7 +40,7 @@ final class IsObjectTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotObjectVal()
+    public static function providerForNotObjectVal()
     {
         return [
             ['123'],

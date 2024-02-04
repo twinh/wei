@@ -691,7 +691,7 @@ trait QueryBuilderTrait
      * @return array
      * @svc
      */
-    protected function pluck(string $column, string $index = null): array
+    protected function pluck(string $column, ?string $index = null): array
     {
         $columns = [$column];
         $index && $columns[] = $index;
@@ -954,9 +954,9 @@ trait QueryBuilderTrait
      */
     protected function join(
         string $table,
-        string $first = null,
+        ?string $first = null,
         string $operator = '=',
-        string $second = null,
+        ?string $second = null,
         string $type = 'INNER'
     ): self {
         return $this->addQueryPart('join', compact('table', 'first', 'operator', 'second', 'type'), true);
@@ -974,9 +974,9 @@ trait QueryBuilderTrait
      */
     protected function innerJoin(
         string $table,
-        string $first = null,
+        ?string $first = null,
         string $operator = '=',
-        string $second = null
+        ?string $second = null
     ): self {
         return $this->join(...func_get_args());
     }
@@ -993,9 +993,9 @@ trait QueryBuilderTrait
      */
     protected function leftJoin(
         string $table,
-        string $first = null,
+        ?string $first = null,
         string $operator = '=',
-        string $second = null
+        ?string $second = null
     ): self {
         return $this->join($table, $first, $operator, $second, 'LEFT');
     }
@@ -1012,9 +1012,9 @@ trait QueryBuilderTrait
      */
     protected function rightJoin(
         string $table,
-        string $first = null,
+        ?string $first = null,
         string $operator = '=',
-        string $second = null
+        ?string $second = null
     ): self {
         return $this->join($table, $first, $operator, $second, 'RIGHT');
     }
@@ -1461,7 +1461,7 @@ trait QueryBuilderTrait
      * @return $this
      * @svc
      */
-    protected function when($value, callable $callback, callable $default = null): self
+    protected function when($value, callable $callback, ?callable $default = null): self
     {
         if ($value) {
             $callback($this, $value);
@@ -1478,7 +1478,7 @@ trait QueryBuilderTrait
      * @return $this
      * @svc
      */
-    protected function unless($value, callable $callback, callable $default = null): self
+    protected function unless($value, callable $callback, ?callable $default = null): self
     {
         if (!$value) {
             $callback($this, $value);
@@ -1493,7 +1493,7 @@ trait QueryBuilderTrait
      * @return $this
      * @svc
      */
-    protected function setDbKeyConverter(callable $converter = null): self
+    protected function setDbKeyConverter(?callable $converter = null): self
     {
         $this->dbKeyConverter = $converter;
         return $this;
@@ -1504,7 +1504,7 @@ trait QueryBuilderTrait
      * @return $this
      * @svc
      */
-    protected function setPhpKeyConverter(callable $converter = null): self
+    protected function setPhpKeyConverter(?callable $converter = null): self
     {
         $this->phpKeyConverter = $converter;
         return $this;
@@ -1606,7 +1606,7 @@ trait QueryBuilderTrait
         ?string $operator,
         $value = null,
         string $condition = 'AND',
-        string $type = null
+        ?string $type = null
     ): self {
         $isClosure = $column instanceof \Closure;
         if ($isClosure) {
@@ -1645,7 +1645,7 @@ trait QueryBuilderTrait
      * @param string|null $type
      * @return $this
      */
-    protected function addWhereArgs(array $args, string $condition = 'AND', string $type = null): self
+    protected function addWhereArgs(array $args, string $condition = 'AND', ?string $type = null): self
     {
         if (2 === count($args)) {
             $operator = '=';

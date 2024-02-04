@@ -355,7 +355,7 @@ final class CastTraitTest extends TestCase
         $this->assertSame('value', $cast->object_column->test);
     }
 
-    public function providerForTestStringAsObject(): array
+    public static function providerForTestStringAsObject(): array
     {
         return [
             [
@@ -453,7 +453,7 @@ final class CastTraitTest extends TestCase
         $this->assertEquals($phpValue, $cast->object_column);
     }
 
-    public function providerForSetObjectNotObjectValue(): array
+    public static function providerForSetObjectNotObjectValue(): array
     {
         return [
             [
@@ -803,7 +803,7 @@ final class CastTraitTest extends TestCase
         $this->assertSame($nullableDecimalValue, $cast->nullable_decimal_column);
     }
 
-    public function providerForTestSaveDecimal(): array
+    public static function providerForTestSaveDecimal(): array
     {
         return [
             ['', '0', '0'],

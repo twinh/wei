@@ -27,7 +27,7 @@ final class IsDateTimeTest extends BaseValidatorTestCase
         $this->assertFalse($this->isDateTime($input, $format));
     }
 
-    public function providerForDateTime()
+    public static function providerForDateTime()
     {
         return [
             ['1000-01-01 00:00:00'],
@@ -36,7 +36,7 @@ final class IsDateTimeTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotDateTime()
+    public static function providerForNotDateTime()
     {
         return [
             ['0'],

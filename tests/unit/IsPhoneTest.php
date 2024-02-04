@@ -25,7 +25,7 @@ final class IsPhoneTest extends BaseValidatorTestCase
         $this->assertFalse($this->isPhone($input));
     }
 
-    public function providerForPhone()
+    public static function providerForPhone()
     {
         return [
             ['020-1234567'],
@@ -48,7 +48,7 @@ final class IsPhoneTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPhone()
+    public static function providerForNotPhone()
     {
         return [
             ['not digit'],

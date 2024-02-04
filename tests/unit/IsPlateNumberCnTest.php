@@ -25,7 +25,7 @@ final class IsPlateNumberCnTest extends BaseValidatorTestCase
         $this->assertFalse($this->isPlateNumberCn($input));
     }
 
-    public function providerForPlateNumberCn()
+    public static function providerForPlateNumberCn()
     {
         return [
             ['京A12345'],
@@ -73,7 +73,7 @@ final class IsPlateNumberCnTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPlateNumberCn()
+    public static function providerForNotPlateNumberCn()
     {
         return [
             ['12345'],

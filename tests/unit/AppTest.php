@@ -204,7 +204,7 @@ final class AppTest extends TestCase
         $this->app->dispatch('example', $action);
     }
 
-    public function providerForActionReturnValue()
+    public static function providerForActionReturnValue()
     {
         return [
             [

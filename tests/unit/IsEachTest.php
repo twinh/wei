@@ -110,7 +110,7 @@ final class IsEachTest extends BaseValidatorTestCase
         $this->assertRetErr($ret, $message);
     }
 
-    public function providerForEachNested()
+    public static function providerForEachNested()
     {
         return [
             ['en', 'The 2nd 用户\'s 3rd 邮箱\'s 地址 must be valid email address'],

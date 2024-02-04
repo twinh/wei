@@ -65,7 +65,7 @@ final class HttpTest extends TestCase
         $this->assertTriggeredEvents(['beforeSend', 'success', 'complete']);
     }
 
-    public function providerForSuccess()
+    public static function providerForSuccess()
     {
         $url = $this->http->getOption('url');
 
@@ -140,7 +140,7 @@ final class HttpTest extends TestCase
         $this->assertTriggeredEvents(['beforeSend', 'error', 'complete']);
     }
 
-    public function providerForError()
+    public static function providerForError()
     {
         $url = $this->http->getOption('url');
 
@@ -649,7 +649,7 @@ final class HttpTest extends TestCase
         $this->assertTriggeredEvents(['success']);
     }
 
-    public function providerForGetMethods()
+    public static function providerForGetMethods()
     {
         // The result is depend on the server configuration
         return [             // Apache               PHP 5.4 cli web server
@@ -662,7 +662,7 @@ final class HttpTest extends TestCase
         ];
     }
 
-    public function providerForMethods()
+    public static function providerForMethods()
     {
         return [
             ['DELETE'],
@@ -690,7 +690,7 @@ final class HttpTest extends TestCase
         $this->assertTrue($http->isSuccess());
     }
 
-    public function providerForAliasMethods()
+    public static function providerForAliasMethods()
     {
         return [
             ['GET'],
@@ -1035,7 +1035,7 @@ final class HttpTest extends TestCase
         $this->assertSame($result, $response['url']);
     }
 
-    public function providerForParams(): array
+    public static function providerForParams(): array
     {
         return [
             [

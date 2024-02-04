@@ -24,7 +24,7 @@ final class AssetTest extends TestCase
         $this->assertEquals($asset($from), $to);
     }
 
-    public function providerForAsset()
+    public static function providerForAsset()
     {
         return [
             [

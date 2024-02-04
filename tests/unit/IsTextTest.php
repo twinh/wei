@@ -25,7 +25,7 @@ final class IsTextTest extends BaseValidatorTestCase
         $this->assertFalse($this->isText($input));
     }
 
-    public function providerForTextVal()
+    public static function providerForTextVal()
     {
         return [
             [''],
@@ -36,7 +36,7 @@ final class IsTextTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotTextVal()
+    public static function providerForNotTextVal()
     {
         return [
             [str_repeat('1', 65535) . '1'],

@@ -286,7 +286,7 @@ class WeChatApp extends Base
      * @param \Closure $fn
      * @return $this
      */
-    public function on($name, $key, \Closure $fn = null)
+    public function on($name, $key, ?\Closure $fn = null)
     {
         $name = strtolower($name);
         if ($key instanceof \Closure) {
@@ -1005,7 +1005,7 @@ class WeChatApp extends Base
      * @param \SimpleXMLElement $xml
      * @return \SimpleXMLElement
      */
-    protected function arrayToXml(array $array, \SimpleXMLElement $xml = null)
+    protected function arrayToXml(array $array, ?\SimpleXMLElement $xml = null)
     {
         if (null === $xml) {
             $xml = new \SimpleXMLElement('<xml/>');

@@ -25,7 +25,7 @@ final class IsUMediumIntTest extends BaseValidatorTestCase
         $this->assertFalse($this->isUMediumInt($input));
     }
 
-    public function providerForUMediumInt()
+    public static function providerForUMediumInt()
     {
         return [
             [1],
@@ -34,7 +34,7 @@ final class IsUMediumIntTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUMediumInt()
+    public static function providerForNotUMediumInt()
     {
         return [
             ['1.0'],

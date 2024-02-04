@@ -83,7 +83,7 @@ final class SessionTest extends TestCase
         $this->assertEquals($value, $this->session->get($key));
     }
 
-    public function providerForGetterAndSetter()
+    public static function providerForGetterAndSetter()
     {
         $obj = new \stdClass();
 

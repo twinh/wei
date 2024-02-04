@@ -387,7 +387,7 @@ final class VTest extends TestCase
         $this->assertSame($result, $ret->isSuc());
     }
 
-    public function providerForAllow()
+    public static function providerForAllow()
     {
         return [
             ['13800138000', '', true],
@@ -836,7 +836,7 @@ final class VTest extends TestCase
      * @dataProvider providerForDefaultNotEmptyWithTypes
      * @param mixed $value
      */
-    public function testDefaultNotEmptyWithTypes(string $type, $value, bool $notEmptyResult, string $message = null)
+    public function testDefaultNotEmptyWithTypes(string $type, $value, bool $notEmptyResult, ?string $message = null)
     {
         $v = V::defaultNotEmpty();
         $v->key('key', 'label')->addRule($type, []);
@@ -849,7 +849,7 @@ final class VTest extends TestCase
         }
     }
 
-    public function providerForDefaultNotEmptyWithTypes()
+    public static function providerForDefaultNotEmptyWithTypes()
     {
         return [
             ['string', '', false],

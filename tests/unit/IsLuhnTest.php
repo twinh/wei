@@ -25,7 +25,7 @@ final class IsLuhnTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLuhn($options));
     }
 
-    public function providerForLuhn()
+    public static function providerForLuhn()
     {
         return [
             ['100035542'],
@@ -50,7 +50,7 @@ final class IsLuhnTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLuhn()
+    public static function providerForNotLuhn()
     {
         return [
             [''],

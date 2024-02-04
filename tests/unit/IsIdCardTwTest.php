@@ -25,7 +25,7 @@ final class IsIdCardTwTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIdCardTw($input));
     }
 
-    public function providerForIdCardTw()
+    public static function providerForIdCardTw()
     {
         return [
             ['A122501945'],
@@ -57,7 +57,7 @@ final class IsIdCardTwTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIdCardTw()
+    public static function providerForNotIdCardTw()
     {
         return [
             ['1285003269'], // first char should be A-Z

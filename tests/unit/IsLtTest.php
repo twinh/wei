@@ -27,7 +27,7 @@ final class IsLtTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLt($input, $options));
     }
 
-    public function providerForLt()
+    public static function providerForLt()
     {
         return [
             [7, 8],
@@ -38,7 +38,7 @@ final class IsLtTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotLt()
+    public static function providerForNotLt()
     {
         return [
             [7, 7],

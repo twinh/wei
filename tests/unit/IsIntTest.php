@@ -13,7 +13,7 @@ final class IsIntTest extends BaseValidatorTestCase
      * @param int|null $min
      * @param int|null $max
      */
-    public function testIntVal($input, int $min = null, int $max = null)
+    public function testIntVal($input, ?int $min = null, ?int $max = null)
     {
         $this->assertTrue($this->isInt($input, $min, $max));
     }
@@ -24,12 +24,12 @@ final class IsIntTest extends BaseValidatorTestCase
      * @param int|null $min
      * @param int|null $max
      */
-    public function testNotIntVal($input, int $min = null, int $max = null)
+    public function testNotIntVal($input, ?int $min = null, ?int $max = null)
     {
         $this->assertFalse($this->isInt($input, $min, $max));
     }
 
-    public function providerForIntVal()
+    public static function providerForIntVal()
     {
         return [
             [1],
@@ -45,7 +45,7 @@ final class IsIntTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIntVal()
+    public static function providerForNotIntVal()
     {
         return [
             [true],

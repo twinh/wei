@@ -49,7 +49,7 @@ final class IsTypeTest extends BaseValidatorTestCase
         $this->assertContains('type message', $type->getMessages());
     }
 
-    public function providerForType()
+    public static function providerForType()
     {
         $obj = new \stdClass();
 
@@ -89,7 +89,7 @@ final class IsTypeTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotType()
+    public static function providerForNotType()
     {
         $obj = new \stdClass();
 

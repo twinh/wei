@@ -20,7 +20,7 @@ final class IsNumberTest extends BaseValidatorTestCase
      * @param int|null $precision
      * @param int|null $scale
      */
-    public function testNumber($input, int $precision = null, int $scale = null)
+    public function testNumber($input, ?int $precision = null, ?int $scale = null)
     {
         $this->assertTrue($this->isNumber($input, $precision, $scale));
     }
@@ -31,12 +31,12 @@ final class IsNumberTest extends BaseValidatorTestCase
      * @param int|null $precision
      * @param int|null $scale
      */
-    public function testNotNumber($input, int $precision = null, int $scale = null)
+    public function testNotNumber($input, ?int $precision = null, ?int $scale = null)
     {
         $this->assertFalse($this->isNumber($input, $precision, $scale));
     }
 
-    public function providerForNumber()
+    public static function providerForNumber()
     {
         return [
             ['0'],
@@ -67,7 +67,7 @@ final class IsNumberTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotNumber()
+    public static function providerForNotNumber()
     {
         return [
             ['012345-1234567890'],

@@ -35,7 +35,7 @@ class IsInt extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, int $min = null, int $max = null)
+    public function __invoke($input, ?int $min = null, ?int $max = null)
     {
         null !== $min && $this->storeOption('min', $min);
         null !== $max && $this->storeOption('max', $max);

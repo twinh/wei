@@ -56,7 +56,7 @@ final class IsPasswordTest extends BaseValidatorTestCase
         $this->assertFalse($this->wei->isPassword($password, $options));
     }
 
-    public function providerForPassword()
+    public static function providerForPassword()
     {
         return [
             [
@@ -142,7 +142,7 @@ final class IsPasswordTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPassword()
+    public static function providerForNotPassword()
     {
         return [
             [

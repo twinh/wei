@@ -282,7 +282,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
      * @param string|null $key
      * @return array|mixed|null
      */
-    public function getMetadata(string $key = null)
+    public function getMetadata(?string $key = null)
     {
         return null === $key ? $this->metadata : ($this->metadata[$key] ?? null);
     }
@@ -310,7 +310,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
      * @param string $key
      * @return $this
      */
-    public function removeMetadata(string $key = null)
+    public function removeMetadata(?string $key = null)
     {
         if (null === $key) {
             $this->metadata = [];

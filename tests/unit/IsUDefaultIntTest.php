@@ -25,7 +25,7 @@ final class IsUDefaultIntTest extends BaseValidatorTestCase
         $this->assertFalse($this->isUDefaultInt($input));
     }
 
-    public function providerForUDefaultInt()
+    public static function providerForUDefaultInt()
     {
         return [
             [1],
@@ -34,7 +34,7 @@ final class IsUDefaultIntTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUDefaultInt()
+    public static function providerForNotUDefaultInt()
     {
         return [
             ['1.0'],

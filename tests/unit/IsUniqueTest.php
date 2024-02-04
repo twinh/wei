@@ -26,7 +26,7 @@ final class IsUniqueTest extends BaseValidatorTestCase
         $this->assertFalse($this->isUnique($input));
     }
 
-    public function providerForUnique(): array
+    public static function providerForUnique(): array
     {
         return [
             [[]],
@@ -41,7 +41,7 @@ final class IsUniqueTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotUnique(): array
+    public static function providerForNotUnique(): array
     {
         return [
             [[1, 1]],

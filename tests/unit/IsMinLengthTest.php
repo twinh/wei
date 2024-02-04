@@ -25,7 +25,7 @@ final class IsMinLengthTest extends BaseValidatorTestCase
         $this->assertFalse($this->isMinLength('length7', $options));
     }
 
-    public function providerForMinLength()
+    public static function providerForMinLength()
     {
         return [
             [6],
@@ -34,7 +34,7 @@ final class IsMinLengthTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotMinLength()
+    public static function providerForNotMinLength()
     {
         return [
             [8],

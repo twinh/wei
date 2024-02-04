@@ -48,7 +48,7 @@ final class PasswordTest extends TestCase
         $this->assertEquals($info, $this->password->getInfo($hash));
     }
 
-    public function provideInfo()
+    public static function provideInfo()
     {
         // Init password service to avoid "PASSWORD_BCRYPT" constant no defined error
         $this->password;

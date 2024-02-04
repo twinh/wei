@@ -32,7 +32,7 @@ class IsChildren extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, V $v = null)
+    public function __invoke($input, ?V $v = null)
     {
         $v && $this->storeOption('v', $v);
 

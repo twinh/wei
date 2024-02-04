@@ -240,7 +240,7 @@ final class WeChatAppTest extends TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function providerForInputAndOutput()
+    public static function providerForInputAndOutput()
     {
         return [
             [
@@ -585,7 +585,7 @@ final class WeChatAppTest extends TestCase
         $this->assertEquals($output, $result->Content);
     }
 
-    public function providerForCase()
+    public static function providerForCase()
     {
         return [
             ['abc', 'abc'],
@@ -665,7 +665,7 @@ final class WeChatAppTest extends TestCase
         $this->assertEquals('success', $app->run());
     }
 
-    public function providerForScan()
+    public static function providerForScan()
     {
         return [
             [

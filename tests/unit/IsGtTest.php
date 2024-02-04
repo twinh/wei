@@ -27,7 +27,7 @@ final class IsGtTest extends BaseValidatorTestCase
         $this->assertFalse($this->isGt($input, $options));
     }
 
-    public function providerForGt()
+    public static function providerForGt()
     {
         return [
             [7, 6],
@@ -37,7 +37,7 @@ final class IsGtTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotGt()
+    public static function providerForNotGt()
     {
         return [
             [7, 7],

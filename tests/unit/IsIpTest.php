@@ -27,7 +27,7 @@ final class IsIpTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIp($input, $options));
     }
 
-    public function providerForIp()
+    public static function providerForIp()
     {
         return [
             ['192.168.0.1'],
@@ -62,7 +62,7 @@ final class IsIpTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIp()
+    public static function providerForNotIp()
     {
         return [
             ['192.168.0.1', [

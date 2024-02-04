@@ -62,7 +62,7 @@ class IsNumber extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, int $precision = null, int $scale = null)
+    public function __invoke($input, ?int $precision = null, ?int $scale = null)
     {
         if (null !== $precision && $scale > $precision) {
             throw new \InvalidArgumentException('Precision must be greater than or equals scale');

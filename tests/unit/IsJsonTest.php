@@ -11,7 +11,7 @@ final class IsJsonTest extends BaseValidatorTestCase
      * @dataProvider providerForJson
      * @param mixed $input
      */
-    public function testJson($input, int $length = null)
+    public function testJson($input, ?int $length = null)
     {
         $this->assertTrue($this->wei->isJson($input, $length));
     }
@@ -20,12 +20,12 @@ final class IsJsonTest extends BaseValidatorTestCase
      * @dataProvider providerForNotJson
      * @param mixed $input
      */
-    public function testNotJson($input, int $length = null)
+    public function testNotJson($input, ?int $length = null)
     {
         $this->assertFalse($this->wei->isJson($input, $length));
     }
 
-    public function providerForJson()
+    public static function providerForJson()
     {
         return [
             [(object) []],
@@ -43,7 +43,7 @@ final class IsJsonTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotJson()
+    public static function providerForNotJson()
     {
         return [
             ['123'],

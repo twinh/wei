@@ -26,7 +26,7 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIdCardCn($input));
     }
 
-    public function providerForIdCardCn()
+    public static function providerForIdCardCn()
     {
         return [
             ['632801197908170036'],
@@ -37,7 +37,7 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotIdCardCn()
+    public static function providerForNotIdCardCn()
     {
         return [
             ['632801197908170037'], // checksum invalid

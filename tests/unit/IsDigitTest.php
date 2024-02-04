@@ -25,7 +25,7 @@ final class IsDigitTest extends BaseValidatorTestCase
         $this->assertFalse($this->isDigit($input));
     }
 
-    public function providerForDigit()
+    public static function providerForDigit()
     {
         return [
             ['0'],
@@ -36,7 +36,7 @@ final class IsDigitTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotDigit()
+    public static function providerForNotDigit()
     {
         return [
             ['0.123'],

@@ -1084,7 +1084,7 @@ final class QueryBuilderTest extends TestCase
         $this->assertIsArray($array);
     }
 
-    public function providerForParameterValue()
+    public static function providerForParameterValue()
     {
         return [
             [null],

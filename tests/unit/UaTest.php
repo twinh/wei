@@ -79,7 +79,7 @@ final class UaTest extends TestCase
     /**
      * @link http://www.useragentstring.com/
      */
-    public function providerForUserAgent()
+    public static function providerForUserAgent()
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         return [
@@ -303,7 +303,7 @@ final class UaTest extends TestCase
         $this->assertTrue($ua->isMobile());
     }
 
-    public function providerForInMobile()
+    public static function providerForInMobile()
     {
         return [
             [

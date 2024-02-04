@@ -27,7 +27,7 @@ final class IsAnyDateTimeTest extends BaseValidatorTestCase
         $this->assertFalse($this->isAnyDateTime($input, $format));
     }
 
-    public function providerForAnyDateTime()
+    public static function providerForAnyDateTime()
     {
         return [
             ['2020-01-01'],
@@ -39,7 +39,7 @@ final class IsAnyDateTimeTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotAnyDateTime()
+    public static function providerForNotAnyDateTime()
     {
         return [
             ['0'],

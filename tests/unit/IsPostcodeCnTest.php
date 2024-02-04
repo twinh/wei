@@ -25,7 +25,7 @@ final class IsPostcodeCnTest extends BaseValidatorTestCase
         $this->assertFalse($this->isPostcodeCn($input));
     }
 
-    public function providerForPostcodeCn()
+    public static function providerForPostcodeCn()
     {
         return [
             ['123456'],
@@ -33,7 +33,7 @@ final class IsPostcodeCnTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotPostcodeCn()
+    public static function providerForNotPostcodeCn()
     {
         return [
             ['1234567'],

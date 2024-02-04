@@ -78,7 +78,7 @@ class Mysql extends BaseDriver
         return preg_replace($keys, $values, $query, 1);
     }
 
-    public function getColumns(string $table, callable $phpKeyConverter = null): array
+    public function getColumns(string $table, ?callable $phpKeyConverter = null): array
     {
         $columns = [];
 

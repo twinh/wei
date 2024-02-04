@@ -417,7 +417,7 @@ final class ETest extends TestCase
         $this->e('string', 'unsupport-type');
     }
 
-    public function providerForEmptyVar()
+    public static function providerForEmptyVar()
     {
         return [
             [''],

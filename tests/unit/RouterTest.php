@@ -394,7 +394,7 @@ final class RouterTest extends TestCase
         $this->assertIsSubset($params, $router->match($path, $method));
     }
 
-    public function providerForRestRoutes()
+    public static function providerForRestRoutes()
     {
         return [
             [
@@ -539,7 +539,7 @@ final class RouterTest extends TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function dataForMatchParamSet()
+    public static function dataForMatchParamSet()
     {
         return [
             [
@@ -1737,7 +1737,7 @@ final class RouterTest extends TestCase
      * @link http://zh.wiktionary.org/zh/%E9%99%84%E5%BD%95:%E8%8B%B1%E8%AF%AD%E4%B8%8D%E8%A7%84%E5%88%99%E5%A4%8D%E6%95%B0
      * @link https://github.com/doctrine/inflector/blob/master/tests/Doctrine/Tests/Common/Inflector/InflectorTest.php
      */
-    public function dataForSingularize()
+    public static function dataForSingularize()
     {
         return [
             ['life', 'lives'],

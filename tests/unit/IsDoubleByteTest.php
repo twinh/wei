@@ -25,7 +25,7 @@ final class IsDoubleByteTest extends BaseValidatorTestCase
         $this->assertFalse($this->isDoubleByte($input));
     }
 
-    public function providerForDoubleByte()
+    public static function providerForDoubleByte()
     {
         return [
             ['中文'],
@@ -38,7 +38,7 @@ final class IsDoubleByteTest extends BaseValidatorTestCase
         ];
     }
 
-    public function providerForNotDoubleByte()
+    public static function providerForNotDoubleByte()
     {
         return [
             ['abc'],
