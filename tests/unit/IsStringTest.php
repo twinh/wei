@@ -7,11 +7,6 @@ namespace WeiTest;
  */
 final class IsStringTest extends BaseValidatorTestCase
 {
-    public function __toString()
-    {
-        return 'test';
-    }
-
     /**
      * @dataProvider providerForStringVal
      * @param mixed $input
@@ -43,7 +38,8 @@ final class IsStringTest extends BaseValidatorTestCase
             [false],
             [1],
             [1.2],
-            [$this],
+            // Stringable object
+            [new \Exception('test')],
             ['1', 1],
             ['1', null, 1],
             ['1', 1, 2],

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace WeiTest;
 
 use Wei\Ret;
-use Wei\RetTrait;
 use Wei\V;
 use WeiTest\Model\Fixture\TestV;
 
@@ -14,8 +13,6 @@ use WeiTest\Model\Fixture\TestV;
  */
 final class VModelTest extends TestCase
 {
-    use RetTrait;
-
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -154,97 +151,97 @@ final class VModelTest extends TestCase
             [
                 'bool_column',
                 'a',
-                $this->err('The bool_column must be a bool value'),
+                Ret::err('The bool_column must be a bool value'),
             ],
             [
                 'tiny_int_column',
                 2 ** 7,
-                $this->err('The tiny_int_column must be less than or equal to 127'),
+                Ret::err('The tiny_int_column must be less than or equal to 127'),
             ],
             [
                 'u_tiny_int_column',
                 2 ** 8,
-                $this->err('The u_tiny_int_column must be less than or equal to 255'),
+                Ret::err('The u_tiny_int_column must be less than or equal to 255'),
             ],
             [
                 'small_int_column',
                 2 ** 15,
-                $this->err('The small_int_column must be less than or equal to 32767'),
+                Ret::err('The small_int_column must be less than or equal to 32767'),
             ],
             [
                 'u_small_int_column',
                 2 ** 16,
-                $this->err('The u_small_int_column must be less than or equal to 65535'),
+                Ret::err('The u_small_int_column must be less than or equal to 65535'),
             ],
             [
                 'int_column',
                 2 ** 31,
-                $this->err('The int_column must be less than or equal to 2147483647'),
+                Ret::err('The int_column must be less than or equal to 2147483647'),
             ],
             [
                 'u_int_column',
                 2 ** 32,
-                $this->err('The u_int_column must be less than or equal to 4294967295'),
+                Ret::err('The u_int_column must be less than or equal to 4294967295'),
             ],
             [
                 'big_int_column',
                 '9223372036854775808',
-                $this->err('The big_int_column must be less than or equal to 9223372036854775807'),
+                Ret::err('The big_int_column must be less than or equal to 9223372036854775807'),
             ],
             [
                 'big_int_column',
                 '',
-                $this->suc(),
+                Ret::suc(),
             ],
             [
                 'u_big_int_column',
                 '18446744073709551616',
-                $this->err('The u_big_int_column must be less than or equal to 18446744073709551615'),
+                Ret::err('The u_big_int_column must be less than or equal to 18446744073709551615'),
             ],
             [
                 'timestamp_column',
                 '1000-01-01 00:00:00',
-                $this->err('The timestamp_column must between 1970-01-01 00:00:01 and 2038-01-19 03:14:07'),
+                Ret::err('The timestamp_column must between 1970-01-01 00:00:01 and 2038-01-19 03:14:07'),
             ],
             [
                 'datetime_column',
                 '',
-                $this->err('The datetime_column must be a valid datetime'),
+                Ret::err('The datetime_column must be a valid datetime'),
             ],
             [
                 'decimal_column',
                 '123.1',
-                $this->err('The decimal_column must be less than or equal to 99.9'),
+                Ret::err('The decimal_column must be less than or equal to 99.9'),
             ],
             [
                 'u_decimal_column',
                 '1231231.1',
-                $this->err('The u_decimal_column must be less than or equal to 999.999'),
+                Ret::err('The u_decimal_column must be less than or equal to 999.999'),
             ],
             [
                 'char_column',
                 '1234',
-                $this->err('The char_column must be no more than 3 character(s)'),
+                Ret::err('The char_column must be no more than 3 character(s)'),
             ],
             [
                 'string_column',
                 str_repeat('1', 32) . '1',
-                $this->err('The string_column must be no more than 32 character(s)'),
+                Ret::err('The string_column must be no more than 32 character(s)'),
             ],
             [
                 'text_column',
                 str_repeat('1', 65535) . '1',
-                $this->err('The text_column must have a length lower than 65535'),
+                Ret::err('The text_column must have a length lower than 65535'),
             ],
             [
                 'medium_text_column',
                 str_repeat('1', 16777215 + 1),
-                $this->err('The medium_text_column must have a length lower than 16777215'),
+                Ret::err('The medium_text_column must have a length lower than 16777215'),
             ],
             [
                 'json_column',
                 'test',
-                $this->err('The json_column must be an array or object'),
+                Ret::err('The json_column must be an array or object'),
             ],
         ];
     }

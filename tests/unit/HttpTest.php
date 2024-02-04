@@ -45,6 +45,9 @@ final class HttpTest extends TestCase
      */
     public function testSuccess($options)
     {
+        $url = $this->http->getUrl();
+        $options['url'] = $url . $options['url'];
+
         $http = $this->http([
                 'beforeSend' => function () {
                     $this->triggeredEvents[] = 'beforeSend';
@@ -67,27 +70,25 @@ final class HttpTest extends TestCase
 
     public static function providerForSuccess()
     {
-        $url = $this->http->getOption('url');
-
         return [
             [
                 [
-                    'url' => $url,
+                    'url' => '',
                 ],
             ],
             [
                 [
-                    'url' => $url . '?abc=cdf',
+                    'url' => '?abc=cdf',
                 ],
             ],
             [
                 [
-                    'url' => $url . '#abc',
+                    'url' => '#abc',
                 ],
             ],
             [
                 [
-                    'url' => $url . '?abc#abc',
+                    'url' => '?abc#abc',
                 ],
             ],
         ];
@@ -118,6 +119,11 @@ final class HttpTest extends TestCase
      */
     public function testError($options, $responseText)
     {
+        $url = $this->http->getUrl();
+        if (0 !== strpos($options['url'], 'http')) {
+            $options['url'] = $url . $options['url'];
+        }
+
         $http = $this->http([
                 'beforeSend' => function () {
                     $this->triggeredEvents[] = 'beforeSend';
@@ -142,19 +148,17 @@ final class HttpTest extends TestCase
 
     public static function providerForError()
     {
-        $url = $this->http->getOption('url');
-
         return [
             // 404 but return content
             [
                 [
-                    'url' => $url . '?code=404',
+                    'url' => '?code=404',
                 ],
                 'default text',
             ],
             [
                 [
-                    'url' => $url . '?code=500',
+                    'url' => '?code=500',
                 ],
                 'default text',
             ],
