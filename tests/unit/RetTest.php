@@ -521,4 +521,10 @@ final class RetTest extends TestCase
         $result = $ret->assert();
         $this->assertSame($ret, $result);
     }
+
+    public function testFn()
+    {
+        $this->assertRetSuc(suc());
+        $this->assertRetErr(err('x'));
+    }
 }
