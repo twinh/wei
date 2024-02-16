@@ -29,7 +29,8 @@
       "Wei\\": "lib"
     },
     "files": [
-      "lib/Wei.php"
+      "lib/Wei.php",
+      "lib/functions.php"
     ]
   },
   "autoload-dev": {
