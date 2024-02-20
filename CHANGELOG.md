@@ -1,3 +1,11 @@
+## [0.17.3](https://github.com/twinh/wei/compare/v0.17.2...v0.17.3) (2024-02-20)
+
+
+### Features
+
+* 增加 `suc`，`err` 函数，方便外部使用 ([475d121](https://github.com/twinh/wei/commit/475d121596692bee5eacddd3a6fcadae146637b3))
+* **Money:** 增加 `Money` 服务，用于计算金额 ([1391fcb](https://github.com/twinh/wei/commit/1391fcb8c497647d2d0e100be6780eba7e62a3f9))
+
 ## [0.17.2](https://github.com/twinh/wei/compare/v0.17.1...v0.17.2) (2024-01-08)
 
 
