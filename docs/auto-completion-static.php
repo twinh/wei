@@ -5175,6 +5175,17 @@ class Time
     public static function timestamp()
     {
     }
+
+    /**
+     * Set the current timestamp
+     *
+     * @param int|null $timestamp
+     * @return $this
+     * @see Time::setTimestamp
+     */
+    public static function setTimestamp(int $timestamp = null): self
+    {
+    }
 }
 
 class Ua
@@ -12227,6 +12238,17 @@ if (0) {
          * @see Time::timestamp
          */
         public function timestamp()
+        {
+        }
+
+        /**
+         * Set the current timestamp
+         *
+         * @param int|null $timestamp
+         * @return $this
+         * @see Time::setTimestamp
+         */
+        public function setTimestamp(int $timestamp = null): self
         {
         }
     }
