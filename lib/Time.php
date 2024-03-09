@@ -8,7 +8,7 @@ namespace Wei;
 class Time extends Base
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $timestamp;
 
@@ -37,5 +37,18 @@ class Time extends Base
     protected function timestamp()
     {
         return $this->timestamp ?: time();
+    }
+
+    /**
+     * Set the current timestamp
+     *
+     * @param int|null $timestamp
+     * @return $this
+     * @svc
+     */
+    protected function setTimestamp(?int $timestamp = null): self
+    {
+        $this->timestamp = $timestamp;
+        return $this;
     }
 }
