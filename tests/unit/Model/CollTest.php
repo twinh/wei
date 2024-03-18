@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
+use Wei\Logger;
 use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
@@ -73,7 +74,7 @@ class CollTest extends TestCase
 
     public function testOffsetSetInvalid()
     {
-        $this->expectException(\TypeError::class);
+        $this->expectExceptionObject(new \InvalidArgumentException('Invalid property: key'));
 
         $users = TestUser::newColl();
         $users['key'] = 'test';
@@ -137,7 +138,7 @@ class CollTest extends TestCase
 
     public function testSetInvalid()
     {
-        $this->expectException(\TypeError::class);
+        $this->expectExceptionObject(new \InvalidArgumentException('Invalid property: key'));
 
         $users = TestUser::newColl();
         $users->set('key', 'test');
@@ -262,7 +263,7 @@ class CollTest extends TestCase
 
         $users = TestUser::newColl();
 
-        $this->expectException(\TypeError::class);
+        $this->expectExceptionObject(new \InvalidArgumentException('Invalid property: [null]'));
 
         // Assign non record value to raise an exception
         $users[] = 234;
@@ -621,6 +622,15 @@ class CollTest extends TestCase
 
         $sql = $users2->getSql();
         $this->assertSqlSame('SELECT * FROM `test_users` WHERE `id` IN (?, ?)', $sql);
+    }
+
+    public function testGetService()
+    {
+        $this->initFixtures();
+
+        $users = TestUser::newColl();
+
+        $this->assertInstanceOf(Logger::class, $users->logger);
     }
 
     protected function assertSqlSame($expected, $actual, string $message = '')
