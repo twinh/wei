@@ -800,7 +800,7 @@ trait ModelTrait
      */
     protected function set($name, $value, bool $throwException = true)
     {
-        if ($this->coll) {
+        if ($this->coll && $value instanceof static) {
             return $this->setCollValue($name, $value);
         }
 

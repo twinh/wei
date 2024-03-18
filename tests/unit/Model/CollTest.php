@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
+use Wei\Db;
+use Wei\Logger;
 use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
@@ -621,6 +623,15 @@ class CollTest extends TestCase
 
         $sql = $users2->getSql();
         $this->assertSqlSame('SELECT * FROM `test_users` WHERE `id` IN (?, ?)', $sql);
+    }
+
+    public function testGetService()
+    {
+        $this->initFixtures();
+
+        $users = TestUser::newColl();
+
+        $this->assertInstanceOf(Logger::class, $users->logger);
     }
 
     protected function assertSqlSame($expected, $actual, string $message = '')

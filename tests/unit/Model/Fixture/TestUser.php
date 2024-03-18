@@ -18,6 +18,7 @@ use Wei\ModelTrait;
  * @property string|null $name
  * @property int|null $group_id
  * @property string|null $address
+ * @mixin \LoggerPropMixin
  */
 class TestUser extends BaseModel
 {
