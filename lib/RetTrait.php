@@ -13,7 +13,7 @@ trait RetTrait
      * @param string|array $message
      * @param int $code
      * @param string $type
-     * @return array
+     * @return Ret
      */
     public function ret($message, $code = null, $type = null)
     {
