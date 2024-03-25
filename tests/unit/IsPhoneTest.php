@@ -45,6 +45,7 @@ final class IsPhoneTest extends BaseValidatorTestCase
             ['416-981-0001'],
             ['4001234567'],
             ['1-877-777-1420'],
+            ['+852 12312323'],
         ];
     }
 
@@ -56,6 +57,9 @@ final class IsPhoneTest extends BaseValidatorTestCase
             ['1-877-777-1420 x117'],
             ['++123234'],
             ['1233456+'],
+            // auto fill course invalid value
+            ['+852 +852 12312323'],
+            ['+852 +85212312323'],
         ];
     }
 }
