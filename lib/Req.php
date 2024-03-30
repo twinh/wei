@@ -937,7 +937,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     protected function getHeader(string $name): ?string
     {
-        $name = 'HTTP_' . strtoupper($name);
+        $name = 'HTTP_' . strtoupper(strtr($name, '-', '_'));
         return $this->servers[$name] ?? null;
     }
 
