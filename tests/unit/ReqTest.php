@@ -1153,12 +1153,14 @@ final class ReqTest extends TestCase
             'servers' => [
                 'HTTP_ORIGIN' => 'https://test.com',
                 'HTTP_TEST' => 'test',
+                'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'GET',
                 'ORIGIN' => 'https://test2.com',
             ],
         ]);
         $this->assertSame('https://test.com', $req->getHeader('ORIGIN'));
         $this->assertSame('https://test.com', $req->getHeader('origin'));
         $this->assertSame('test', $req->getHeader('test'));
+        $this->assertSame('GET', $req->getHeader('Access-Control-Request-Method'));
         $this->assertNull($req->getHeader('test2'));
 
         $this->assertTrue($req->hasHeader('ORIGIN'));
