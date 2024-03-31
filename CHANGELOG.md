@@ -1,3 +1,24 @@
+## [0.17.4](https://github.com/twinh/wei/compare/v0.17.3...v0.17.4) (2024-03-31)
+
+
+### Bug Fixes
+
+* **Model:** Coll 获取服务时出错 ([1e6f8f0](https://github.com/twinh/wei/commit/1e6f8f0c4135ea5bd0671091b52070236ffd4eb1)), closes [#2](https://github.com/miaoxing/miaoxing/issues/2)
+
+
+### Features
+
+* **Req:** `getHeader` 支持键名包含 `-`，如 `Access-Control-Request-Method` ([6436091](https://github.com/twinh/wei/commit/6436091607211629e59a0be880bf607fcd759d20))
+* **Time:** 增加 `setTimestamp` 方法 ([49c709f](https://github.com/twinh/wei/commit/49c709feda7cf25e9f7fdd0c899ae83830469420))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `9.1.0` to `9.1.1`
+
 ## [0.17.3](https://github.com/twinh/wei/compare/v0.17.2...v0.17.3) (2024-02-20)
 
 

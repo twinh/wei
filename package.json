@@ -1,11 +1,11 @@
 {
   "name": "@wei/wei",
-  "version": "0.17.3",
+  "version": "0.17.4",
   "main": "index.js",
   "author": "twinh",
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@miaoxing/dev": "^9.1.0"
+    "@miaoxing/dev": "^9.1.1"
   }
 }
