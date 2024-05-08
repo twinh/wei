@@ -59,6 +59,7 @@ class Str extends Base
         'menus' => 'menu',
         'monies' => 'money',
         'news' => 'news',
+        'goods' => 'goods',
         'people' => 'person',
         'quizzes' => 'quiz',
     ];

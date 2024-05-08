@@ -83,6 +83,7 @@ final class StrTest extends TestCase
             ['test', 'tests'],
             ['query', 'queries'],
             ['news', 'news'],
+            ['goods', 'goods'],
             ['myList', 'myLists'],
 
             ['life', 'lives'],
