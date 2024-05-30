@@ -1,3 +1,10 @@
+## [0.17.5](https://github.com/twinh/wei/compare/v0.17.4...v0.17.5) (2024-05-30)
+
+
+### Features
+
+* **Str:** 增加 `goods` 单数转为 `goods` ([45a8b6b](https://github.com/twinh/wei/commit/45a8b6b29e147cff77b42cde026a6847cab0d7f8))
+
 ## [0.17.4](https://github.com/twinh/wei/compare/v0.17.3...v0.17.4) (2024-03-31)
 
 
