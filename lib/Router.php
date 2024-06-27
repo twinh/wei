@@ -367,7 +367,7 @@ class Router extends Base
             return $route;
         }
 
-        $regex = preg_replace('#[.\+*?[^\]${}=!|:-]#', '\\\\$0', $route['pattern']);
+        $regex = preg_replace('#[.\+*?[^\]${}=!|:-]#', '\\\$0', $route['pattern']);
 
         $regex = str_replace(['(', ')'], ['(?:', ')?'], $regex);
 

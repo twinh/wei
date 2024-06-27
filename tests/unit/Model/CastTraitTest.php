@@ -55,7 +55,7 @@ final class CastTraitTest extends TestCase
                 'string_column' => '1',
                 'datetime_column' => '2018-01-01 00:00:00',
                 'date_column' => '2018-01-01',
-                'json_column' => '{"a":"b\\\\c","d":"中文"}',
+                'json_column' => '{"a":"b\\\c","d":"中文"}',
                 'object_column' => '{"a":"b"}',
                 'list_column' => 'a,b,c',
                 'list2_column' => '1|2|3',
@@ -213,7 +213,7 @@ final class CastTraitTest extends TestCase
                     'string_column' => 1,
                     'datetime_column' => '2018-01-01 00:00:00',
                     'date_column' => '2018-01-01',
-                    'json_column' => '{"a":"b\\c","d":"中文"}',
+                    'json_column' => '{"a":"b\c","d":"中文"}',
                     'list_column' => 'a|b',
                     'list2_column' => '1,2',
                     'ip_column' => '1',
@@ -298,7 +298,7 @@ final class CastTraitTest extends TestCase
         $this->assertSame('1', $data['string_column']);
         $this->assertSame('2018-01-01 00:00:00', $data['datetime_column']);
         $this->assertSame('2018-01-01', $data['date_column']);
-        $this->assertSame('{"a":"b\\\\c","d":"中文"}', $data['json_column']);
+        $this->assertSame('{"a":"b\\\c","d":"中文"}', $data['json_column']);
         $this->assertSame('{"a":"b"}', $data['object_column']);
         $this->assertSame('a,b,c', $data['list_column']);
         $this->assertSame('1|2|3', $data['list2_column']);

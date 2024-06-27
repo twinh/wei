@@ -350,10 +350,10 @@ class E extends Base
     {
         $chr = $matches[0];
         if (1 == strlen($chr)) {
-            return sprintf('\\x%02X', ord($chr));
+            return sprintf('\x%02X', ord($chr));
         }
         $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
-        return sprintf('\\u%04s', strtoupper(bin2hex($chr)));
+        return sprintf('\u%04s', strtoupper(bin2hex($chr)));
     }
 
     /**
@@ -372,7 +372,7 @@ class E extends Base
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
             $ord = hexdec(bin2hex($chr));
         }
-        return sprintf('\\%X ', $ord);
+        return sprintf('\%X ', $ord);
     }
 
     /**

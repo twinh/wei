@@ -74,13 +74,13 @@ final class ETest extends TestCase
 
     protected $jsSpecialChars = [
         /* HTML special chars - escape without exception to hex */
-        '<' => '\\x3C',
-        '>' => '\\x3E',
-        '\'' => '\\x27',
-        '"' => '\\x22',
-        '&' => '\\x26',
+        '<' => '\x3C',
+        '>' => '\x3E',
+        '\'' => '\x27',
+        '"' => '\x22',
+        '&' => '\x26',
         /* Characters beyond ASCII value 255 to unicode escape */
-        'Ā' => '\\u0100',
+        'Ā' => '\u0100',
         /* Immune chars excluded */
         ',' => ',',
         '.' => '.',
@@ -93,12 +93,12 @@ final class ETest extends TestCase
         '0' => '0',
         '9' => '9',
         /* Basic control characters and null */
-        "\r" => '\\x0D',
-        "\n" => '\\x0A',
-        "\t" => '\\x09',
-        "\0" => '\\x00',
+        "\r" => '\x0D',
+        "\n" => '\x0A',
+        "\t" => '\x09',
+        "\0" => '\x00',
         /* Encode spaces for quoteless attribute protection */
-        ' ' => '\\x20',
+        ' ' => '\x20',
     ];
 
     protected $urlSpecialChars = [
@@ -138,17 +138,17 @@ final class ETest extends TestCase
 
     protected $cssSpecialChars = [
         /* HTML special chars - escape without exception to hex */
-        '<' => '\\3C ',
-        '>' => '\\3E ',
-        '\'' => '\\27 ',
-        '"' => '\\22 ',
-        '&' => '\\26 ',
+        '<' => '\3C ',
+        '>' => '\3E ',
+        '\'' => '\27 ',
+        '"' => '\22 ',
+        '&' => '\26 ',
         /* Characters beyond ASCII value 255 to unicode escape */
-        'Ā' => '\\100 ',
+        'Ā' => '\100 ',
         /* Immune chars excluded */
-        ',' => '\\2C ',
-        '.' => '\\2E ',
-        '_' => '\\5F ',
+        ',' => '\2C ',
+        '.' => '\2E ',
+        '_' => '\5F ',
         /* Basic alnums exluded */
         'a' => 'a',
         'A' => 'A',
@@ -157,12 +157,12 @@ final class ETest extends TestCase
         '0' => '0',
         '9' => '9',
         /* Basic control characters and null */
-        "\r" => '\\D ',
-        "\n" => '\\A ',
-        "\t" => '\\9 ',
-        "\0" => '\\0 ',
+        "\r" => '\D ',
+        "\n" => '\A ',
+        "\t" => '\9 ',
+        "\0" => '\0 ',
         /* Encode spaces for quoteless attribute protection */
-        ' ' => '\\20 ',
+        ' ' => '\20 ',
     ];
 
     /**
