@@ -15,7 +15,7 @@
   },
   "require-dev": {
     "joseph-lenton/php-error": "dev-master",
-    "miaoxing/dev": "^9.1.1"
+    "miaoxing/dev": "^9.1.2"
   },
   "authors": [
     {
@@ -45,10 +45,10 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "0.17.5-dev"
+      "dev-main": "0.17.6-dev"
     },
     "require-ci": {
-      "miaoxing/dev": "miaoxing/dev as 8.x-dev",
+      "miaoxing/dev": "miaoxing/dev as 9.x-dev",
       "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 3.x-dev"
     }
   },
