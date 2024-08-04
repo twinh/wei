@@ -170,7 +170,7 @@ class Snowflake extends Base
      */
     protected function getSequence(int $timestamp): int
     {
-        $key = 'snowflake:' . $timestamp;
+        $key = 'snowflake:' . $this->getWorkerId() . ':' . $timestamp;
         // TODO 考虑增加比例，减少跨毫秒的情况
         $startSequence = $this->randomStartSequence ? mt_rand(0, $this->getMaxNumber($this->sequenceBits)) : 0;
         if ($this->cache->add($key, $startSequence, 1)) {
