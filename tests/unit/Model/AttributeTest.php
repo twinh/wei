@@ -286,7 +286,7 @@ class AttributeTest extends TestCase
             ->string('event')
             ->exec();
 
-        $service = new class () extends BaseModel {
+        $service = new class extends BaseModel {
             use ModelTrait;
 
             protected $primaryKey = 'db';

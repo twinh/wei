@@ -326,7 +326,7 @@ final class RetTest extends TestCase
     {
         $ret = Ret::suc(['data' => ['id' => 1, 'password' => 2]]);
 
-        $ret->transform(new class () extends Base {
+        $ret->transform(new class extends Base {
             /**
              * @svc
              * @param mixed $data
@@ -348,7 +348,7 @@ final class RetTest extends TestCase
     {
         $ret = Ret::suc(['data' => ['id' => 1, 'password' => 2]]);
 
-        $ret->transform(new class () extends Base {
+        $ret->transform(new class extends Base {
             /**
              * @svc
              * @param mixed $data
@@ -372,7 +372,7 @@ final class RetTest extends TestCase
     {
         $ret = Ret::err('err', 1);
 
-        $ret->transform(new class () extends Base {
+        $ret->transform(new class extends Base {
             /**
              * @svc
              */
