@@ -586,6 +586,16 @@ namespace Wei {
         }
 
         /**
+         * Return the service aliases
+         *
+         * @return array
+         */
+        public function getAliases(): array
+        {
+            return $this->aliases;
+        }
+
+        /**
          * Merge service aliases
          *
          * @param array $aliases

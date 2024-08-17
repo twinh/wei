@@ -538,7 +538,7 @@ final class WeiTest extends TestCase
     public function testSetAlias()
     {
         $this->wei->setAlias('weiName', 'className');
-        $aliases = $this->wei->getOption('aliases');
+        $aliases = $this->wei->getAliases();
 
         $this->assertArrayHasKey('weiName', $aliases);
         $this->assertEquals('className', $aliases['weiName']);
