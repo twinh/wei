@@ -79,7 +79,7 @@ class ClassMap extends Base
     {
         // 假设为根目录
         if ('.' === $file[0]) {
-            $file = '\\' . ltrim($file, './');
+            $file = ltrim($file, './');
         }
 
         list($dir, $className) = explode('src/', $file);
