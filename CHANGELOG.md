@@ -1,3 +1,24 @@
+## [0.17.8](https://github.com/twinh/wei/compare/v0.17.7...v0.17.8) (2024-09-01)
+
+
+### Bug Fixes
+
+* **ClassMap:** 根目录生成类名错误 ([85a8dcb](https://github.com/twinh/wei/commit/85a8dcbb17f27abdbcd9f86225543876285efe65))
+
+
+### Features
+
+* `Wei` 增加 `getAliases` 方法 ([69e66df](https://github.com/twinh/wei/commit/69e66df2ad7949ad8b17c6884ebd96354d239f4b))
+* **Snowflake:** 增加机器编号到序列的缓存键名中，减少冲突 ([e6c4757](https://github.com/twinh/wei/commit/e6c475729f31048856253608372a30221ae3bc63))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `9.1.3` to `9.2.0`
+
 ## [0.17.7](https://github.com/twinh/wei/compare/v0.17.6...v0.17.7) (2024-08-03)
 
 
