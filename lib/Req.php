@@ -647,6 +647,36 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Check if the current request method is PATCH
+     *
+     * @return bool
+     */
+    public function isPatch(): bool
+    {
+        return $this->isMethod('PATCH');
+    }
+
+    /**
+     * Check if the current request method is PUT
+     *
+     * @return bool
+     */
+    public function isPut(): bool
+    {
+        return $this->isMethod('PUT');
+    }
+
+    /**
+     * Check if the current request method is DELETE
+     *
+     * @return bool
+     */
+    public function isDelete(): bool
+    {
+        return $this->isMethod('DELETE');
+    }
+
+    /**
      * Check if the current request is an ajax(XMLHttpRequest) request
      *
      * @return bool
