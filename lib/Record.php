@@ -17,6 +17,7 @@ namespace Wei;
  * @method      \Wei\Record db($table = null) Create a new record object
  * @property    BaseCache $cache A cache service (Optional)
  * @method      \Wei\TagCache tagCache($tags) Create a new cache service with tagging support (Optional)
+ * @deprecated  use \Wei\Model instead
  */
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
 {
