@@ -1,3 +1,11 @@
+## [0.17.9](https://github.com/twinh/wei/compare/v0.17.8...v0.17.9) (2024-11-01)
+
+
+### Features
+
+* **Record, deprecated:** deprecate `Record` class, should use `Model` instead ([9b55e4c](https://github.com/twinh/wei/commit/9b55e4c131d2572340b15f0749eb4614728fa3c3))
+* **Req:** 增加 `isPatch`，`isPut` 和 `isDelete` 方法 ([6aaefe0](https://github.com/twinh/wei/commit/6aaefe01f7746c2d5e423c94a67b84049fd7de0d))
+
 ## [0.17.8](https://github.com/twinh/wei/compare/v0.17.7...v0.17.8) (2024-09-01)
 
 
