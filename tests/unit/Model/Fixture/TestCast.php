@@ -18,6 +18,7 @@ use Wei\ModelTrait;
  * @property string|null $datetime_column
  * @property string|null $date_column
  * @property array $json_column
+ * @property array|null $nullable_json_column
  * @property object $object_column
  * @property object|null $nullable_object_column
  * @property object $default_object_column
@@ -51,6 +52,9 @@ class TestCast extends BaseModel
         'json_column' => [
             'cast' => 'array',
             'default' => [],
+        ],
+        'nullable_json_column' => [
+            'cast' => 'array',
         ],
         'object_column' => [
             'cast' => 'object',

@@ -627,7 +627,7 @@ final class CastTraitTest extends TestCase
             'date_column' => 'date',
             'nullable_date_column' => 'date',
             'json_column' => 'array',
-            'nullable_json_column' => 'string',
+            'nullable_json_column' => 'array',
             'object_column' => 'object',
             'nullable_object_column' => 'object',
             'default_object_column' => 'object',
@@ -895,7 +895,7 @@ final class CastTraitTest extends TestCase
             ],
             'nullable_json_column' => [
                 'type' => 'string',
-                'cast' => 'string',
+                'cast' => 'array',
                 'length' => 255,
                 'nullable' => true,
             ],
@@ -959,5 +959,22 @@ final class CastTraitTest extends TestCase
                 'cast' => 'ip',
             ],
         ], $columns);
+    }
+
+    public function testSetChild()
+    {
+        $cast = TestCast::save();
+        $this->assertFalse($cast->isChanged('json_column'));
+
+        $cast->json_column['a'] = 'b';
+        $cast->nullable_json_column['c'] = 'd';
+        $this->assertTrue($cast->isChanged('json_column'));
+        $this->assertTrue($cast->isChanged('nullable_json_column'));
+
+        $cast->save();
+        $cast->reload();
+
+        $this->assertSame('b', $cast->json_column['a']);
+        $this->assertSame('d', $cast->nullable_json_column['c']);
     }
 }
