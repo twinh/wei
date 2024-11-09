@@ -1198,7 +1198,18 @@ trait ModelTrait
      */
     protected function &getColumnValue(string $name)
     {
-        return $this->convertToPhpAttribute($name);
+        $value = &$this->convertToPhpAttribute($name);
+
+        // @internal mark array or object as changed
+        if (
+            !array_key_exists($name, $this->changes)
+            && isset($this->columns[$name]['cast']) // Cast may not load on init
+            && !$this->isScalarCastType($this->columns[$name]['cast'])
+        ) {
+            $this->changes[$name] = $this->attributes[$name];
+        }
+
+        return $value;
     }
 
     /**

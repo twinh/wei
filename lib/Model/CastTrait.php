@@ -15,6 +15,23 @@ trait CastTrait
     protected static $castCache = [];
 
     /**
+     * The types that can be cast to PHP scalar types, exclude types like array and object
+     *
+     * @var string[]
+     * @internal
+     */
+    protected static $scalarCastTypes = [
+        'int',
+        'intString',
+        'bool',
+        'string',
+        'float',
+        'decimal',
+        'date',
+        'datetime',
+    ];
+
+    /**
      * Get the column cast configs
      *
      * @return array
@@ -258,6 +275,29 @@ trait CastTrait
     protected function isIgnoreCast($value): bool
     {
         return $this->db->isRaw($value);
+    }
+
+    /**
+     * Check if the specified type is a scalar cast type
+     *
+     * @param string|array $type
+     * @return bool
+     * @internal
+     */
+    protected function isScalarCastType($type): bool
+    {
+        return in_array($this->getCastType($type), static::$scalarCastTypes, true);
+    }
+
+    /**
+     * Get the cast type without options
+     *
+     * @param string|array $type
+     * @return string
+     */
+    private function getCastType($type): string
+    {
+        return is_array($type) ? $type[0] : $type;
     }
 
     /**
