@@ -83,11 +83,16 @@ class Mysql extends BaseDriver
         $columns = [];
 
         $table = $this->db->getTable($table);
-        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $table");
-
+        $dbColumns = $this->db->fetchAll(<<<SQL
+SELECT COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, NUMERIC_SCALE,
+COLUMN_TYPE, EXTRA, COLUMN_COMMENT
+FROM information_schema.COLUMNS
+WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '$table'
+SQL
+        );
         foreach ($dbColumns as $dbColumn) {
             $column = $this->parseColumn($dbColumn);
-            $name = $phpKeyConverter ? $phpKeyConverter($dbColumn['Field']) : $dbColumn['Field'];
+            $name = $phpKeyConverter ? $phpKeyConverter($dbColumn['COLUMN_NAME']) : $dbColumn['COLUMN_NAME'];
             $columns[$name] = $column;
         }
 
@@ -100,17 +105,15 @@ class Mysql extends BaseDriver
      */
     protected function getCustomDefault(array $column): array
     {
-        $parts = explode('(', $column['Type']);
-        $type = $parts[0];
-        $length = (int) ($parts[1] ?? 0);
-        $default = $column['Default'];
+        $type = $column['DATA_TYPE'];
+        $default = $column['COLUMN_DEFAULT'];
 
-        if (null === $column['Default'] && 'YES' === $column['Null']) {
+        if (null === $column['COLUMN_DEFAULT'] && 'YES' === $column['IS_NULLABLE']) {
             return [null, false];
         }
 
         // Bool
-        if ('tinyint' === $type && 1 === $length) {
+        if ('tinyint(1)' === $column['COLUMN_TYPE']) {
             return [(bool) $default, '0' !== $default];
         }
 
@@ -129,7 +132,7 @@ class Mysql extends BaseDriver
 
         // TODO Mysql 8.0 support expression as default value
 
-        if (in_array($column['Type'], ['tinytext', 'text', 'mediumtext', 'longtext'], true)) {
+        if (in_array($column['COLUMN_TYPE'], ['tinytext', 'text', 'mediumtext', 'longtext'], true)) {
             return ['', true];
         }
 
@@ -428,10 +431,10 @@ class Mysql extends BaseDriver
      */
     protected function parseColumn(array $dbColumn): array
     {
-        $column = $this->parseColumnType($dbColumn['Type']);
+        $column = $this->parseColumnType($dbColumn);
 
         // Auto increment column cant have default value, so it's allow to be null
-        if ('YES' === $dbColumn['Null'] || false !== strpos($dbColumn['Extra'], 'auto_increment')) {
+        if ('YES' === $dbColumn['IS_NULLABLE'] || false !== strpos($dbColumn['EXTRA'], 'auto_increment')) {
             $column['nullable'] = true;
         }
 
@@ -440,8 +443,8 @@ class Mysql extends BaseDriver
             $column['default'] = $default;
         }
 
-        if ($dbColumn['Comment']) {
-            $column['title'] = explode('。', $dbColumn['Comment'], 2)[0];
+        if ($dbColumn['COLUMN_COMMENT']) {
+            $column['title'] = explode('。', $dbColumn['COLUMN_COMMENT'], 2)[0];
         }
 
         return $column;
@@ -450,52 +453,43 @@ class Mysql extends BaseDriver
     /**
      * Parse column metadata from database column type
      *
-     * $columnType examples:
-     *
-     * bigint(20) unsigned
-     * decimal(16,2) unsigned
-     * timestamp
-     *
-     * @param string $columnType
+     * @param array $column
      * @return array
      * @internal
      */
-    protected function parseColumnType(string $columnType): array
+    protected function parseColumnType(array $column): array
     {
-        [$type, $left] = explode('(', $columnType) + [1 => 0];
-        $length = (int) $left;
-
-        switch ($type) {
+        switch ($column['DATA_TYPE']) {
             case 'tinyint':
-                return 1 === $length ? [
+                return 'tinyint(1)' === $column['COLUMN_TYPE'] ? [
                     'type' => 'bool',
                     'cast' => 'bool',
                 ] : [
                     'type' => 'tinyInt',
                     'cast' => 'int',
-                    'unsigned' => $this->isTypeUnsigned($columnType),
+                    'unsigned' => $this->isTypeUnsigned($column['COLUMN_TYPE']),
                 ];
 
             case 'smallint':
             case 'mediumint':
             case 'int':
                 return [
-                    'type' => $this->typeMap[$type],
+                    'type' => $this->typeMap[$column['DATA_TYPE']],
                     'cast' => 'int',
-                    'unsigned' => $this->isTypeUnsigned($columnType),
+                    'unsigned' => $this->isTypeUnsigned($column['COLUMN_TYPE']),
                 ];
 
             case 'bigint':
                 return [
                     'type' => 'bigInt',
                     'cast' => 'intString',
-                    'unsigned' => $this->isTypeUnsigned($columnType),
+                    'unsigned' => $this->isTypeUnsigned($column['COLUMN_TYPE']),
                 ];
 
             case 'timestamp':
             case 'datetime':
                 return [
-                    'type' => $type,
+                    'type' => $column['COLUMN_TYPE'],
                     'cast' => 'datetime',
                 ];
 
@@ -506,14 +500,12 @@ class Mysql extends BaseDriver
                 ];
 
             case 'decimal':
-                // $left = 16,2) unsigned
-                $scale = (int) explode(',', $left)[1];
                 return [
                     'type' => 'decimal',
                     'cast' => 'decimal',
-                    'unsigned' => $this->isTypeUnsigned($columnType),
-                    'length' => $length,
-                    'scale' => $scale,
+                    'unsigned' => $this->isTypeUnsigned($column['COLUMN_TYPE']),
+                    'length' => (int) $column['NUMERIC_PRECISION'],
+                    'scale' => (int) $column['NUMERIC_SCALE'],
                 ];
 
             case 'json':
@@ -528,14 +520,14 @@ class Mysql extends BaseDriver
                 return [
                     'type' => 'string',
                     'cast' => 'string',
-                    'length' => $length,
+                    'length' => (int) $column['CHARACTER_MAXIMUM_LENGTH'],
                 ];
 
             case 'text':
             case 'mediumtext':
             case 'longtext':
                 return [
-                    'type' => $this->typeMap[$type],
+                    'type' => $this->typeMap[$column['DATA_TYPE']],
                     'cast' => 'string',
                 ];
 
