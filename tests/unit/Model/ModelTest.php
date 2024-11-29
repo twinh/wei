@@ -881,6 +881,17 @@ final class ModelTest extends TestCase
         $this->assertSame($user, $ret->getMetadata('model'));
     }
 
+    public function testToRetWithData()
+    {
+        $this->initFixtures();
+
+        $user = TestUser::first();
+
+        $ret = $user->toRet()->data('key', 'value');
+        $this->assertSame('value', $ret->getData()['key']);
+        $this->assertSame($user->id, $ret->getData()['id']);
+    }
+
     public function testFindByOrCreateWithNewAttribute()
     {
         $this->initFixtures();
