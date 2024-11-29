@@ -272,7 +272,14 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
         if (is_string($data)) {
             $data = [$data => $value];
         }
-        $this->data['data'] = array_merge($this->data['data'] ?? [], $data);
+
+        /** @experimental Convert object to array to merge data */
+        $internalData = $this->data['data'] ?? [];
+        if (is_object($internalData) && method_exists($internalData, 'toArray')) {
+            $internalData = $internalData->toArray();
+        }
+
+        $this->data['data'] = array_merge($internalData, $data);
         return $this;
     }
 
