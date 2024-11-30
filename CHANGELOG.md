@@ -1,3 +1,21 @@
+# [0.18.0](https://github.com/twinh/wei/compare/v0.17.9...v0.18.0) (2024-11-30)
+
+
+### Bug Fixes
+
+* **db:** 解决 MySQL >= 8.0.19 通过 `SHOW FULL COLUMNS` 获取不到 `tinyint` 长度 ([0773958](https://github.com/twinh/wei/commit/0773958b1bd8f11cf61e39ce88e60763f70fbcaf))
+* **Model:** 解决设置数组，对象等下级数据后保存未生效 ([a3a2a91](https://github.com/twinh/wei/commit/a3a2a914d98313c1cb5f01599025c09576dd4a2e))
+
+
+### Features
+
+* **Ret, experimental:** 附加数据时，检测到数据是对象（如模型）时，先将对象转换为数组 ([bb8ae43](https://github.com/twinh/wei/commit/bb8ae43b56a9afa15cb0f0185943840be96b976d))
+
+
+### BREAKING CHANGES
+
+* **db:** MySQL 需要账号可以访问 `information_schema.COLUMNS`
+
 ## [0.17.9](https://github.com/twinh/wei/compare/v0.17.8...v0.17.9) (2024-11-01)
 
 
