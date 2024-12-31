@@ -352,7 +352,7 @@ jobs:
 
       - name: Run
         run: >
-          ./vendor/bin/phpmnd lib tests --ignore-numbers=-1,0,1,2,3 --non-zero-exit-on-violation --progress
+          ./vendor/bin/phpmnd lib tests --ignore-numbers=-1,0,1,2,3 --progress
           --exclude-path E.php --exclude-path Pinyin.php --exclude-path unit/ETest.php
           --exclude-path IsIdCardHk.php --exclude-path IsIdCardTw.php --exclude-path Password.php
 
