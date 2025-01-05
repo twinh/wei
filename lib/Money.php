@@ -216,10 +216,10 @@ class Money extends Base implements \JsonSerializable
         }
 
         $value *= $options['precisionValue'];
+        $value = $this->round($value, 4);
 
         if ($round) {
-            // Act like JS Math.round
-            $value = round($value, 0, $value > 0 ? \PHP_ROUND_HALF_UP : \PHP_ROUND_HALF_DOWN);
+            $value = $this->round($value);
         }
 
         return $value;
@@ -243,5 +243,17 @@ class Money extends Base implements \JsonSerializable
             'precision' => $this->precision,
             'precisionValue' => $this->precisionValue,
         ];
+    }
+
+    /**
+     * Round a number to a precision like JS Math.round
+     *
+     * @param int|float $value
+     * @param int $precision
+     * @return float
+     */
+    protected function round($value, int $precision = 0): float
+    {
+        return round($value, $precision, $value > 0 ? \PHP_ROUND_HALF_UP : \PHP_ROUND_HALF_DOWN);
     }
 }
