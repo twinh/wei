@@ -75,7 +75,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Replace package dependencies
         run: npx replace-pkg-dep composer.json main
@@ -161,7 +161,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Replace package dependencies
         run: npx replace-pkg-dep composer.json main
@@ -221,7 +221,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Replace package dependencies
         run: npx replace-pkg-dep composer.json main
@@ -281,7 +281,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Replace package dependencies
         run: npx replace-pkg-dep composer.json main
@@ -341,7 +341,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Replace package dependencies
         run: npx replace-pkg-dep composer.json main
@@ -404,7 +404,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Replace package dependencies
         run: npx replace-pkg-dep composer.json main
