@@ -290,6 +290,26 @@ final class SchemaTest extends TestCase
         $this->assertFalse($this->schema->hasTable('test_rename2'));
     }
 
+    public function testAdd()
+    {
+        /** @var Schema $schema */
+        $schema = $this->wei->newInstance('schema');
+        $appId = $schema->uBigInt('app_id')->comment('app id');
+
+        $schema = $this->wei->newInstance('schema');
+        $userId = $schema->uBigInt('user_id')->comment('user id');
+
+        $sql = $this->schema->table('tables')
+            ->add($appId)
+            ->add($userId)
+            ->getSql();
+
+        $this->assertSqlSame("CREATE TABLE tables (
+  app_id bigint unsigned NOT NULL DEFAULT 0 COMMENT 'app id',
+  user_id bigint unsigned NOT NULL DEFAULT 0 COMMENT 'user id'
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", $sql);
+    }
+
     protected function createTestTable()
     {
         $this->schema->dropIfExists('test_products');

@@ -223,6 +223,19 @@ class Schema extends Base
     }
 
     /**
+     * Add the last column from a schema to current schema
+     *
+     * @param Schema $schema
+     * @return $this
+     * @experimental may be merge into `addColumn`, add `Column` class
+     */
+    public function add(self $schema): self
+    {
+        $this->columns[$schema->lastColumn] = $schema->columns[$schema->lastColumn];
+        return $this;
+    }
+
+    /**
      * Add a drop column command
      *
      * @param string|array $column
