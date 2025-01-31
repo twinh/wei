@@ -141,10 +141,6 @@ class Apcu
     }
 }
 
-class App
-{
-}
-
 class ArrayCache
 {
     /**
@@ -282,10 +278,6 @@ class ArrayCache
     public static function isHit(string $key = null): bool
     {
     }
-}
-
-class Asset
-{
 }
 
 class Bicache
@@ -427,10 +419,6 @@ class Bicache
     }
 }
 
-class Block
-{
-}
-
 class Cache
 {
     /**
@@ -547,10 +535,6 @@ class Cache
     }
 }
 
-class ClassMap
-{
-}
-
 class Cls
 {
     /**
@@ -565,18 +549,6 @@ class Cls
     public static function usesDeep($class, bool $autoload = true): array
     {
     }
-}
-
-class Config
-{
-}
-
-class Cookie
-{
-}
-
-class Counter
-{
 }
 
 class Db
@@ -756,10 +728,6 @@ class DbCache
     }
 }
 
-class E
-{
-}
-
 class Env
 {
     /**
@@ -802,10 +770,6 @@ class Env
     public static function isProd()
     {
     }
-}
-
-class Error
-{
 }
 
 class Event
@@ -1020,10 +984,6 @@ class FileCache
     public static function isHit(string $key = null): bool
     {
     }
-}
-
-class Gravatar
-{
 }
 
 class Http
@@ -2744,14 +2704,6 @@ class IsUuid
     }
 }
 
-class Lock
-{
-}
-
-class Logger
-{
-}
-
 class Memcache
 {
     /**
@@ -3531,10 +3483,6 @@ class Password
     }
 }
 
-class PhpError
-{
-}
-
 class PhpFileCache
 {
     /**
@@ -3672,10 +3620,6 @@ class PhpFileCache
     public static function isHit(string $key = null): bool
     {
     }
-}
-
-class Pinyin
-{
 }
 
 class QueryBuilder
@@ -4399,10 +4343,6 @@ class QueryBuilder
     }
 }
 
-class Record
-{
-}
-
 class Redis
 {
     /**
@@ -4640,14 +4580,6 @@ class Request
     }
 }
 
-class Res
-{
-}
-
-class Response
-{
-}
-
 class Ret
 {
     /**
@@ -4710,14 +4642,6 @@ class Ret
     }
 }
 
-class Router
-{
-}
-
-class SafeUrl
-{
-}
-
 class Schema
 {
     /**
@@ -4773,10 +4697,6 @@ class Schema
     public static function getUserIdType(): string
     {
     }
-}
-
-class Session
-{
 }
 
 class Share
@@ -4934,14 +4854,6 @@ class Snowflake
     }
 }
 
-class Soap
-{
-}
-
-class StatsD
-{
-}
-
 class Str
 {
     /**
@@ -5028,10 +4940,6 @@ class Str
     public static function cut(?string $str, int $length): ?string
     {
     }
-}
-
-class T
-{
 }
 
 class TagCache
@@ -5188,10 +5096,6 @@ class Time
     }
 }
 
-class Ua
-{
-}
-
 class Upload
 {
     /**
@@ -5232,10 +5136,6 @@ class Url
     public static function to($url = '', $argsOrParams = [], $params = [])
     {
     }
-}
-
-class Uuid
-{
 }
 
 class V
@@ -7013,18 +6913,6 @@ class V
     }
 }
 
-class Validate
-{
-}
-
-class View
-{
-}
-
-class WeChatApp
-{
-}
-
 class Wei
 {
     /**
@@ -7218,10 +7106,6 @@ if (0) {
         }
     }
 
-    class App
-    {
-    }
-
     class ArrayCache
     {
         /**
@@ -7359,10 +7243,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-    }
-
-    class Asset
-    {
     }
 
     class Bicache
@@ -7504,10 +7384,6 @@ if (0) {
         }
     }
 
-    class Block
-    {
-    }
-
     class Cache
     {
         /**
@@ -7624,10 +7500,6 @@ if (0) {
         }
     }
 
-    class ClassMap
-    {
-    }
-
     class Cls
     {
         /**
@@ -7642,18 +7514,6 @@ if (0) {
         public function usesDeep($class, bool $autoload = true): array
         {
         }
-    }
-
-    class Config
-    {
-    }
-
-    class Cookie
-    {
-    }
-
-    class Counter
-    {
     }
 
     class Db
@@ -7833,10 +7693,6 @@ if (0) {
         }
     }
 
-    class E
-    {
-    }
-
     class Env
     {
         /**
@@ -7879,10 +7735,6 @@ if (0) {
         public function isProd()
         {
         }
-    }
-
-    class Error
-    {
     }
 
     class Event
@@ -8097,10 +7949,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-    }
-
-    class Gravatar
-    {
     }
 
     class Http
@@ -9821,14 +9669,6 @@ if (0) {
         }
     }
 
-    class Lock
-    {
-    }
-
-    class Logger
-    {
-    }
-
     class Memcache
     {
         /**
@@ -10608,10 +10448,6 @@ if (0) {
         }
     }
 
-    class PhpError
-    {
-    }
-
     class PhpFileCache
     {
         /**
@@ -10749,10 +10585,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-    }
-
-    class Pinyin
-    {
     }
 
     class QueryBuilder
@@ -11464,10 +11296,6 @@ if (0) {
         }
     }
 
-    class Record
-    {
-    }
-
     class Redis
     {
         /**
@@ -11705,14 +11533,6 @@ if (0) {
         }
     }
 
-    class Res
-    {
-    }
-
-    class Response
-    {
-    }
-
     class Ret
     {
         /**
@@ -11775,14 +11595,6 @@ if (0) {
         }
     }
 
-    class Router
-    {
-    }
-
-    class SafeUrl
-    {
-    }
-
     class Schema
     {
         /**
@@ -11838,10 +11650,6 @@ if (0) {
         public function getUserIdType(): string
         {
         }
-    }
-
-    class Session
-    {
     }
 
     class Share
@@ -11999,14 +11807,6 @@ if (0) {
         }
     }
 
-    class Soap
-    {
-    }
-
-    class StatsD
-    {
-    }
-
     class Str
     {
         /**
@@ -12093,10 +11893,6 @@ if (0) {
         public function cut(?string $str, int $length): ?string
         {
         }
-    }
-
-    class T
-    {
     }
 
     class TagCache
@@ -12253,10 +12049,6 @@ if (0) {
         }
     }
 
-    class Ua
-    {
-    }
-
     class Upload
     {
         /**
@@ -12297,10 +12089,6 @@ if (0) {
         public function to($url = '', $argsOrParams = [], $params = [])
         {
         }
-    }
-
-    class Uuid
-    {
     }
 
     class V
@@ -14076,18 +13864,6 @@ if (0) {
         public function notUuid($key = null, string $label = null, $pattern = null)
         {
         }
-    }
-
-    class Validate
-    {
-    }
-
-    class View
-    {
-    }
-
-    class WeChatApp
-    {
     }
 
     class Wei

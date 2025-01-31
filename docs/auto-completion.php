@@ -2273,18 +2273,18 @@ class MigrationPropMixin
 }
 
 /**
- * @property    Wei\ModelTrait $modelTrait The main functions of the model, expected to be used with \Wei\BaseModel
+ * @property    Wei\Money $money A service that handles money, following the implement of `currency.js`
  */
  #[\AllowDynamicProperties]
-class ModelTraitMixin
+class MoneyMixin
 {
 }
 
 /**
- * @property    Wei\ModelTrait $modelTrait The main functions of the model, expected to be used with \Wei\BaseModel
+ * @property    Wei\Money $money A service that handles money, following the implement of `currency.js`
  */
  #[\AllowDynamicProperties]
-class ModelTraitPropMixin
+class MoneyPropMixin
 {
 }
 
@@ -2541,22 +2541,6 @@ class RetPropMixin
 }
 
 /**
- * @property    Wei\RetTrait $retTrait Add common usage result functions to service
- */
- #[\AllowDynamicProperties]
-class RetTraitMixin
-{
-}
-
-/**
- * @property    Wei\RetTrait $retTrait Add common usage result functions to service
- */
- #[\AllowDynamicProperties]
-class RetTraitPropMixin
-{
-}
-
-/**
  * @property    Wei\Router $router A service that parse the URL to request data
  */
  #[\AllowDynamicProperties]
@@ -2602,22 +2586,6 @@ class SchemaMixin
  */
  #[\AllowDynamicProperties]
 class SchemaPropMixin
-{
-}
-
-/**
- * @property    Wei\ServiceTrait $serviceTrait Add the ability to get and call other services for the class
- */
- #[\AllowDynamicProperties]
-class ServiceTraitMixin
-{
-}
-
-/**
- * @property    Wei\ServiceTrait $serviceTrait Add the ability to get and call other services for the class
- */
- #[\AllowDynamicProperties]
-class ServiceTraitPropMixin
 {
 }
 
@@ -3055,7 +3023,7 @@ class WeiPropMixin
  * @mixin MemcacheMixin
  * @mixin MemcachedMixin
  * @mixin MigrationMixin
- * @mixin ModelTraitMixin
+ * @mixin MoneyMixin
  * @mixin MongoCacheMixin
  * @mixin NearCacheMixin
  * @mixin NullCacheMixin
@@ -3071,11 +3039,9 @@ class WeiPropMixin
  * @mixin ResMixin
  * @mixin ResponseMixin
  * @mixin RetMixin
- * @mixin RetTraitMixin
  * @mixin RouterMixin
  * @mixin SafeUrlMixin
  * @mixin SchemaMixin
- * @mixin ServiceTraitMixin
  * @mixin SessionMixin
  * @mixin ShareMixin
  * @mixin SnowflakeMixin
