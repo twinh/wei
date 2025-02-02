@@ -1,3 +1,15 @@
+## [0.18.3](https://github.com/twinh/wei/compare/v0.18.2...v0.18.3) (2025-02-02)
+
+
+### Bug Fixes
+
+* **Money:** 对值修整以及解决部分数值处理错误 ([702931a](https://github.com/twinh/wei/commit/702931ae5fc9a4fd682927ade20bd6820ce60739))
+
+
+### Features
+
+* **Schema, experimental:** 增加 `add` 方法，允许从另一个 `Schema` 导入字段 ([4d1a283](https://github.com/twinh/wei/commit/4d1a28396021e6ec574bea40545f9648cd4567ea))
+
 ## [0.18.2](https://github.com/twinh/wei/compare/v0.18.1...v0.18.2) (2024-12-31)
 
 
