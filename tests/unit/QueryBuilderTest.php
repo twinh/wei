@@ -334,6 +334,20 @@ final class QueryBuilderTest extends TestCase
         );
     }
 
+    public function testOrWhereRawWithoutParam()
+    {
+        $qb = Qb::table('test_users')
+            ->where('name', 'twin')
+            ->orWhereRaw("email = 'twin@example.com'");
+
+        $this->assertSame(['twin'], $qb->getBindParams());
+
+        $this->assertEquals(
+            "SELECT * FROM `p_test_users` WHERE `name` = 'twin' OR email = 'twin@example.com'",
+            $qb->getRawSql()
+        );
+    }
+
     public function testWhereBetween()
     {
         $sql = Qb::table('test_users')->whereBetween('age', [1, 10])->getRawSql();

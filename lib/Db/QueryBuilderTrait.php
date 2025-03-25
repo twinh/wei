@@ -132,7 +132,7 @@ trait QueryBuilderTrait
      */
     public function orWhereRaw($expression, $params = null): self
     {
-        return $this->orWhere($this->raw($expression), null, $params);
+        return $this->addWhereArrayParams($this->raw($expression), null, func_num_args() === 1 ? [] : (array) $params, 'OR');
     }
 
     /**
@@ -1654,6 +1654,37 @@ trait QueryBuilderTrait
             [$column, $operator, $value] = $args;
         }
         return $this->addWhere($column, $operator, $value, $condition, $type);
+    }
+
+    /**
+     * @param string|\Closure $column
+     * @param string|null $operator
+     * @param array $value
+     * @param string $condition
+     * @param string|null $type
+     * @return $this
+     * @internal
+     */
+    protected function addWhereArrayParams($column, ?string $operator, array $value, string $condition = 'AND', string $type = null): self
+    {
+        if ($column instanceof \Closure) {
+            /** @phpstan-ignore-next-line Allow new static */
+            $query = new static([
+                'wei' => $this->wei,
+                'db' => $this->getDb(),
+                'table' => $this->getTable(),
+                // NOTE: Remove default scopes for model
+                'withoutScopes' => true,
+            ]);
+            $column($query);
+            $column = $query;
+            $value = $query->getQueryParams();
+        }
+
+        $this->addQueryPart('where', compact('column', 'operator', 'value', 'condition', 'type'), true);
+        $this->addQueryParam($value);
+
+        return $this;
     }
 
     /**
