@@ -1,3 +1,10 @@
+## [0.18.4](https://github.com/twinh/wei/compare/v0.18.3...v0.18.4) (2025-05-01)
+
+
+### Bug Fixes
+
+* **QueryBuilder:** `orWhereRaw` 不含参数时，addWhere 仍会生成 null 参数导致错误 ([465bd45](https://github.com/twinh/wei/commit/465bd4596525a0e3bd1fe970df841d583c415601))
+
 ## [0.18.3](https://github.com/twinh/wei/compare/v0.18.2...v0.18.3) (2025-02-02)
 
 
