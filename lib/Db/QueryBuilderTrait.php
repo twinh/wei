@@ -1670,8 +1670,13 @@ trait QueryBuilderTrait
      * @return $this
      * @internal
      */
-    protected function addWhereArrayParams($column, ?string $operator, array $value, string $condition = 'AND', ?string $type = null): self
-    {
+    protected function addWhereArrayParams(
+        $column,
+        ?string $operator,
+        array $value,
+        string $condition = 'AND',
+        ?string $type = null
+    ): self {
         if ($column instanceof \Closure) {
             /** @phpstan-ignore-next-line Allow new static */
             $query = new static([
