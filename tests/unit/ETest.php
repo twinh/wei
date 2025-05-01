@@ -417,16 +417,6 @@ final class ETest extends TestCase
         $this->e('string', 'unsupport-type');
     }
 
-    public static function providerForEmptyVar()
-    {
-        return [
-            [''],
-            [null],
-            // array(0),
-            ['0'],
-        ];
-    }
-
     /**
      * @dataProvider providerForEmptyVar
      * @param mixed $value
@@ -436,6 +426,16 @@ final class ETest extends TestCase
         foreach (['html', 'js', 'css', 'url', 'attr'] as $method) {
             $this->assertSame($value, $this->escaper->{$method}($value));
         }
+    }
+
+    public static function providerForEmptyVar()
+    {
+        return [
+            [''],
+            [null],
+            // array(0),
+            ['0'],
+        ];
     }
 
     /**

@@ -17,16 +17,6 @@ final class IsGtTest extends BaseValidatorTestCase
         $this->assertTrue($this->isGt($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotGt
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotGt($input, $options)
-    {
-        $this->assertFalse($this->isGt($input, $options));
-    }
-
     public static function providerForGt()
     {
         return [
@@ -35,6 +25,16 @@ final class IsGtTest extends BaseValidatorTestCase
             ['2000-01-01', '1999-01-01'],
             ['10:03', '09:24'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotGt
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotGt($input, $options)
+    {
+        $this->assertFalse($this->isGt($input, $options));
     }
 
     public static function providerForNotGt()

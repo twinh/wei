@@ -16,15 +16,6 @@ final class IsDoubleByteTest extends BaseValidatorTestCase
         $this->assertTrue($this->isDoubleByte($input));
     }
 
-    /**
-     * @dataProvider providerForNotDoubleByte
-     * @param mixed $input
-     */
-    public function testNotDoubleByte($input)
-    {
-        $this->assertFalse($this->isDoubleByte($input));
-    }
-
     public static function providerForDoubleByte()
     {
         return [
@@ -36,6 +27,15 @@ final class IsDoubleByteTest extends BaseValidatorTestCase
             ['조선어'], // Korean language
             ['āōêīūǖ'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotDoubleByte
+     * @param mixed $input
+     */
+    public function testNotDoubleByte($input)
+    {
+        $this->assertFalse($this->isDoubleByte($input));
     }
 
     public static function providerForNotDoubleByte()

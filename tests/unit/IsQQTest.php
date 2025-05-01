@@ -16,15 +16,6 @@ final class IsQQTest extends BaseValidatorTestCase
         $this->assertTrue($this->isQQ($input));
     }
 
-    /**
-     * @dataProvider providerForNotQQ
-     * @param mixed $input
-     */
-    public function testNotQQ($input)
-    {
-        $this->assertFalse($this->isQQ($input));
-    }
-
     public static function providerForQQ()
     {
         return [
@@ -32,6 +23,15 @@ final class IsQQTest extends BaseValidatorTestCase
             ['1234567'],
             ['123456789'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotQQ
+     * @param mixed $input
+     */
+    public function testNotQQ($input)
+    {
+        $this->assertFalse($this->isQQ($input));
     }
 
     public static function providerForNotQQ()

@@ -28,34 +28,6 @@ final class IsPasswordTest extends BaseValidatorTestCase
         $this->assertTrue($this->wei->isPassword($password, $options));
     }
 
-    /**
-     * @dataProvider providerForNotPassword
-     * @param mixed $password
-     * @param mixed $messageTypes
-     */
-    public function testNotPassword($password, array $options, $messageTypes)
-    {
-        /** @var $validator \Wei\Validate */
-        $validator = $this->validate([
-            'data' => [
-                'password' => $password,
-            ],
-            'rules' => [
-                'password' => [
-                    'password' => $options,
-                ],
-            ],
-        ]);
-
-        $messages = $validator->getDetailMessages();
-        foreach ((array) $messageTypes as $type) {
-            $this->assertArrayHasKey($type, $messages['password']['password']);
-        }
-
-        $this->assertFalse($validator->isValid());
-        $this->assertFalse($this->wei->isPassword($password, $options));
-    }
-
     public static function providerForPassword()
     {
         return [
@@ -140,6 +112,34 @@ final class IsPasswordTest extends BaseValidatorTestCase
                 ],
             ],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotPassword
+     * @param mixed $password
+     * @param mixed $messageTypes
+     */
+    public function testNotPassword($password, array $options, $messageTypes)
+    {
+        /** @var $validator \Wei\Validate */
+        $validator = $this->validate([
+            'data' => [
+                'password' => $password,
+            ],
+            'rules' => [
+                'password' => [
+                    'password' => $options,
+                ],
+            ],
+        ]);
+
+        $messages = $validator->getDetailMessages();
+        foreach ((array) $messageTypes as $type) {
+            $this->assertArrayHasKey($type, $messages['password']['password']);
+        }
+
+        $this->assertFalse($validator->isValid());
+        $this->assertFalse($this->wei->isPassword($password, $options));
     }
 
     public static function providerForNotPassword()

@@ -16,15 +16,6 @@ final class IsDateTest extends BaseValidatorTestCase
         $this->assertTrue($this->isDate($input));
     }
 
-    /**
-     * @dataProvider providerForNotDate
-     * @param mixed $input
-     */
-    public function testNotDate($input)
-    {
-        $this->assertFalse($this->isDate($input));
-    }
-
     public static function providerForDate()
     {
         return [
@@ -33,6 +24,15 @@ final class IsDateTest extends BaseValidatorTestCase
             ['3000-01-01'],
             ['2012-02-29'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotDate
+     * @param mixed $input
+     */
+    public function testNotDate($input)
+    {
+        $this->assertFalse($this->isDate($input));
     }
 
     public static function providerForNotDate()

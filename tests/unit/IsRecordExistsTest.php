@@ -52,17 +52,6 @@ final class IsRecordExistsTest extends BaseValidatorTestCase
         $this->assertNotEmpty($this->isRecordExists->getData());
     }
 
-    /**
-     * @dataProvider dataProviderForRecordNotExists
-     * @param mixed $input
-     * @param mixed $field
-     */
-    public function testRecordNotExists($input, $field)
-    {
-        $this->assertFalse($this->isRecordExists($input, 'users', $field));
-        $this->assertEmpty($this->isRecordExists->getData());
-    }
-
     public static function dataProviderForRecordExists()
     {
         return [
@@ -72,6 +61,17 @@ final class IsRecordExistsTest extends BaseValidatorTestCase
             ['test', 'name'],
             ['test', 'address'],
         ];
+    }
+
+    /**
+     * @dataProvider dataProviderForRecordNotExists
+     * @param mixed $input
+     * @param mixed $field
+     */
+    public function testRecordNotExists($input, $field)
+    {
+        $this->assertFalse($this->isRecordExists($input, 'users', $field));
+        $this->assertEmpty($this->isRecordExists->getData());
     }
 
     public static function dataProviderForRecordNotExists()

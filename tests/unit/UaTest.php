@@ -31,51 +31,6 @@ final class UaTest extends TestCase
         }
     }
 
-    public function testInvalidException()
-    {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unrecognized browser, OS, mobile or tablet name "unknown"'
-        );
-
-        $this->ua->is('unknown');
-    }
-
-    public function testInvalidException2()
-    {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unrecognized browser, OS, mobile or tablet name "unknown"'
-        );
-
-        $this->ua->getVersion('unknown');
-    }
-
-    public function testGetVersion()
-    {
-        $result = $this->ua->getVersion('iphone');
-
-        $this->assertFalse($result);
-    }
-
-    public function testNotIn()
-    {
-        $ua = new \Wei\Ua([
-            'wei' => $this->wei,
-            'server' => [
-                'HTTP_USER_AGENT' => 'test',
-            ],
-        ]);
-
-        $this->assertFalse($ua->isIPad());
-    }
-
-    public function testMagicCall()
-    {
-        $result = $this->ua->ua('iPad');
-        $this->assertFalse($result);
-    }
-
     /**
      * @link http://www.useragentstring.com/
      */
@@ -277,6 +232,51 @@ final class UaTest extends TestCase
             ],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong
+    }
+
+    public function testInvalidException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unrecognized browser, OS, mobile or tablet name "unknown"'
+        );
+
+        $this->ua->is('unknown');
+    }
+
+    public function testInvalidException2()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unrecognized browser, OS, mobile or tablet name "unknown"'
+        );
+
+        $this->ua->getVersion('unknown');
+    }
+
+    public function testGetVersion()
+    {
+        $result = $this->ua->getVersion('iphone');
+
+        $this->assertFalse($result);
+    }
+
+    public function testNotIn()
+    {
+        $ua = new \Wei\Ua([
+            'wei' => $this->wei,
+            'server' => [
+                'HTTP_USER_AGENT' => 'test',
+            ],
+        ]);
+
+        $this->assertFalse($ua->isIPad());
+    }
+
+    public function testMagicCall()
+    {
+        $result = $this->ua->ua('iPad');
+        $this->assertFalse($result);
     }
 
     public function testNotInMobile()

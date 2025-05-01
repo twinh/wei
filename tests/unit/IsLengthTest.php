@@ -19,6 +19,16 @@ final class IsLengthTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLength($input, $option1, $option2));
     }
 
+    public static function providerForLength()
+    {
+        return [
+            ['length7', 7, 10],
+            ['length7', 0, 10],
+            [[1, 2], 1, 2],
+            [new \ArrayObject([1, 2]), 1, 10],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotLength
      * @param mixed $input
@@ -28,6 +38,16 @@ final class IsLengthTest extends BaseValidatorTestCase
     public function testNotLength($input, $option1, $option2)
     {
         $this->assertFalse($this->isLength($input, $option1, $option2));
+    }
+
+    public static function providerForNotLength()
+    {
+        return [
+            ['length7', 0, 0],
+            ['length7', -2, -1],
+            [[1, 2], 10, 0],
+            [new \ArrayObject([1, 2]), 0, 1],
+        ];
     }
 
     /**
@@ -40,6 +60,15 @@ final class IsLengthTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLength($input, $length));
     }
 
+    public static function providerForSpecifiedLength()
+    {
+        return [
+            ['length7', 7],
+            [[1, 2], 2],
+            [new \ArrayObject([1, 2]), 2],
+        ];
+    }
+
     /**
      * @dataProvider providerForSpecifiedLengthNotPass
      * @param mixed $input
@@ -50,41 +79,12 @@ final class IsLengthTest extends BaseValidatorTestCase
         $this->assertFalse($this->isLength($input, $length));
     }
 
-    public static function providerForSpecifiedLength()
-    {
-        return [
-            ['length7', 7],
-            [[1, 2], 2],
-            [new \ArrayObject([1, 2]), 2],
-        ];
-    }
-
     public static function providerForSpecifiedLengthNotPass()
     {
         return [
             ['length7', 8],
             [[1, 2], 3],
             [new \ArrayObject([1, 2]), 3],
-        ];
-    }
-
-    public static function providerForLength()
-    {
-        return [
-            ['length7', 7, 10],
-            ['length7', 0, 10],
-            [[1, 2], 1, 2],
-            [new \ArrayObject([1, 2]), 1, 10],
-        ];
-    }
-
-    public static function providerForNotLength()
-    {
-        return [
-            ['length7', 0, 0],
-            ['length7', -2, -1],
-            [[1, 2], 10, 0],
-            [new \ArrayObject([1, 2]), 0, 1],
         ];
     }
 

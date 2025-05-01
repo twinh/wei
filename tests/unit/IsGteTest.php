@@ -17,16 +17,6 @@ final class IsGteTest extends BaseValidatorTestCase
         $this->assertTrue($this->isGte($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotGte
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotGte($input, $options)
-    {
-        $this->assertFalse($this->isGte($input, $options));
-    }
-
     public static function providerForGte()
     {
         return [
@@ -36,6 +26,16 @@ final class IsGteTest extends BaseValidatorTestCase
             ['2000-01-01', '1999-01-01'],
             ['10:03', '09:24'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotGte
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotGte($input, $options)
+    {
+        $this->assertFalse($this->isGte($input, $options));
     }
 
     public static function providerForNotGte()

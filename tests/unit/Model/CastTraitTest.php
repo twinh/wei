@@ -79,6 +79,33 @@ final class CastTraitTest extends TestCase
         wei()->schema->dropIfExists(['test_casts', 'test_cast_objects']);
     }
 
+    /**
+     * 测试Set后的结果
+     *
+     * @param array $from
+     * @param array $result
+     * @dataProvider providerForSet
+     */
+    public function testSetAsDbType($from, $result)
+    {
+        $record = TestCast::new();
+
+        $record->fromArray($from);
+
+        // data中的数据不变
+        $data = $record->getAttributes();
+        foreach ($from as $key => $value) {
+            $this->assertSame($value, $data[$key]);
+        }
+
+        // 重新加载,数据会改变
+        $record->save();
+        $record = TestCast::find((int) $record->int_column);
+        foreach ($result as $key => $value) {
+            $this->assertSame($value, $record->{$key});
+        }
+    }
+
     public static function providerForSet()
     {
         return [
@@ -153,27 +180,18 @@ final class CastTraitTest extends TestCase
     }
 
     /**
-     * 测试Set后的结果
+     * 测试Get后的结果
      *
      * @param array $from
      * @param array $result
-     * @dataProvider providerForSet
+     * @dataProvider providerForGetAsPhpType
      */
-    public function testSetAsDbType($from, $result)
+    public function testGetAsPhpType($from, $result)
     {
         $record = TestCast::new();
 
         $record->fromArray($from);
 
-        // data中的数据不变
-        $data = $record->getAttributes();
-        foreach ($from as $key => $value) {
-            $this->assertSame($value, $data[$key]);
-        }
-
-        // 重新加载,数据会改变
-        $record->save();
-        $record = TestCast::find((int) $record->int_column);
         foreach ($result as $key => $value) {
             $this->assertSame($value, $record->{$key});
         }
@@ -241,24 +259,6 @@ final class CastTraitTest extends TestCase
                 ],
             ],
         ];
-    }
-
-    /**
-     * 测试Get后的结果
-     *
-     * @param array $from
-     * @param array $result
-     * @dataProvider providerForGetAsPhpType
-     */
-    public function testGetAsPhpType($from, $result)
-    {
-        $record = TestCast::new();
-
-        $record->fromArray($from);
-
-        foreach ($result as $key => $value) {
-            $this->assertSame($value, $record->{$key});
-        }
     }
 
     public function testFind()
@@ -355,20 +355,6 @@ final class CastTraitTest extends TestCase
         $this->assertSame('value', $cast->object_column->test);
     }
 
-    public static function providerForTestStringAsObject(): array
-    {
-        return [
-            [
-                [],
-                '{}',
-            ],
-            [
-                null,
-                '',
-            ],
-        ];
-    }
-
     /**
      * @dataProvider providerForTestStringAsObject
      * @param mixed $default
@@ -390,6 +376,20 @@ final class CastTraitTest extends TestCase
         $object->save();
         $data = wei()->db->select('test_cast_objects', $object->id);
         $this->assertSame($dbValue, $data['object_column']);
+    }
+
+    public static function providerForTestStringAsObject(): array
+    {
+        return [
+            [
+                [],
+                '{}',
+            ],
+            [
+                null,
+                '',
+            ],
+        ];
     }
 
     public function testIncr()

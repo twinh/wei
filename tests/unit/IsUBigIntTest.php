@@ -16,15 +16,6 @@ final class IsUBigIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUBigInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotUBigInt
-     * @param mixed $input
-     */
-    public function testNotUBigInt($input)
-    {
-        $this->assertFalse($this->isUBigInt($input));
-    }
-
     public static function providerForUBigInt()
     {
         return [
@@ -33,6 +24,15 @@ final class IsUBigIntTest extends BaseValidatorTestCase
             ['18446744073709551615'], // 2 ** 64-1
             ['18446744073709551614'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUBigInt
+     * @param mixed $input
+     */
+    public function testNotUBigInt($input)
+    {
+        $this->assertFalse($this->isUBigInt($input));
     }
 
     public static function providerForNotUBigInt()

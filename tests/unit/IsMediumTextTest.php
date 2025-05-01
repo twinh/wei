@@ -16,15 +16,6 @@ final class IsMediumTextTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMediumText($input));
     }
 
-    /**
-     * @dataProvider providerForNotMediumTextVal
-     * @param mixed $input
-     */
-    public function testNotStringVal($input)
-    {
-        $this->assertFalse($this->isMediumText($input));
-    }
-
     public static function providerForMediumTextVal()
     {
         return [
@@ -34,6 +25,15 @@ final class IsMediumTextTest extends BaseValidatorTestCase
             [str_repeat('我', 16777215 / 3)],
             [str_repeat('🙂', (int) (16777215 / 4))],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotMediumTextVal
+     * @param mixed $input
+     */
+    public function testNotStringVal($input)
+    {
+        $this->assertFalse($this->isMediumText($input));
     }
 
     public static function providerForNotMediumTextVal()

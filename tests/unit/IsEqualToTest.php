@@ -17,16 +17,6 @@ final class IsEqualToTest extends BaseValidatorTestCase
         $this->assertTrue($this->isEqualTo($input, $equals));
     }
 
-    /**
-     * @dataProvider providerForNotEquals
-     * @param mixed $input
-     * @param mixed $equals
-     */
-    public function testNotEquals($input, $equals)
-    {
-        $this->assertFalse($this->isEqualTo($input, $equals));
-    }
-
     public static function providerForEquals()
     {
         return [
@@ -36,6 +26,16 @@ final class IsEqualToTest extends BaseValidatorTestCase
             [null, null],
             [new \stdClass(), new \stdClass()],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotEquals
+     * @param mixed $input
+     * @param mixed $equals
+     */
+    public function testNotEquals($input, $equals)
+    {
+        $this->assertFalse($this->isEqualTo($input, $equals));
     }
 
     public static function providerForNotEquals()

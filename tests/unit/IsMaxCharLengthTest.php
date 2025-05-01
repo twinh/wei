@@ -17,6 +17,15 @@ final class IsMaxCharLengthTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMaxCharLength($input, $length));
     }
 
+    public static function providerForMaxCharLength()
+    {
+        return [
+            ['123', 3],
+            ['我我', 2],
+            ['我我12', 4],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotMaxCharLength
      * @param mixed $input
@@ -25,15 +34,6 @@ final class IsMaxCharLengthTest extends BaseValidatorTestCase
     public function testNotMaxCharLength($input, int $length)
     {
         $this->assertFalse($this->isMaxCharLength($input, $length));
-    }
-
-    public static function providerForMaxCharLength()
-    {
-        return [
-            ['123', 3],
-            ['我我', 2],
-            ['我我12', 4],
-        ];
     }
 
     public static function providerForNotMaxCharLength()

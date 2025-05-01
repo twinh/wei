@@ -18,17 +18,6 @@ final class IsStartsWithTest extends BaseValidatorTestCase
         $this->assertTrue($this->isStartsWith($input, $findMe, $case));
     }
 
-    /**
-     * @dataProvider providerForNotStartsWith
-     * @param mixed $input
-     * @param mixed $findMe
-     * @param mixed $case
-     */
-    public function testNotStartsWith($input, $findMe, $case = false)
-    {
-        $this->assertFalse($this->isStartsWith($input, $findMe, $case));
-    }
-
     public static function providerForStartsWith()
     {
         return [
@@ -41,6 +30,17 @@ final class IsStartsWithTest extends BaseValidatorTestCase
             ['#abc', ['#', 'a', '?']],
             [123, 1],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotStartsWith
+     * @param mixed $input
+     * @param mixed $findMe
+     * @param mixed $case
+     */
+    public function testNotStartsWith($input, $findMe, $case = false)
+    {
+        $this->assertFalse($this->isStartsWith($input, $findMe, $case));
     }
 
     public static function providerForNotStartsWith()

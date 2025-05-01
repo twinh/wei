@@ -17,6 +17,15 @@ final class IsDivisibleByTest extends BaseValidatorTestCase
         $this->assertTrue($this->isDivisibleBy($input, $divisor));
     }
 
+    public static function providerForDivisibleBy()
+    {
+        return [
+            ['10', '5'],
+            ['2', '1'],
+            [2.5, 0.5],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotDivisibleBy
      * @param mixed $input
@@ -25,15 +34,6 @@ final class IsDivisibleByTest extends BaseValidatorTestCase
     public function testNotDivisibleBy($input, $divisor)
     {
         $this->assertFalse($this->isDivisibleBy($input, $divisor));
-    }
-
-    public static function providerForDivisibleBy()
-    {
-        return [
-            ['10', '5'],
-            ['2', '1'],
-            [2.5, 0.5],
-        ];
     }
 
     public static function providerForNotDivisibleBy()

@@ -17,16 +17,6 @@ final class IsUppercaseTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUppercase($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotUppercase
-     * @param mixed $input
-     * @param mixed|null $options
-     */
-    public function testNotUppercase($input, $options = null)
-    {
-        $this->assertFalse($this->isUppercase($input, $options));
-    }
-
     public static function providerForUppercase()
     {
         return [
@@ -36,6 +26,16 @@ final class IsUppercaseTest extends BaseValidatorTestCase
             ['ΤΆΧΙΣΤΗ ΑΛΏΠΗΞ ΒΑΦΉΣ ΨΗΜΈΝΗ ΓΗ, ΔΡΑΣΚΕΛΊΖΕΙ ΥΠΈΡ ΝΩΘΡΟΎ ΚΥΝΌΣ'],
             ['PRINTS MARY HAD A LITTLE LAMB AND SHE LOVED IT SO'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUppercase
+     * @param mixed $input
+     * @param mixed|null $options
+     */
+    public function testNotUppercase($input, $options = null)
+    {
+        $this->assertFalse($this->isUppercase($input, $options));
     }
 
     public static function providerForNotUppercase()

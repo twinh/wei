@@ -16,15 +16,6 @@ final class IsBoolableTest extends BaseValidatorTestCase
         $this->assertTrue($this->isBoolable($input));
     }
 
-    /**
-     * @dataProvider providerForNotBoolVal
-     * @param mixed $input
-     */
-    public function testNotBoolVal($input)
-    {
-        $this->assertFalse($this->isBoolable($input));
-    }
-
     public static function providerForBoolVal()
     {
         return [
@@ -41,6 +32,15 @@ final class IsBoolableTest extends BaseValidatorTestCase
             ['yes'],
             ['no'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotBoolVal
+     * @param mixed $input
+     */
+    public function testNotBoolVal($input)
+    {
+        $this->assertFalse($this->isBoolable($input));
     }
 
     public static function providerForNotBoolVal()

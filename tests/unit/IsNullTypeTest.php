@@ -16,6 +16,13 @@ final class IsNullTypeTest extends BaseValidatorTestCase
         $this->assertTrue($this->isNullType($input));
     }
 
+    public static function providerForNull()
+    {
+        return [
+            [null],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotNull
      * @param mixed $input
@@ -23,13 +30,6 @@ final class IsNullTypeTest extends BaseValidatorTestCase
     public function testNotNull($input)
     {
         $this->assertFalse($this->isNullType($input));
-    }
-
-    public static function providerForNull()
-    {
-        return [
-            [null],
-        ];
     }
 
     public static function providerForNotNull()

@@ -18,17 +18,6 @@ final class IsBetweenTest extends BaseValidatorTestCase
         $this->assertTrue($this->isBetween($input, $min, $max));
     }
 
-    /**
-     * @dataProvider providerForNotBetween
-     * @param mixed $input
-     * @param mixed $min
-     * @param mixed $max
-     */
-    public function testNotBetween($input, $min, $max)
-    {
-        $this->assertFalse($this->isBetween($input, $min, $max));
-    }
-
     public static function providerForBetween()
     {
         return [
@@ -38,6 +27,17 @@ final class IsBetweenTest extends BaseValidatorTestCase
             [20, 0, 30],
             [-1, -2, 0],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotBetween
+     * @param mixed $input
+     * @param mixed $min
+     * @param mixed $max
+     */
+    public function testNotBetween($input, $min, $max)
+    {
+        $this->assertFalse($this->isBetween($input, $min, $max));
     }
 
     public static function providerForNotBetween()

@@ -16,15 +16,6 @@ final class IsPlateNumberCnTest extends BaseValidatorTestCase
         $this->assertTrue($this->isPlateNumberCn($input));
     }
 
-    /**
-     * @dataProvider providerForNotPlateNumberCn
-     * @param mixed $input
-     */
-    public function testNotPlateNumberCn($input)
-    {
-        $this->assertFalse($this->isPlateNumberCn($input));
-    }
-
     public static function providerForPlateNumberCn()
     {
         return [
@@ -71,6 +62,15 @@ final class IsPlateNumberCnTest extends BaseValidatorTestCase
             ['广A12345'],
             ['成A12345'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotPlateNumberCn
+     * @param mixed $input
+     */
+    public function testNotPlateNumberCn($input)
+    {
+        $this->assertFalse($this->isPlateNumberCn($input));
     }
 
     public static function providerForNotPlateNumberCn()

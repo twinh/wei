@@ -21,34 +21,6 @@ final class IsTypeTest extends BaseValidatorTestCase
         $this->assertTrue($this->isType->__invoke($input, $type));
     }
 
-    /**
-     * @dataProvider providerForNotType
-     * @param mixed $input
-     * @param mixed $type
-     */
-    public function testNotType($input, $type)
-    {
-        $this->assertFalse($this->isType->__invoke($input, $type));
-    }
-
-    public function testResource()
-    {
-        $res = fopen(__FILE__, 'r');
-        $this->assertIsResource($res);
-        $this->assertTrue($this->isType->__invoke($res, 'resource'));
-    }
-
-    public function testGetMessages()
-    {
-        $type = $this->validate->createRuleValidator('type', [
-            'typeMessage' => 'type message',
-        ]);
-
-        $type('string', 'float');
-
-        $this->assertContains('type message', $type->getMessages());
-    }
-
     public static function providerForType()
     {
         $obj = new \stdClass();
@@ -89,6 +61,16 @@ final class IsTypeTest extends BaseValidatorTestCase
         ];
     }
 
+    /**
+     * @dataProvider providerForNotType
+     * @param mixed $input
+     * @param mixed $type
+     */
+    public function testNotType($input, $type)
+    {
+        $this->assertFalse($this->isType->__invoke($input, $type));
+    }
+
     public static function providerForNotType()
     {
         $obj = new \stdClass();
@@ -124,5 +106,23 @@ final class IsTypeTest extends BaseValidatorTestCase
             ['LWC13', 'upper'],
             ['AR1012', 'xdigit'],
         ];
+    }
+
+    public function testResource()
+    {
+        $res = fopen(__FILE__, 'r');
+        $this->assertIsResource($res);
+        $this->assertTrue($this->isType->__invoke($res, 'resource'));
+    }
+
+    public function testGetMessages()
+    {
+        $type = $this->validate->createRuleValidator('type', [
+            'typeMessage' => 'type message',
+        ]);
+
+        $type('string', 'float');
+
+        $this->assertContains('type message', $type->getMessages());
     }
 }

@@ -32,6 +32,22 @@ abstract class BaseValidatorTestCase extends BaseTestCase
         }
     }
 
+    /**
+     * @dataProvider providerForInput
+     * @param mixed $input
+     */
+    public function testInput($input)
+    {
+        // Gets validator name WeiTest\Validator\LengthTest => Length
+        $name = $this->name ?: substr(static::class, strrpos(static::class, '\\') + 1, -4);
+        $name = substr($name, 2);
+        $validator = $this->validate->createRuleValidator($name, $this->getInputTestOptions());
+
+        // The validator should accept any type of INPUT and do NOT raise any
+        // exceptions or errors
+        $this->assertIsBool($validator($input));
+    }
+
     public static function providerForInput()
     {
         // Initial test fixtures
@@ -69,22 +85,6 @@ abstract class BaseValidatorTestCase extends BaseTestCase
         }
 
         return $data;
-    }
-
-    /**
-     * @dataProvider providerForInput
-     * @param mixed $input
-     */
-    public function testInput($input)
-    {
-        // Gets validator name WeiTest\Validator\LengthTest => Length
-        $name = $this->name ?: substr(static::class, strrpos(static::class, '\\') + 1, -4);
-        $name = substr($name, 2);
-        $validator = $this->validate->createRuleValidator($name, $this->getInputTestOptions());
-
-        // The validator should accept any type of INPUT and do NOT raise any
-        // exceptions or errors
-        $this->assertIsBool($validator($input));
     }
 
     public function createResource()

@@ -132,7 +132,12 @@ trait QueryBuilderTrait
      */
     public function orWhereRaw($expression, $params = null): self
     {
-        return $this->addWhereArrayParams($this->raw($expression), null, func_num_args() === 1 ? [] : (array) $params, 'OR');
+        return $this->addWhereArrayParams(
+            $this->raw($expression),
+            null,
+            1 === func_num_args() ? [] : (array) $params,
+            'OR'
+        );
     }
 
     /**
@@ -1665,7 +1670,7 @@ trait QueryBuilderTrait
      * @return $this
      * @internal
      */
-    protected function addWhereArrayParams($column, ?string $operator, array $value, string $condition = 'AND', string $type = null): self
+    protected function addWhereArrayParams($column, ?string $operator, array $value, string $condition = 'AND', ?string $type = null): self
     {
         if ($column instanceof \Closure) {
             /** @phpstan-ignore-next-line Allow new static */

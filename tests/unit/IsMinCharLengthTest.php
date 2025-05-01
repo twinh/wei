@@ -17,6 +17,15 @@ final class IsMinCharLengthTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMinCharLength($input, $length));
     }
 
+    public static function providerForMinCharLength()
+    {
+        return [
+            ['123', 3],
+            ['我', 1],
+            ['我1', 2],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotMinCharLength
      * @param mixed $input
@@ -25,15 +34,6 @@ final class IsMinCharLengthTest extends BaseValidatorTestCase
     public function testNotMinCharLength($input, int $length)
     {
         $this->assertFalse($this->isMinCharLength($input, $length));
-    }
-
-    public static function providerForMinCharLength()
-    {
-        return [
-            ['123', 3],
-            ['我', 1],
-            ['我1', 2],
-        ];
     }
 
     public static function providerForNotMinCharLength()

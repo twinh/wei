@@ -50,6 +50,13 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($cache->replace($key, uniqid()));
     }
 
+    public static function providerForGetterAndSetter()
+    {
+        $types = self::getFixtures();
+        $types[] = [\NAN, 'nan'];
+        return $types;
+    }
+
     public static function getFixtures(): array
     {
         $object = new CacheObject('test');
@@ -67,13 +74,6 @@ abstract class CacheTestCase extends TestCase
             ['1', 'numeric'],
             [$object, 'object'],
         ];
-    }
-
-    public static function providerForGetterAndSetter()
-    {
-        $types = self::getFixtures();
-        $types[] = [\NAN, 'nan'];
-        return $types;
     }
 
     public function testIncrAndDecr()

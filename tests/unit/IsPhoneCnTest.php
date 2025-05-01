@@ -16,15 +16,6 @@ final class IsPhoneCnTest extends BaseValidatorTestCase
         $this->assertTrue($this->isPhoneCn($input));
     }
 
-    /**
-     * @dataProvider providerForNotPhoneCn
-     * @param mixed $input
-     */
-    public function testNotPhoneCn($input)
-    {
-        $this->assertFalse($this->isPhoneCn($input));
-    }
-
     public static function providerForPhoneCn()
     {
         return [
@@ -34,6 +25,15 @@ final class IsPhoneCnTest extends BaseValidatorTestCase
             ['1234567'],
             ['123456789'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotPhoneCn
+     * @param mixed $input
+     */
+    public function testNotPhoneCn($input)
+    {
+        $this->assertFalse($this->isPhoneCn($input));
     }
 
     public static function providerForNotPhoneCn()

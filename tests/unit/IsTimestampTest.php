@@ -18,6 +18,15 @@ final class IsTimestampTest extends BaseValidatorTestCase
         $this->assertTrue($this->isTimestamp($input, $format));
     }
 
+    public static function providerForTimestamp()
+    {
+        return [
+            ['2012-02-29 23:59:59'],
+            ['1970-01-01 00:00:01'],
+            ['2038-01-19 03:14:07'],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotTimestamp
      * @param mixed $input
@@ -26,15 +35,6 @@ final class IsTimestampTest extends BaseValidatorTestCase
     public function testNotTimestamp($input, $format = null)
     {
         $this->assertFalse($this->isTimestamp($input, $format));
-    }
-
-    public static function providerForTimestamp()
-    {
-        return [
-            ['2012-02-29 23:59:59'],
-            ['1970-01-01 00:00:01'],
-            ['2038-01-19 03:14:07'],
-        ];
     }
 
     public static function providerForNotTimestamp()

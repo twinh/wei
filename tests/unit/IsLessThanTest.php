@@ -17,16 +17,6 @@ final class IsLessThanTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLessThan($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotLessThan
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotLessThan($input, $options)
-    {
-        $this->assertFalse($this->isLessThan($input, $options));
-    }
-
     public static function providerForLessThan()
     {
         return [
@@ -36,6 +26,16 @@ final class IsLessThanTest extends BaseValidatorTestCase
             ['10:00', '11:00'],
             ['10:03', '9:24'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotLessThan
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotLessThan($input, $options)
+    {
+        $this->assertFalse($this->isLessThan($input, $options));
     }
 
     public static function providerForNotLessThan()

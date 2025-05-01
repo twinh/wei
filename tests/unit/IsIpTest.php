@@ -17,16 +17,6 @@ final class IsIpTest extends BaseValidatorTestCase
         $this->assertTrue($this->isIp($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotIp
-     * @param mixed $input
-     * @param mixed|null $options
-     */
-    public function testNotIp($input, $options = null)
-    {
-        $this->assertFalse($this->isIp($input, $options));
-    }
-
     public static function providerForIp()
     {
         return [
@@ -60,6 +50,16 @@ final class IsIpTest extends BaseValidatorTestCase
                 'ipv6' => true,
             ]],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotIp
+     * @param mixed $input
+     * @param mixed|null $options
+     */
+    public function testNotIp($input, $options = null)
+    {
+        $this->assertFalse($this->isIp($input, $options));
     }
 
     public static function providerForNotIp()

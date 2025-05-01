@@ -16,15 +16,6 @@ final class IsChineseTest extends BaseValidatorTestCase
         $this->assertTrue($this->isChinese($input));
     }
 
-    /**
-     * @dataProvider providerForNotChinese
-     * @param mixed $input
-     */
-    public function testNotChinese($input)
-    {
-        $this->assertFalse($this->isChinese($input));
-    }
-
     public static function providerForChinese()
     {
         return [
@@ -32,6 +23,15 @@ final class IsChineseTest extends BaseValidatorTestCase
             ['汉字'],
             ['姓名'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotChinese
+     * @param mixed $input
+     */
+    public function testNotChinese($input)
+    {
+        $this->assertFalse($this->isChinese($input));
     }
 
     public static function providerForNotChinese()

@@ -16,15 +16,6 @@ final class IsUSmallIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUSmallInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotUSmallInt
-     * @param mixed $input
-     */
-    public function testNotUSmallInt($input)
-    {
-        $this->assertFalse($this->isUSmallInt($input));
-    }
-
     public static function providerForUSmallInt()
     {
         return [
@@ -32,6 +23,15 @@ final class IsUSmallIntTest extends BaseValidatorTestCase
             [0],
             [65535],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUSmallInt
+     * @param mixed $input
+     */
+    public function testNotUSmallInt($input)
+    {
+        $this->assertFalse($this->isUSmallInt($input));
     }
 
     public static function providerForNotUSmallInt()

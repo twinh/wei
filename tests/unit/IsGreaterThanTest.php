@@ -17,16 +17,6 @@ final class IsGreaterThanTest extends BaseValidatorTestCase
         $this->assertTrue($this->isGreaterThan($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotGreaterThan
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotGreaterThan($input, $options)
-    {
-        $this->assertFalse($this->isGreaterThan($input, $options));
-    }
-
     public static function providerForGreaterThan()
     {
         return [
@@ -35,6 +25,16 @@ final class IsGreaterThanTest extends BaseValidatorTestCase
             ['2000-01-01', '1999-01-01'],
             ['10:03', '09:24'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotGreaterThan
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotGreaterThan($input, $options)
+    {
+        $this->assertFalse($this->isGreaterThan($input, $options));
     }
 
     public static function providerForNotGreaterThan()

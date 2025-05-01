@@ -16,15 +16,6 @@ final class IsBigIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isBigInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotBigInt
-     * @param mixed $input
-     */
-    public function testNotBigInt($input)
-    {
-        $this->assertFalse($this->isBigInt($input));
-    }
-
     public static function providerForBigInt()
     {
         return [
@@ -34,6 +25,15 @@ final class IsBigIntTest extends BaseValidatorTestCase
             ['-9223372036854775808'], // -2 ** 63
             ['9223372036854775807'], // 2 ** 63 - 1
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotBigInt
+     * @param mixed $input
+     */
+    public function testNotBigInt($input)
+    {
+        $this->assertFalse($this->isBigInt($input));
     }
 
     public static function providerForNotBigInt()

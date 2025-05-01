@@ -16,15 +16,6 @@ final class IsPresentTest extends BaseValidatorTestCase
         $this->assertTrue($this->isPresent($input));
     }
 
-    /**
-     * @dataProvider providerForNotPresent
-     * @param mixed $input
-     */
-    public function testNotPresent($input)
-    {
-        $this->assertFalse($this->isPresent($input));
-    }
-
     public static function providerForPresent()
     {
         return [
@@ -37,6 +28,15 @@ final class IsPresentTest extends BaseValidatorTestCase
             ["\n"],
             ["\r"],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotPresent
+     * @param mixed $input
+     */
+    public function testNotPresent($input)
+    {
+        $this->assertFalse($this->isPresent($input));
     }
 
     public static function providerForNotPresent()

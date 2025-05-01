@@ -631,6 +631,16 @@ final class HttpTest extends TestCase
         $this->assertTriggeredEvents(['success']);
     }
 
+    public static function providerForMethods()
+    {
+        return [
+            ['DELETE'],
+            ['PUT'],
+            ['PATCH'],
+            ['pAtCh'],
+        ];
+    }
+
     /**
      * @dataProvider providerForGetMethods
      * @param mixed $method
@@ -663,16 +673,6 @@ final class HttpTest extends TestCase
             ['OPTIONS'],     // OK                   OK
             // array('CONNECT'),   // Bad                  Request Invalid request (Malformed HTTP request)
             // array('CUSTOM')     // OK                   Request Invalid request (Malformed HTTP request)
-        ];
-    }
-
-    public static function providerForMethods()
-    {
-        return [
-            ['DELETE'],
-            ['PUT'],
-            ['PATCH'],
-            ['pAtCh'],
         ];
     }
 

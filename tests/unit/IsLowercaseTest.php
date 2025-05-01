@@ -17,16 +17,6 @@ final class IsLowercaseTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLowercase($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotLowercase
-     * @param mixed $input
-     * @param mixed|null $options
-     */
-    public function testNotLowercase($input, $options = null)
-    {
-        $this->assertFalse($this->isLowercase($input, $options));
-    }
-
     public static function providerForLowercase()
     {
         return [
@@ -36,6 +26,16 @@ final class IsLowercaseTest extends BaseValidatorTestCase
             ['τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός'],
             ['mary had a little lamb and she loved it so'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotLowercase
+     * @param mixed $input
+     * @param mixed|null $options
+     */
+    public function testNotLowercase($input, $options = null)
+    {
+        $this->assertFalse($this->isLowercase($input, $options));
     }
 
     public static function providerForNotLowercase()

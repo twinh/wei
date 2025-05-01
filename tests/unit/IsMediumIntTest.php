@@ -16,15 +16,6 @@ final class IsMediumIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMediumInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotMediumInt
-     * @param mixed $input
-     */
-    public function testNotMediumInt($input)
-    {
-        $this->assertFalse($this->isMediumInt($input));
-    }
-
     public static function providerForMediumInt()
     {
         return [
@@ -34,6 +25,15 @@ final class IsMediumIntTest extends BaseValidatorTestCase
             [(-2) ** 23],
             [2 ** 23 - 1],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotMediumInt
+     * @param mixed $input
+     */
+    public function testNotMediumInt($input)
+    {
+        $this->assertFalse($this->isMediumInt($input));
     }
 
     public static function providerForNotMediumInt()

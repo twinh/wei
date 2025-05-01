@@ -16,15 +16,6 @@ final class IsMaxLengthTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMaxLength('length7', $options));
     }
 
-    /**
-     * @dataProvider providerForNotMaxLength
-     * @param mixed $options
-     */
-    public function testNotMaxLength($options)
-    {
-        $this->assertFalse($this->isMaxLength('length7', $options));
-    }
-
     public static function providerForMaxLength()
     {
         return [
@@ -32,6 +23,15 @@ final class IsMaxLengthTest extends BaseValidatorTestCase
             [8],
             [200],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotMaxLength
+     * @param mixed $options
+     */
+    public function testNotMaxLength($options)
+    {
+        $this->assertFalse($this->isMaxLength('length7', $options));
     }
 
     public static function providerForNotMaxLength()

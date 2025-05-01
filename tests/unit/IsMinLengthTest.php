@@ -16,15 +16,6 @@ final class IsMinLengthTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMinLength('length7', $options));
     }
 
-    /**
-     * @dataProvider providerForNotMinLength
-     * @param mixed $options
-     */
-    public function testNotMinLength($options)
-    {
-        $this->assertFalse($this->isMinLength('length7', $options));
-    }
-
     public static function providerForMinLength()
     {
         return [
@@ -32,6 +23,15 @@ final class IsMinLengthTest extends BaseValidatorTestCase
             [1],
             [-1],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotMinLength
+     * @param mixed $options
+     */
+    public function testNotMinLength($options)
+    {
+        $this->assertFalse($this->isMinLength('length7', $options));
     }
 
     public static function providerForNotMinLength()

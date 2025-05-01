@@ -17,15 +17,6 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
         $this->assertTrue($this->isIdCardCn($input));
     }
 
-    /**
-     * @dataProvider providerForNotIdCardCn
-     * @param mixed $input
-     */
-    public function testNotIdCardCn($input)
-    {
-        $this->assertFalse($this->isIdCardCn($input));
-    }
-
     public static function providerForIdCardCn()
     {
         return [
@@ -35,6 +26,15 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
             ['34262219840209049x'],
             ['310109198002147295'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotIdCardCn
+     * @param mixed $input
+     */
+    public function testNotIdCardCn($input)
+    {
+        $this->assertFalse($this->isIdCardCn($input));
     }
 
     public static function providerForNotIdCardCn()

@@ -16,15 +16,6 @@ final class IsTextTest extends BaseValidatorTestCase
         $this->assertTrue($this->isText($input));
     }
 
-    /**
-     * @dataProvider providerForNotTextVal
-     * @param mixed $input
-     */
-    public function testNotStringVal($input)
-    {
-        $this->assertFalse($this->isText($input));
-    }
-
     public static function providerForTextVal()
     {
         return [
@@ -34,6 +25,15 @@ final class IsTextTest extends BaseValidatorTestCase
             [str_repeat('我', 65535 / 3)],
             [str_repeat('🙂', (int) (65535 / 4))],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotTextVal
+     * @param mixed $input
+     */
+    public function testNotStringVal($input)
+    {
+        $this->assertFalse($this->isText($input));
     }
 
     public static function providerForNotTextVal()

@@ -16,15 +16,6 @@ final class IsIdCardTwTest extends BaseValidatorTestCase
         $this->assertTrue($this->isIdCardTw($input));
     }
 
-    /**
-     * @dataProvider providerForNotIdCardTw
-     * @param mixed $input
-     */
-    public function testNotIdCardTw($input)
-    {
-        $this->assertFalse($this->isIdCardTw($input));
-    }
-
     public static function providerForIdCardTw()
     {
         return [
@@ -55,6 +46,15 @@ final class IsIdCardTwTest extends BaseValidatorTestCase
             ['Y214481364'],
             ['Z285003269'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotIdCardTw
+     * @param mixed $input
+     */
+    public function testNotIdCardTw($input)
+    {
+        $this->assertFalse($this->isIdCardTw($input));
     }
 
     public static function providerForNotIdCardTw()

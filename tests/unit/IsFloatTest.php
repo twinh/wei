@@ -16,15 +16,6 @@ final class IsFloatTest extends BaseValidatorTestCase
         $this->assertTrue($this->isFloat($input));
     }
 
-    /**
-     * @dataProvider providerForNotFloatVal
-     * @param mixed $input
-     */
-    public function testNotFloatVal($input)
-    {
-        $this->assertFalse($this->isFloat($input));
-    }
-
     public static function providerForFloatVal()
     {
         return [
@@ -40,6 +31,15 @@ final class IsFloatTest extends BaseValidatorTestCase
             ['-1'],
             ['99'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotFloatVal
+     * @param mixed $input
+     */
+    public function testNotFloatVal($input)
+    {
+        $this->assertFalse($this->isFloat($input));
     }
 
     public static function providerForNotFloatVal()

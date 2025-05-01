@@ -193,6 +193,19 @@ final class LoggerTest extends TestCase
         $this->assertStringContainsString('test log message', $content);
     }
 
+    /**
+     * @dataProvider providerForContexts
+     * @param mixed $method
+     */
+    public function testStringAsContext($method)
+    {
+        $this->logger->{$method}($method, $method);
+
+        $content = file_get_contents($this->logger->getFile());
+
+        $this->assertStringContainsString($method, $content);
+    }
+
     public static function providerForContexts()
     {
         return [
@@ -205,18 +218,5 @@ final class LoggerTest extends TestCase
             ['alert'],
             ['emergency'],
         ];
-    }
-
-    /**
-     * @dataProvider providerForContexts
-     * @param mixed $method
-     */
-    public function testStringAsContext($method)
-    {
-        $this->logger->{$method}($method, $method);
-
-        $content = file_get_contents($this->logger->getFile());
-
-        $this->assertStringContainsString($method, $content);
     }
 }

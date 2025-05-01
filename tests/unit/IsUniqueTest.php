@@ -17,15 +17,6 @@ final class IsUniqueTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUnique($input));
     }
 
-    /**
-     * @dataProvider providerForNotUnique
-     * @param mixed $input
-     */
-    public function testNotUnique($input)
-    {
-        $this->assertFalse($this->isUnique($input));
-    }
-
     public static function providerForUnique(): array
     {
         return [
@@ -39,6 +30,15 @@ final class IsUniqueTest extends BaseValidatorTestCase
                 ],
             ],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUnique
+     * @param mixed $input
+     */
+    public function testNotUnique($input)
+    {
+        $this->assertFalse($this->isUnique($input));
     }
 
     public static function providerForNotUnique(): array

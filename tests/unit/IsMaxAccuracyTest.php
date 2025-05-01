@@ -17,16 +17,6 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
         $this->assertTrue($this->isMaxAccuracy($input, $max));
     }
 
-    /**
-     * @dataProvider providerForNotMaxAccuracy
-     * @param mixed $input
-     * @param mixed $max
-     */
-    public function testNotMaxAccuracy($input, $max)
-    {
-        $this->assertFalse($this->isMaxAccuracy($input, $max));
-    }
-
     public static function providerForMaxAccuracy()
     {
         return [
@@ -39,6 +29,16 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
             [1.1E-10, 11],
             [\NAN, 0],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotMaxAccuracy
+     * @param mixed $input
+     * @param mixed $max
+     */
+    public function testNotMaxAccuracy($input, $max)
+    {
+        $this->assertFalse($this->isMaxAccuracy($input, $max));
     }
 
     public static function providerForNotMaxAccuracy()

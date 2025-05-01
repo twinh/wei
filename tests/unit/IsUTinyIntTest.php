@@ -16,15 +16,6 @@ final class IsUTinyIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUTinyInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotUTinyInt
-     * @param mixed $input
-     */
-    public function testNotUTinyInt($input)
-    {
-        $this->assertFalse($this->isUTinyInt($input));
-    }
-
     public static function providerForUTinyInt()
     {
         return [
@@ -32,6 +23,15 @@ final class IsUTinyIntTest extends BaseValidatorTestCase
             [0],
             [255],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUTinyInt
+     * @param mixed $input
+     */
+    public function testNotUTinyInt($input)
+    {
+        $this->assertFalse($this->isUTinyInt($input));
     }
 
     public static function providerForNotUTinyInt()

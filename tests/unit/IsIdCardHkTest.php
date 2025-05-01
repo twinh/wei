@@ -16,15 +16,6 @@ final class IsIdCardHkTest extends BaseValidatorTestCase
         $this->assertTrue($this->isIdCardHk($input));
     }
 
-    /**
-     * @dataProvider providerForNotIdCardHk
-     * @param mixed $input
-     */
-    public function testNotIdCardHk($input)
-    {
-        $this->assertFalse($this->isIdCardHk($input));
-    }
-
     public static function providerForIdCardHk()
     {
         return [
@@ -41,6 +32,15 @@ final class IsIdCardHkTest extends BaseValidatorTestCase
             ['X1983259'],
             ['Z2749050'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotIdCardHk
+     * @param mixed $input
+     */
+    public function testNotIdCardHk($input)
+    {
+        $this->assertFalse($this->isIdCardHk($input));
     }
 
     public static function providerForNotIdCardHk()

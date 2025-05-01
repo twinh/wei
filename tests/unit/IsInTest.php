@@ -18,6 +18,15 @@ final class IsInTest extends BaseValidatorTestCase
         $this->assertTrue($this->isIn($input, $array, $case));
     }
 
+    public static function providerForIn()
+    {
+        return [
+            ['apple', ['apple', 'pear']],
+            ['apple', new \ArrayObject(['apple', 'pear'])],
+            ['', [null]],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotIn
      * @param mixed $input
@@ -29,26 +38,17 @@ final class IsInTest extends BaseValidatorTestCase
         $this->assertFalse($this->isIn($input, $array, $case));
     }
 
-    public function testUnexpectedType()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->isIn('abc', 'bcd');
-    }
-
-    public static function providerForIn()
-    {
-        return [
-            ['apple', ['apple', 'pear']],
-            ['apple', new \ArrayObject(['apple', 'pear'])],
-            ['', [null]],
-        ];
-    }
-
     public static function providerForNotIn()
     {
         return [
             ['', [null], true],
         ];
+    }
+
+    public function testUnexpectedType()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->isIn('abc', 'bcd');
     }
 }

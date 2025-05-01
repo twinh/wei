@@ -18,17 +18,6 @@ final class IsEndsWithTest extends BaseValidatorTestCase
         $this->assertTrue($this->isEndsWith($input, $findMe, $case));
     }
 
-    /**
-     * @dataProvider providerForNotEndsWith
-     * @param mixed $input
-     * @param mixed $findMe
-     * @param mixed $case
-     */
-    public function testNotEndsWith($input, $findMe, $case = false)
-    {
-        $this->assertFalse($this->isEndsWith($input, $findMe, $case));
-    }
-
     public static function providerForEndsWith()
     {
         return [
@@ -40,6 +29,17 @@ final class IsEndsWithTest extends BaseValidatorTestCase
             ['#?\\', ['#', '?', '\\']],
             [123, 3],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotEndsWith
+     * @param mixed $input
+     * @param mixed $findMe
+     * @param mixed $case
+     */
+    public function testNotEndsWith($input, $findMe, $case = false)
+    {
+        $this->assertFalse($this->isEndsWith($input, $findMe, $case));
     }
 
     public static function providerForNotEndsWith()

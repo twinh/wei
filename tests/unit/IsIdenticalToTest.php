@@ -17,16 +17,6 @@ final class IsIdenticalToTest extends BaseValidatorTestCase
         $this->assertTrue($this->isIdenticalTo($input, $equals));
     }
 
-    /**
-     * @dataProvider providerForNotIdenticalTo
-     * @param mixed $input
-     * @param mixed $equals
-     */
-    public function testNotEquals($input, $equals)
-    {
-        $this->assertFalse($this->isIdenticalTo($input, $equals));
-    }
-
     public static function providerForIdenticalTo()
     {
         $input = $equals = new \stdClass();
@@ -38,6 +28,16 @@ final class IsIdenticalToTest extends BaseValidatorTestCase
             [0, 0],
             [false, false],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotIdenticalTo
+     * @param mixed $input
+     * @param mixed $equals
+     */
+    public function testNotEquals($input, $equals)
+    {
+        $this->assertFalse($this->isIdenticalTo($input, $equals));
     }
 
     public static function providerForNotIdenticalTo()

@@ -16,15 +16,6 @@ final class IsUuidTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUuid($input));
     }
 
-    /**
-     * @dataProvider providerForNotUuid
-     * @param mixed $input
-     */
-    public function testNotUuid($input)
-    {
-        $this->assertFalse($this->isUuid($input));
-    }
-
     public static function providerForUuid()
     {
         return [
@@ -36,6 +27,15 @@ final class IsUuidTest extends BaseValidatorTestCase
             ['00010203-0405-0607-0809-0a0b0c0d0e0f'],
             ['00010203-0405-0607-0809-0A0B0C0D0E0F'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUuid
+     * @param mixed $input
+     */
+    public function testNotUuid($input)
+    {
+        $this->assertFalse($this->isUuid($input));
     }
 
     public static function providerForNotUuid()

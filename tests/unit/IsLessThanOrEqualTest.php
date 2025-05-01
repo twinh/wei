@@ -17,16 +17,6 @@ final class IsLessThanOrEqualTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLessThanOrEqual($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotLessThanOrEqual
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotLessThanOrEqual($input, $options)
-    {
-        $this->assertFalse($this->isLessThanOrEqual($input, $options));
-    }
-
     public static function providerForLessThanOrEqual()
     {
         return [
@@ -37,6 +27,16 @@ final class IsLessThanOrEqualTest extends BaseValidatorTestCase
             ['10:00', '11:00'],
             ['10:03', '9:24'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotLessThanOrEqual
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotLessThanOrEqual($input, $options)
+    {
+        $this->assertFalse($this->isLessThanOrEqual($input, $options));
     }
 
     public static function providerForNotLessThanOrEqual()

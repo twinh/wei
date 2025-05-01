@@ -665,6 +665,51 @@ final class WeChatAppTest extends TestCase
         $this->assertEquals('success', $app->run());
     }
 
+    /**
+     * @dataProvider providerForScan
+     * @param mixed $postData
+     * @param mixed $sceneId
+     * @param mixed $result
+     * @param mixed $calledSubscribe
+     */
+    public function testScan($postData, $sceneId, $result, $calledSubscribe)
+    {
+        $app = new WeChatApp([
+            'wei' => $this->wei,
+            'query' => [
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce' => '1365872231',
+            ],
+            'postData' => $postData,
+        ]);
+
+        $subscribeFlag = false;
+
+        $this->assertEquals($sceneId, $app->getScanSceneId());
+
+        $app->subscribe(static function () use (&$subscribeFlag) {
+            $subscribeFlag = true;
+            return 'subscribe';
+        });
+
+        $app->scan(function (WeChatApp $app) use ($sceneId) {
+            $this->assertEquals($sceneId, $app->getScanSceneId());
+            return 'scan';
+        });
+
+        $app->defaults(static function () {
+            return 'This is the default message';
+        });
+
+        $resultXml = $app->run();
+
+        $this->assertStringNotContainsString('This is the default message', $resultXml);
+        $this->assertStringContainsString($result, $resultXml);
+
+        $this->assertSame($calledSubscribe, $subscribeFlag);
+    }
+
     public static function providerForScan()
     {
         return [
@@ -710,51 +755,6 @@ final class WeChatAppTest extends TestCase
                 'calledSubscribe' => true,
             ],
         ];
-    }
-
-    /**
-     * @dataProvider providerForScan
-     * @param mixed $postData
-     * @param mixed $sceneId
-     * @param mixed $result
-     * @param mixed $calledSubscribe
-     */
-    public function testScan($postData, $sceneId, $result, $calledSubscribe)
-    {
-        $app = new WeChatApp([
-            'wei' => $this->wei,
-            'query' => [
-                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
-                'timestamp' => '1366032735',
-                'nonce' => '1365872231',
-            ],
-            'postData' => $postData,
-        ]);
-
-        $subscribeFlag = false;
-
-        $this->assertEquals($sceneId, $app->getScanSceneId());
-
-        $app->subscribe(static function () use (&$subscribeFlag) {
-            $subscribeFlag = true;
-            return 'subscribe';
-        });
-
-        $app->scan(function (WeChatApp $app) use ($sceneId) {
-            $this->assertEquals($sceneId, $app->getScanSceneId());
-            return 'scan';
-        });
-
-        $app->defaults(static function () {
-            return 'This is the default message';
-        });
-
-        $resultXml = $app->run();
-
-        $this->assertStringNotContainsString('This is the default message', $resultXml);
-        $this->assertStringContainsString($result, $resultXml);
-
-        $this->assertSame($calledSubscribe, $subscribeFlag);
     }
 
     public function testScanAndSubscribe()

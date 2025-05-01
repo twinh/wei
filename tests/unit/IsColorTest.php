@@ -17,16 +17,6 @@ final class IsColorTest extends BaseValidatorTestCase
         $this->assertTrue($this->isColor($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotColor
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotColor($input, $options = [])
-    {
-        $this->assertFalse($this->isColor($input, $options));
-    }
-
     public static function providerForColor()
     {
         return [
@@ -38,6 +28,16 @@ final class IsColorTest extends BaseValidatorTestCase
             ['#AABBCC'],
             ['#fff'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotColor
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotColor($input, $options = [])
+    {
+        $this->assertFalse($this->isColor($input, $options));
     }
 
     public static function providerForNotColor()

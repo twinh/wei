@@ -21,6 +21,13 @@ final class IsRegexTest extends BaseValidatorTestCase
         $this->assertTrue($this->isRegex($input, $regex));
     }
 
+    public static function providerForRegex()
+    {
+        return [
+            ['This is Wei Framework.', '/wei/i'],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotRegex
      * @param mixed $input
@@ -29,13 +36,6 @@ final class IsRegexTest extends BaseValidatorTestCase
     public function testNotRegex($input, $regex)
     {
         $this->assertFalse($this->isRegex($input, $regex));
-    }
-
-    public static function providerForRegex()
-    {
-        return [
-            ['This is Wei Framework.', '/wei/i'],
-        ];
     }
 
     public static function providerForNotRegex()

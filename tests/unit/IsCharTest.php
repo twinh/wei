@@ -18,6 +18,14 @@ final class IsCharTest extends BaseValidatorTestCase
         $this->assertTrue($this->isChar($input, $minLength, $maxLength));
     }
 
+    public static function providerForLength()
+    {
+        return [
+            ['i♥u4', 0, 4],
+            ['i♥u4', 2, 5],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotLength
      * @param mixed $input
@@ -27,14 +35,6 @@ final class IsCharTest extends BaseValidatorTestCase
     public function testNotLength($input, ?int $minLength = null, ?int $maxLength = null)
     {
         $this->assertFalse($this->isChar($input, $minLength, $maxLength));
-    }
-
-    public static function providerForLength()
-    {
-        return [
-            ['i♥u4', 0, 4],
-            ['i♥u4', 2, 5],
-        ];
     }
 
     public static function providerForNotLength()

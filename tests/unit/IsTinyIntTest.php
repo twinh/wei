@@ -16,15 +16,6 @@ final class IsTinyIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isTinyInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotTinyInt
-     * @param mixed $input
-     */
-    public function testNotTinyInt($input)
-    {
-        $this->assertFalse($this->isTinyInt($input));
-    }
-
     public static function providerForTinyInt()
     {
         return [
@@ -34,6 +25,15 @@ final class IsTinyIntTest extends BaseValidatorTestCase
             [-128],
             [127],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotTinyInt
+     * @param mixed $input
+     */
+    public function testNotTinyInt($input)
+    {
+        $this->assertFalse($this->isTinyInt($input));
     }
 
     public static function providerForNotTinyInt()

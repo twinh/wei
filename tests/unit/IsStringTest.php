@@ -18,17 +18,6 @@ final class IsStringTest extends BaseValidatorTestCase
         $this->assertTrue($this->isString($input, $minLength, $maxLength));
     }
 
-    /**
-     * @dataProvider providerForNotStringVal
-     * @param mixed $input
-     * @param int|null $minLength
-     * @param int|null $maxLength
-     */
-    public function testNotStringVal($input, ?int $minLength = null, ?int $maxLength = null)
-    {
-        $this->assertFalse($this->isString($input, $minLength, $maxLength));
-    }
-
     public static function providerForStringVal()
     {
         return [
@@ -50,6 +39,17 @@ final class IsStringTest extends BaseValidatorTestCase
             ['😊', null, 4],
             ['😊', 3, 4],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotStringVal
+     * @param mixed $input
+     * @param int|null $minLength
+     * @param int|null $maxLength
+     */
+    public function testNotStringVal($input, ?int $minLength = null, ?int $maxLength = null)
+    {
+        $this->assertFalse($this->isString($input, $minLength, $maxLength));
     }
 
     public static function providerForNotStringVal()

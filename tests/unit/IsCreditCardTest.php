@@ -17,16 +17,6 @@ final class IsCreditCardTest extends BaseValidatorTestCase
         $this->assertTrue($this->isCreditCard($input, $type));
     }
 
-    /**
-     * @dataProvider providerForNotCreditCard
-     * @param mixed $input
-     * @param mixed|null $type
-     */
-    public function testNotCreditCard($input, $type = null)
-    {
-        $this->assertFalse($this->isCreditCard($input, $type));
-    }
-
     public static function providerForCreditCard()
     {
         // Test data from
@@ -71,6 +61,16 @@ final class IsCreditCardTest extends BaseValidatorTestCase
             ['4111111111111111',   ['MasterCard', 'Visa']],
             ['4111111111111111',   'All'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotCreditCard
+     * @param mixed $input
+     * @param mixed|null $type
+     */
+    public function testNotCreditCard($input, $type = null)
+    {
+        $this->assertFalse($this->isCreditCard($input, $type));
     }
 
     public static function providerForNotCreditCard()

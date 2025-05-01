@@ -16,15 +16,6 @@ final class IsPhoneTest extends BaseValidatorTestCase
         $this->assertTrue($this->isPhone($input));
     }
 
-    /**
-     * @dataProvider providerForNotPhone
-     * @param mixed $input
-     */
-    public function testNotPhone($input)
-    {
-        $this->assertFalse($this->isPhone($input));
-    }
-
     public static function providerForPhone()
     {
         return [
@@ -47,6 +38,15 @@ final class IsPhoneTest extends BaseValidatorTestCase
             ['1-877-777-1420'],
             ['+852 12312323'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotPhone
+     * @param mixed $input
+     */
+    public function testNotPhone($input)
+    {
+        $this->assertFalse($this->isPhone($input));
     }
 
     public static function providerForNotPhone()

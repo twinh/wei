@@ -17,16 +17,6 @@ final class IsUrlTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUrl($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotUrl
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotUrl($input, $options = [])
-    {
-        $this->assertFalse($this->isUrl($input, $options));
-    }
-
     public static function providerForUrl()
     {
         return [
@@ -46,6 +36,16 @@ final class IsUrlTest extends BaseValidatorTestCase
                 'query' => true,
             ]],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUrl
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotUrl($input, $options = [])
+    {
+        $this->assertFalse($this->isUrl($input, $options));
     }
 
     public static function providerForNotUrl()

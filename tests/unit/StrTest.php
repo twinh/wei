@@ -8,6 +8,16 @@ namespace WeiTest;
  */
 final class StrTest extends TestCase
 {
+    /**
+     * @param string $input
+     * @param string $output
+     * @dataProvider providerForSnake
+     */
+    public function testSnake($input, $output)
+    {
+        $this->assertEquals($output, $this->str->snake($input));
+    }
+
     public static function providerForSnake()
     {
         return [
@@ -22,11 +32,11 @@ final class StrTest extends TestCase
     /**
      * @param string $input
      * @param string $output
-     * @dataProvider providerForSnake
+     * @dataProvider providerForDash
      */
-    public function testSnake($input, $output)
+    public function testDash($input, $output)
     {
-        $this->assertEquals($output, $this->str->snake($input));
+        $this->assertEquals($output, $this->str->dash($input));
     }
 
     public static function providerForDash()
@@ -43,11 +53,11 @@ final class StrTest extends TestCase
     /**
      * @param string $input
      * @param string $output
-     * @dataProvider providerForDash
+     * @dataProvider providerForCamel
      */
-    public function testDash($input, $output)
+    public function testCamel(string $input, string $output)
     {
-        $this->assertEquals($output, $this->str->dash($input));
+        $this->assertEquals($output, $this->str->camel($input));
     }
 
     public static function providerForCamel(): array
@@ -65,11 +75,11 @@ final class StrTest extends TestCase
     /**
      * @param string $input
      * @param string $output
-     * @dataProvider providerForCamel
+     * @dataProvider providerForSingularize
      */
-    public function testCamel(string $input, string $output)
+    public function testSingularize($output, $input)
     {
-        $this->assertEquals($output, $this->str->camel($input));
+        $this->assertEquals($output, $this->str->singularize($input));
     }
 
     /**
@@ -156,11 +166,11 @@ final class StrTest extends TestCase
     /**
      * @param string $input
      * @param string $output
-     * @dataProvider providerForSingularize
+     * @dataProvider providerForPluralize
      */
-    public function testSingularize($output, $input)
+    public function testPluralize($input, $output)
     {
-        $this->assertEquals($output, $this->str->singularize($input));
+        $this->assertEquals($output, $this->str->pluralize($input));
     }
 
     public static function providerForPluralize()
@@ -234,16 +244,6 @@ final class StrTest extends TestCase
             ['criterion', 'criteria'],
             ['', ''],
         ];
-    }
-
-    /**
-     * @param string $input
-     * @param string $output
-     * @dataProvider providerForPluralize
-     */
-    public function testPluralize($input, $output)
-    {
-        $this->assertEquals($output, $this->str->pluralize($input));
     }
 
     /**

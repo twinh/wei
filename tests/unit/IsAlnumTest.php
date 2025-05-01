@@ -16,15 +16,6 @@ final class IsAlnumTest extends BaseValidatorTestCase
         $this->assertTrue($this->isAlnum($input));
     }
 
-    /**
-     * @dataProvider providerForNotAlnum
-     * @param mixed $input
-     */
-    public function testNotAlnum($input)
-    {
-        $this->assertFalse($this->isAlnum($input));
-    }
-
     public static function providerForAlnum()
     {
         return [
@@ -35,6 +26,15 @@ final class IsAlnumTest extends BaseValidatorTestCase
             ['a2BcD3eFg4'],
             ['045fewwefds'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotAlnum
+     * @param mixed $input
+     */
+    public function testNotAlnum($input)
+    {
+        $this->assertFalse($this->isAlnum($input));
     }
 
     public static function providerForNotAlnum()

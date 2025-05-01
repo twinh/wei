@@ -17,16 +17,6 @@ final class IsLtTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLt($input, $options));
     }
 
-    /**
-     * @dataProvider providerForNotLt
-     * @param mixed $input
-     * @param mixed $options
-     */
-    public function testNotLt($input, $options)
-    {
-        $this->assertFalse($this->isLt($input, $options));
-    }
-
     public static function providerForLt()
     {
         return [
@@ -36,6 +26,16 @@ final class IsLtTest extends BaseValidatorTestCase
             ['10:00', '11:00'],
             ['10:03', '9:24'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotLt
+     * @param mixed $input
+     * @param mixed $options
+     */
+    public function testNotLt($input, $options)
+    {
+        $this->assertFalse($this->isLt($input, $options));
     }
 
     public static function providerForNotLt()

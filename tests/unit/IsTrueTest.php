@@ -16,15 +16,6 @@ final class IsTrueTest extends BaseValidatorTestCase
         $this->assertTrue($this->wei->isTrue($input));
     }
 
-    /**
-     * @dataProvider providerForNotTrue
-     * @param mixed $input
-     */
-    public function testNotTrue($input)
-    {
-        $this->assertFalse($this->wei->isTrue($input));
-    }
-
     public static function providerForTrue()
     {
         return [
@@ -32,6 +23,15 @@ final class IsTrueTest extends BaseValidatorTestCase
             [1],
             ['1'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotTrue
+     * @param mixed $input
+     */
+    public function testNotTrue($input)
+    {
+        $this->assertFalse($this->wei->isTrue($input));
     }
 
     public static function providerForNotTrue()

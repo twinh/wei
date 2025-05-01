@@ -16,15 +16,6 @@ final class IsLuhnTest extends BaseValidatorTestCase
         $this->assertTrue($this->isLuhn($options));
     }
 
-    /**
-     * @dataProvider providerForNotLuhn
-     * @param mixed $options
-     */
-    public function testNotLuhn($options)
-    {
-        $this->assertFalse($this->isLuhn($options));
-    }
-
     public static function providerForLuhn()
     {
         return [
@@ -48,6 +39,15 @@ final class IsLuhnTest extends BaseValidatorTestCase
             ['3566002020360505'], // JCB
             ['5555555555554444'], // MasterCard
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotLuhn
+     * @param mixed $options
+     */
+    public function testNotLuhn($options)
+    {
+        $this->assertFalse($this->isLuhn($options));
     }
 
     public static function providerForNotLuhn()

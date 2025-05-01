@@ -25,17 +25,6 @@ final class IsNumberTest extends BaseValidatorTestCase
         $this->assertTrue($this->isNumber($input, $precision, $scale));
     }
 
-    /**
-     * @dataProvider providerForNotNumber
-     * @param mixed $input
-     * @param int|null $precision
-     * @param int|null $scale
-     */
-    public function testNotNumber($input, ?int $precision = null, ?int $scale = null)
-    {
-        $this->assertFalse($this->isNumber($input, $precision, $scale));
-    }
-
     public static function providerForNumber()
     {
         return [
@@ -65,6 +54,17 @@ final class IsNumberTest extends BaseValidatorTestCase
             [10.1, 3, 1],
             [100.1, 4, 1],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotNumber
+     * @param mixed $input
+     * @param int|null $precision
+     * @param int|null $scale
+     */
+    public function testNotNumber($input, ?int $precision = null, ?int $scale = null)
+    {
+        $this->assertFalse($this->isNumber($input, $precision, $scale));
     }
 
     public static function providerForNotNumber()

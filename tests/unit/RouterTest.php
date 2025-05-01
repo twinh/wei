@@ -1734,6 +1734,19 @@ final class RouterTest extends TestCase
     }
 
     /**
+     * @dataProvider dataForSingularize
+     * @param mixed $singular
+     * @param mixed $plural
+     */
+    public function testSingularize($singular, $plural)
+    {
+        $router = wei()->router;
+        $method = new \ReflectionMethod($router, 'singularize');
+        $method->setAccessible(true);
+        $this->assertEquals($singular, $method->invoke($router, $plural));
+    }
+
+    /**
      * @link http://zh.wiktionary.org/zh/%E9%99%84%E5%BD%95:%E8%8B%B1%E8%AF%AD%E4%B8%8D%E8%A7%84%E5%88%99%E5%A4%8D%E6%95%B0
      * @link https://github.com/doctrine/inflector/blob/master/tests/Doctrine/Tests/Common/Inflector/InflectorTest.php
      */
@@ -1805,19 +1818,6 @@ final class RouterTest extends TestCase
             ['criterion', 'criteria'],
             ['', ''],
         ];
-    }
-
-    /**
-     * @dataProvider dataForSingularize
-     * @param mixed $singular
-     * @param mixed $plural
-     */
-    public function testSingularize($singular, $plural)
-    {
-        $router = wei()->router;
-        $method = new \ReflectionMethod($router, 'singularize');
-        $method->setAccessible(true);
-        $this->assertEquals($singular, $method->invoke($router, $plural));
     }
 
     protected function getRouterOutput()

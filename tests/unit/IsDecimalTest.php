@@ -16,15 +16,6 @@ final class IsDecimalTest extends BaseValidatorTestCase
         $this->assertTrue($this->isDecimal($input));
     }
 
-    /**
-     * @dataProvider providerForNotDecimal
-     * @param mixed $input
-     */
-    public function testNotDecimal($input)
-    {
-        $this->assertFalse($this->isDecimal($input));
-    }
-
     public static function providerForDecimal()
     {
         return [
@@ -40,6 +31,15 @@ final class IsDecimalTest extends BaseValidatorTestCase
             [2.3E-3],
             [2.3E3],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotDecimal
+     * @param mixed $input
+     */
+    public function testNotDecimal($input)
+    {
+        $this->assertFalse($this->isDecimal($input));
     }
 
     public static function providerForNotDecimal()

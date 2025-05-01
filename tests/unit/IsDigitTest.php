@@ -16,15 +16,6 @@ final class IsDigitTest extends BaseValidatorTestCase
         $this->assertTrue($this->isDigit($input));
     }
 
-    /**
-     * @dataProvider providerForNotDigit
-     * @param mixed $input
-     */
-    public function testNotDigit($input)
-    {
-        $this->assertFalse($this->isDigit($input));
-    }
-
     public static function providerForDigit()
     {
         return [
@@ -34,6 +25,15 @@ final class IsDigitTest extends BaseValidatorTestCase
             ['123456'],
             ['0123456'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotDigit
+     * @param mixed $input
+     */
+    public function testNotDigit($input)
+    {
+        $this->assertFalse($this->isDigit($input));
     }
 
     public static function providerForNotDigit()

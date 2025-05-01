@@ -17,16 +17,6 @@ final class IsAnyDateTimeTest extends BaseValidatorTestCase
         $this->assertTrue($this->isAnyDateTime($input, $format));
     }
 
-    /**
-     * @dataProvider providerForNotAnyDateTime
-     * @param mixed $input
-     * @param mixed|null $format
-     */
-    public function testNotAnyDateTime($input, $format = null)
-    {
-        $this->assertFalse($this->isAnyDateTime($input, $format));
-    }
-
     public static function providerForAnyDateTime()
     {
         return [
@@ -37,6 +27,16 @@ final class IsAnyDateTimeTest extends BaseValidatorTestCase
             ['3000-01-01 00:00:50'],
             ['2012-02-29 23:59:59'],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotAnyDateTime
+     * @param mixed $input
+     * @param mixed|null $format
+     */
+    public function testNotAnyDateTime($input, $format = null)
+    {
+        $this->assertFalse($this->isAnyDateTime($input, $format));
     }
 
     public static function providerForNotAnyDateTime()

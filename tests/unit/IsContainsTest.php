@@ -22,6 +22,16 @@ final class IsContainsTest extends BaseValidatorTestCase
         $this->assertTrue($this->isContains($input, $search, $regex));
     }
 
+    public static function providerForContains()
+    {
+        return [
+            [123, 1],
+            ['abc', 'a'],
+            ['@#$', '@'],
+            ['ABC', '/a/i', true],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotContains
      * @param mixed $input
@@ -31,16 +41,6 @@ final class IsContainsTest extends BaseValidatorTestCase
     public function testNotContains($input, $search, $regex = false)
     {
         $this->assertFalse($this->isContains($input, $search, $regex));
-    }
-
-    public static function providerForContains()
-    {
-        return [
-            [123, 1],
-            ['abc', 'a'],
-            ['@#$', '@'],
-            ['ABC', '/a/i', true],
-        ];
     }
 
     public static function providerForNotContains()

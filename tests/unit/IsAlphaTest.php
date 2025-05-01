@@ -16,6 +16,14 @@ final class IsAlphaTest extends BaseValidatorTestCase
         $this->assertTrue($this->isAlpha($input));
     }
 
+    public static function providerForAlpha()
+    {
+        return [
+            ['abcedfg'],
+            ['aBcDeFg'],
+        ];
+    }
+
     /**
      * @dataProvider providerForNotAlpha
      * @param mixed $input
@@ -23,14 +31,6 @@ final class IsAlphaTest extends BaseValidatorTestCase
     public function testNotAlpha($input)
     {
         $this->assertFalse($this->isAlpha($input));
-    }
-
-    public static function providerForAlpha()
-    {
-        return [
-            ['abcedfg'],
-            ['aBcDeFg'],
-        ];
     }
 
     public static function providerForNotAlpha()

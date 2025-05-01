@@ -17,16 +17,6 @@ final class IsTldTest extends BaseValidatorTestCase
         $this->assertTrue($this->isTld($input, $format));
     }
 
-    /**
-     * @dataProvider providerForNotTld
-     * @param mixed $input
-     * @param mixed|null $format
-     */
-    public function testNotTld($input, $format = null)
-    {
-        $this->assertFalse($this->isTld($input, $format));
-    }
-
     public static function providerForTld()
     {
         return [
@@ -36,6 +26,16 @@ final class IsTldTest extends BaseValidatorTestCase
             ['us'],
             ['xn--fiqs8S'], // 中国
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotTld
+     * @param mixed $input
+     * @param mixed|null $format
+     */
+    public function testNotTld($input, $format = null)
+    {
+        $this->assertFalse($this->isTld($input, $format));
     }
 
     public static function providerForNotTld()

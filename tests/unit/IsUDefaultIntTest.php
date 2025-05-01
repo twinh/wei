@@ -16,15 +16,6 @@ final class IsUDefaultIntTest extends BaseValidatorTestCase
         $this->assertTrue($this->isUDefaultInt($input));
     }
 
-    /**
-     * @dataProvider providerForNotUDefaultInt
-     * @param mixed $input
-     */
-    public function testNotUDefaultInt($input)
-    {
-        $this->assertFalse($this->isUDefaultInt($input));
-    }
-
     public static function providerForUDefaultInt()
     {
         return [
@@ -32,6 +23,15 @@ final class IsUDefaultIntTest extends BaseValidatorTestCase
             [0],
             [4294967295],
         ];
+    }
+
+    /**
+     * @dataProvider providerForNotUDefaultInt
+     * @param mixed $input
+     */
+    public function testNotUDefaultInt($input)
+    {
+        $this->assertFalse($this->isUDefaultInt($input));
     }
 
     public static function providerForNotUDefaultInt()

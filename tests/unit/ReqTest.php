@@ -158,6 +158,19 @@ final class ReqTest extends TestCase
     }
 
     /**
+     * @dataProvider baseUrlAndPathProvider
+     * @param mixed $baseUrl
+     * @param mixed $pathInfo
+     */
+    public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
+    {
+        $this->req->setOption('servers', $server);
+
+        $this->assertEquals($baseUrl, $this->req->getBaseUrl());
+        $this->assertEquals($pathInfo, $this->req->getPathInfo());
+    }
+
+    /**
      * Data provider for testing base URL and path detection.
      *
      * @link https://github.com/zendframework/zf2/blob/master/tests/ZendTest/Http/PhpEnvironment/RequestTest.php
@@ -388,19 +401,6 @@ final class ReqTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider baseUrlAndPathProvider
-     * @param mixed $baseUrl
-     * @param mixed $pathInfo
-     */
-    public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
-    {
-        $this->req->setOption('servers', $server);
-
-        $this->assertEquals($baseUrl, $this->req->getBaseUrl());
-        $this->assertEquals($pathInfo, $this->req->getPathInfo());
-    }
-
     public function testGetHost()
     {
         $server = [
@@ -432,6 +432,20 @@ final class ReqTest extends TestCase
         $this->assertEquals('/blog', $this->req->getRequestUri());
     }
 
+    /**
+     * @dataProvider providerForGetUrl
+     * @param mixed $server
+     * @param mixed $url
+     * @param mixed $urlPath
+     */
+    public function testGetUrl($server, $url, $urlPath)
+    {
+        $this->req->setOption('servers', $server);
+
+        $this->assertEquals($url, $this->req->getUrl());
+        $this->assertEquals($urlPath, $this->req->getUrlFor('/path'));
+    }
+
     public static function providerForGetUrl()
     {
         return [
@@ -456,20 +470,6 @@ final class ReqTest extends TestCase
                 'https://test.com:8080/path',
             ],
         ];
-    }
-
-    /**
-     * @dataProvider providerForGetUrl
-     * @param mixed $server
-     * @param mixed $url
-     * @param mixed $urlPath
-     */
-    public function testGetUrl($server, $url, $urlPath)
-    {
-        $this->req->setOption('servers', $server);
-
-        $this->assertEquals($url, $this->req->getUrl());
-        $this->assertEquals($urlPath, $this->req->getUrlFor('/path'));
     }
 
     public function testGetContent()
